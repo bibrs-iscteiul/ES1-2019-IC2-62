@@ -9,16 +9,16 @@ public class Method {
 	int loc;
 	int cyclo;
 	int atfd;
-	double laa;
+	int laa;
 	boolean is_long_method;
 	boolean iplasma;
 	boolean pmd;
 	boolean is_feature_envy;
 	
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
-			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
+			int laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
 		super();
-		MethodID = methodID;
+		this.MethodID = methodID;
 		this.packageName = packageName;
 		this.className = className;
 		this.methodName = methodName;
@@ -32,5 +32,19 @@ public class Method {
 		this.is_feature_envy = is_feature_envy;
 	}
 	
+	public Method() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("ID: " + this.MethodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
+				"; Método: " + this.methodName + "; LOC: " + this.loc + "; CYCLO: " + this.cyclo + "; ATFD: " + this.atfd + "; LAA: " 
+				+ this.laa + "; isLongMethod: " + this.is_long_method + "; iPlasma: " + this.iplasma + "; PMD: " 
+				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy);
+
+		return sb.toString();
+	}
 	
 }
