@@ -83,28 +83,21 @@ public class ReadFromFile {
 					break;
 					
 				case 7:
-					method.laa = (int)cell.getNumericCellValue();
+				//	method.laa = (int)cell.getNumericCellValue(); 		//isto nao funciona 
 					break;
 					
 				case 8:
-					//aux = cell.getBooleanCellValue();
-					/*
-					if (aux == "FALSO" || aux == "falso" || aux == "FALSE" || aux == "false") 
-						method.is_long_method = false;
-					else if (aux == "VERDADEIRO" || aux == "verdadeiro" || aux == "TRUE" || aux == "true")
-						method.is_long_method = true;
-						*/
 					method.is_long_method = cell.getBooleanCellValue();
 					break;	
 					
 				case 9:
-					//method.iplasma = cell.getBooleanCellValue();
+					method.iplasma = cell.getBooleanCellValue();
 					break;
 				case 10:
-					//method.pmd = cell.getBooleanCellValue();
+					method.pmd = cell.getBooleanCellValue();
 					break;
 				case 11:
-					//method.is_feature_envy = cell.getBooleanCellValue();
+					method.is_feature_envy = cell.getBooleanCellValue();
 					break;	
 				default:
 					break;
