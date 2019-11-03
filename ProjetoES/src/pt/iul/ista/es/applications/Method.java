@@ -9,14 +9,14 @@ public class Method {
 	int loc;
 	int cyclo;
 	int atfd;
-	int laa;
+	double laa;
 	boolean is_long_method;
 	boolean iplasma;
 	boolean pmd;
 	boolean is_feature_envy;
 	
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
-			int laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
+			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
 		super();
 		this.MethodID = methodID;
 		this.packageName = packageName;
@@ -35,6 +35,21 @@ public class Method {
 	public Method() {
 		
 	}
+	
+	public boolean isLongMethod (int thresholdLOC, int thresholdCYCLO) {
+		if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean isFeatureEnvy (int thresholdATFD, int thresholdLAA) {
+		if (this.atfd > thresholdATFD && this.laa < thresholdLAA) 
+			return true;
+		else 
+			return false;
+	}
+	
 	
 	@Override
 	public String toString() {
