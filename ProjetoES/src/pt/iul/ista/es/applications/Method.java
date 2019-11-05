@@ -20,19 +20,19 @@ public class Method {
 	/** The method name. */
 	String methodName;
 	
-	/** The loc. */
+	/** The loc represents the number of lines of method code. */
 	int loc;
 	
-	/** The cyclo. */
+	/** The cyclo represents the cyclomatic complexity of the code. */
 	int cyclo;
 	
-	/** The atfd. */
+	/** The atfd represents the acesses that the method makes to methods of other classes. */
 	int atfd;
 	
-	/** The laa. */
+	/** The laa represents the method acesses to attributes of the class itself. */
 	double laa;
 	
-	/** The is long method. */
+	/** The long method. */
 	boolean is_long_method;
 	
 	/** The iplasma. */
@@ -41,7 +41,7 @@ public class Method {
 	/** The pmd. */
 	boolean pmd;
 	
-	/** The is feature envy. */
+	/** The feature envy. */
 	boolean is_feature_envy;
 	
 	/**
