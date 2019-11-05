@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -83,7 +84,10 @@ public class ReadFromFile {
 					break;
 
 				case 7:
-					// method.laa = (int)cell.getNumericCellValue(); //isto nao funciona
+					if (cell.getCellType() == CellType.NUMERIC) 
+						method.laa = cell.getNumericCellValue();
+					else 
+						method.laa = Double.parseDouble(cell.getStringCellValue());
 					break;
 
 				case 8:

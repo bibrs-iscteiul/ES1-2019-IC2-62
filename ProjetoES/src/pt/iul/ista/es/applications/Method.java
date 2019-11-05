@@ -17,7 +17,7 @@ public class Method {
 	
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
 			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
-		super();
+	
 		this.MethodID = methodID;
 		this.packageName = packageName;
 		this.className = className;
