@@ -13,16 +13,37 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ * The Class ReadFromFile.
+ * @author Joana Cavalheiro
+ * @since 2019-11-05
+ * 
+ */
 public class ReadFromFile {
 
+	/** The row number. */
 	int rowNumber = 0;
+	
+	/** The col number. */
 	int colNumber = 0;
+	
+	/** A list with all methods which exists in excel file. */
 	List<Method> allMethods;
 
+	/**
+	 * Instantiates a new read from file.
+	 */
 	public ReadFromFile() {
 		this.allMethods = new ArrayList<Method>();
 	}
 
+	/**
+	 * Read from a file.
+	 *
+	 * @param fileName the file name
+	 * @param sheetName the sheet name
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void read(String fileName, String sheetName) throws IOException {
 
 		FileInputStream fis = new FileInputStream(new File(fileName));
@@ -112,6 +133,11 @@ public class ReadFromFile {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		ReadFromFile read = new ReadFromFile();
 		try {
