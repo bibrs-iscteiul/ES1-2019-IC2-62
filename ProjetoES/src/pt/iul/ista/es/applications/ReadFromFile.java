@@ -2,14 +2,11 @@ package pt.iul.ista.es.applications;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -44,16 +41,13 @@ public class ReadFromFile {
 
 			row = rowIterator.next();
 			cellIterator = row.cellIterator();
-			// colNumber = 0;
 			Method method = new Method();
 			System.out.println("linha: " + row.getRowNum());
 
 			while (cellIterator.hasNext()) {
-
+				
 				cell = cellIterator.next();
-				String aux;
-				// System.out.println("coluna " + cell.getColumnIndex());
-
+				
 				switch (cell.getColumnIndex()) {
 				case 0:
 					method.MethodID = (int) cell.getNumericCellValue();
@@ -106,16 +100,15 @@ public class ReadFromFile {
 				default:
 					break;
 				}
-
-				// System.out.println(cell.toString() + ";");
-
 			}
+			
 			allMethods.add(method);
-			System.out.println("metodo : " + method);
 
-			System.out.println();
 			workbook.close();
 			fis.close();
+			
+			for (Method m : allMethods) 
+				System.out.println(allMethods.indexOf(m) + ": " + m.toString());
 		}
 	}
 
