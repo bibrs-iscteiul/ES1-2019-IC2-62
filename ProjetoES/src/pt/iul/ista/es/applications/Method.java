@@ -44,6 +44,12 @@ public class Method {
 	/** The feature envy. */
 	boolean is_feature_envy;
 	
+	/** The user's long method. */
+	boolean is_long_method_user;
+	
+	/** The user's feature envy. */
+	boolean is_feature_envy_user;
+	
 	/**
 	 * Instantiates a new method.
 	 *
@@ -61,7 +67,8 @@ public class Method {
 	 * @param is_feature_envy the is feature envy
 	 */
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
-			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy) {
+			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy, boolean is_long_method_user, 
+			boolean is_feature_envy_user) {
 	
 		this.MethodID = methodID;
 		this.packageName = packageName;
@@ -75,6 +82,9 @@ public class Method {
 		this.iplasma = iplasma;
 		this.pmd = pmd;
 		this.is_feature_envy = is_feature_envy;
+
+		this.is_long_method_user = is_long_method_user;
+		this.is_feature_envy_user = is_feature_envy_user;
 	}
 	
 	/**
@@ -124,7 +134,8 @@ public class Method {
 		sb.append("ID: " + this.MethodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
 				"; Método: " + this.methodName + "; LOC: " + this.loc + "; CYCLO: " + this.cyclo + "; ATFD: " + this.atfd + "; LAA: " 
 				+ this.laa + "; isLongMethod: " + this.is_long_method + "; iPlasma: " + this.iplasma + "; PMD: " 
-				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy);
+				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy + "; isLongMethod_user: " + this.is_long_method_user + 
+				"; isFeatureEnvy_user: " + this.is_feature_envy_user);
 
 		return sb.toString();
 	}
