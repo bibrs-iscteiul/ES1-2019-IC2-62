@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
 
- 
 public class Frame{
 	private JFrame frame;
 	private DefaultListModel<String> funcoes = new DefaultListModel<>(); //n pode ser Jlist pq o que metes dentro da Jlist é defaultListModel
