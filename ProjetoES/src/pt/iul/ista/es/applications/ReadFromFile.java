@@ -23,11 +23,15 @@ public class ReadFromFile {
 		this.allMethods = new ArrayList<Method>();
 	}
 
-	public void read(String fileName, String sheetName) throws IOException {
+	public List<Method> getAllMethods() {
+		return allMethods;
+	}
+
+	public List<Method> read(String fileName, int sheetIndex) throws IOException {
 
 		FileInputStream fis = new FileInputStream(new File(fileName));
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		XSSFSheet sheet = workbook.getSheet(sheetName);
+		XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
 		Iterator<Row> rowIterator;
 
 		Row row;
@@ -110,12 +114,13 @@ public class ReadFromFile {
 			for (Method m : allMethods) 
 				System.out.println(allMethods.indexOf(m) + ": " + m.toString());
 		}
+		return this.allMethods;
 	}
 
 	public static void main(String[] args) {
 		ReadFromFile read = new ReadFromFile();
 		try {
-			read.read("Long-Method.xlsx", "long-method");
+			read.read("Long-Method.xlsx", 0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

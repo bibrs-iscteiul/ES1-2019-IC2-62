@@ -36,6 +36,8 @@ public class Method {
 		
 	}
 	
+	
+	
 	public boolean isLongMethod (int thresholdLOC, int thresholdCYCLO) {
 		if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
 			return true;
