@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
+import pt.iul.ista.es.applications.Method;
+
 
 public class Frame{
 	private JFrame frame;
@@ -25,15 +29,17 @@ public class Frame{
 	private File fileExcel;
 	private JFrame frameDialog;
 
+	private ArrayList<Method> allMethods;
+
 
 	public Frame() {
 		frame = new JFrame("Deteta Efeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addFrameContent();
-    frame.pack();
+		frame.pack();
 		frame.setSize(1500, 900);
 		frame.setVisible(true);
-		
+
 	}
 
 	public void open() {
@@ -89,7 +95,7 @@ public class Frame{
 
 		atualizaThresholds.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-      	dialog.setSize(700, 300);
+				dialog.setSize(700, 300);
 				dialog.setVisible(true); //equivalente a open
 			}
 		});
@@ -102,7 +108,8 @@ public class Frame{
 				intThreshold2= Integer.parseInt(thresholds2.getText());
 				valor1.setText(thresholds1.getText()); //pq n atualiza valor sozinho
 				valor2.setText(thresholds2.getText());
-        dialog.setVisible(false);
+				//new errorDetection()
+				dialog.setVisible(false);
 			}
 		});
 
@@ -112,14 +119,14 @@ public class Frame{
 
 		//Dialog
 		painel.add(new JLabel("Valores de Thresholds"), BorderLayout.NORTH);
-    JPanel painelTextField = new JPanel();
-    painelTextField.setLayout(new GridLayout(2,1));
+		JPanel painelTextField = new JPanel();
+		painelTextField.setLayout(new GridLayout(2,1));
 		painelTextField.add(thresholds1);
 		painelTextField.add(thresholds2);
-    painel.add(painelTextField, BorderLayout.CENTER);
+		painel.add(painelTextField, BorderLayout.CENTER);
 		painel.add(atualizar, BorderLayout.SOUTH);
 		dialog.add(painel);
-    
+
 
 		//South.West (valores thresholds)
 		painelThresholds.add(label);
@@ -132,23 +139,23 @@ public class Frame{
 		painelBotoes.add(escolherFicheiro);
 		painelBotoes.add(definirRegras);
 		painelBotoes.add(visualizarRegras);
-    
-    //painel South
-    JPanel painelSouth = new JPanel();
-    painelSouth.setLayout(new BorderLayout());
-    painelSouth.add(painelThresholds, BorderLayout.EAST);
-    painelSouth.add(painelBotoes, BorderLayout.WEST);
-    
-    //painel principal
-    JPanel painelPrincipal = new JPanel();
-    painelPrincipal.setLayout(new BorderLayout());
-    painelPrincipal.add(painelSouth, BorderLayout.SOUTH);
-    painelPrincipal.add(lista0, BorderLayout.WEST);
-    
-    frame.add(painelPrincipal);
+
+		//painel South
+		JPanel painelSouth = new JPanel();
+		painelSouth.setLayout(new BorderLayout());
+		painelSouth.add(painelThresholds, BorderLayout.EAST);
+		painelSouth.add(painelBotoes, BorderLayout.WEST);
+
+		//painel principal
+		JPanel painelPrincipal = new JPanel();
+		painelPrincipal.setLayout(new BorderLayout());
+		painelPrincipal.add(painelSouth, BorderLayout.SOUTH);
+		painelPrincipal.add(lista0, BorderLayout.WEST);
+
+		frame.add(painelPrincipal);
 	}
-  
-  	
+
+
 	public static void main(String[] args) {
 		Frame window = new Frame();
 		window.open();

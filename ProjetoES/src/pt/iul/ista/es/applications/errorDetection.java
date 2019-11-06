@@ -45,6 +45,7 @@ public void thresholds_isFE(int atfd, int laa,
 		boolean atfdmaior, boolean laamaior) {
 		
 		for(int i = 0; i<methods.length - 1; i++) {
+			
 			if(atfdmaior == true) {
 				if(methods[i].getAtfd() >= atfd)
 					methods[i].setIs_feature_envy_user(true);
