@@ -139,5 +139,89 @@ public class Method {
 
 		return sb.toString();
 	}
+
+	
+	
+	public int getLoc() {
+		return loc;
+	}
+
+	public void setLoc(int loc) {
+		this.loc = loc;
+	}
+
+	public int getCyclo() {
+		return cyclo;
+	}
+
+	public void setCyclo(int cyclo) {
+		this.cyclo = cyclo;
+	}
+
+	public int getAtfd() {
+		return atfd;
+	}
+
+	public void setAtfd(int atfd) {
+		this.atfd = atfd;
+	}
+
+	public double getLaa() {
+		return laa;
+	}
+
+	public void setLaa(double laa) {
+		this.laa = laa;
+	}
+
+	public boolean isIs_long_method() {
+		return is_long_method;
+	}
+
+	public void setIs_long_method(boolean is_long_method) {
+		this.is_long_method = is_long_method;
+	}
+
+	public boolean isIplasma() {
+		return iplasma;
+	}
+
+	public void setIplasma(boolean iplasma) {
+		this.iplasma = iplasma;
+	}
+
+	public boolean isPmd() {
+		return pmd;
+	}
+
+	public void setPmd(boolean pmd) {
+		this.pmd = pmd;
+	}
+
+	public boolean isIs_feature_envy() {
+		return is_feature_envy;
+	}
+
+	public void setIs_feature_envy(boolean is_feature_envy) {
+		this.is_feature_envy = is_feature_envy;
+	}
+
+	public boolean isIs_long_method_user() {
+		return is_long_method_user;
+	}
+
+	public void setIs_long_method_user(boolean is_long_method_user) {
+		this.is_long_method_user = is_long_method_user;
+	}
+
+	public boolean isIs_feature_envy_user() {
+		return is_feature_envy_user;
+	}
+
+	public void setIs_feature_envy_user(boolean is_feature_envy_user) {
+		this.is_feature_envy_user = is_feature_envy_user;
+	}
+	
+	
 	
 }
