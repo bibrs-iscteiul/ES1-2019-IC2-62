@@ -56,10 +56,10 @@ public class Method {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("ID: " + this.MethodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
-				"; Método: " + this.methodName + "; LOC: " + this.loc + "; CYCLO: " + this.cyclo + "; ATFD: " + this.atfd + "; LAA: " 
-				+ this.laa + "; isLongMethod: " + this.is_long_method + "; iPlasma: " + this.iplasma + "; PMD: " 
-				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy);
+		sb.append("ID: " + this.MethodID + ";	 Package: " + this.packageName + "; 	Classe: " + this.className + 
+				"; 	Método: " + this.methodName + "; 	LOC: " + this.loc + "; 	CYCLO: " + this.cyclo + "; 	ATFD: " + this.atfd + "; LAA: " 
+				+ this.laa + "; 	isLongMethod: " + this.is_long_method + "; 	iPlasma: " + this.iplasma + "; 	PMD: " 
+				+ this.pmd + "; 	isFeatureEnvy: " + this.is_feature_envy);
 
 		return sb.toString();
 	}

@@ -46,10 +46,8 @@ public class ReadFromFile {
 			row = rowIterator.next();
 			cellIterator = row.cellIterator();
 			Method method = new Method();
-			System.out.println("linha: " + row.getRowNum());
 
 			while (cellIterator.hasNext()) {
-				
 				cell = cellIterator.next();
 				
 				switch (cell.getColumnIndex()) {
@@ -110,10 +108,8 @@ public class ReadFromFile {
 
 			workbook.close();
 			fis.close();
-			
-			for (Method m : allMethods) 
-				System.out.println(allMethods.indexOf(m) + ": " + m.toString());
 		}
+		
 		return this.allMethods;
 	}
 

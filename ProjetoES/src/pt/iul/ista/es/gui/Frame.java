@@ -26,15 +26,18 @@ import pt.iul.ista.es.applications.ReadFromFile;
 
 public class Frame {
 	private JFrame frame;
-	private List<Method> methods;
-	private DefaultListModel<Method> methodsJList;
+	
 	private int intThreshold1 = 10;
 	private int intThreshold2 = 80;
 	private File fileExcel;
 	private JFrame frameDialog;
 
 	private ReadFromFile readFile;
-
+	
+	private List<Method> methods;
+	private JList<Method> methodsJList;
+	private DefaultListModel<Method> methodsJModel;
+	
 	public Frame() {
 		frame = new JFrame("Deteta Defeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,8 +55,9 @@ public class Frame {
 	private void addFrameContent() {
 
 		// JLists
-		this.methodsJList = new DefaultListModel();
-		// JScrollPane lista0 = new JScrollPane(methodsJList);
+		methodsJList = new JList();
+		this.methodsJModel = new DefaultListModel();
+		
 
 		// JTextFields
 		JPanel painel = new JPanel(); // o q esta dentro da janela
@@ -91,18 +95,15 @@ public class Frame {
 
 					try {
 						methods = readFile.read(fileExcel.getName(), 0); // qqr cena para a sheet
-						for (Method method : methods) {
-							methodsJList.addElement(method);
-						}
-						System.out.println(methods.toString());
+						for (Method method : methods) 
+							methodsJModel.addElement(method);
+						
+						methodsJList.setModel(methodsJModel);
 						
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
-					// adicionar readfromexcel-methodsJList
-					// methodsJList.addElement(fileExcel.getName()); //no final apagar
 				}
 			}
 		});
@@ -158,7 +159,7 @@ public class Frame {
 		// painel principal
 		JPanel painelPrincipal = new JPanel();
 		painelPrincipal.setLayout(new GridLayout(2, 1));
-	//	painelPrincipal.add(lista0);
+		painelPrincipal.add(methodsJList);
 		painelPrincipal.add(painelSouth);
 
 		frame.add(painelPrincipal);
