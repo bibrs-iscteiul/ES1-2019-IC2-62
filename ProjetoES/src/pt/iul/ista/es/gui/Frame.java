@@ -19,13 +19,19 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
 import pt.iul.ista.es.applications.Method;
+import pt.iul.ista.es.applications.errorDetection;
 
 
 public class Frame{
 	private JFrame frame;
 	private DefaultListModel<String> funcoes = new DefaultListModel<>(); //n pode ser Jlist pq o que metes dentro da Jlist é defaultListModel
-	private int intThreshold1 = 10;
-	private int intThreshold2 = 80;
+	
+	private int intThreshold1 = 10; //LOC
+	private int intThreshold2 = 80; //CYCLO
+	private int intThreshold3; //ATFD
+	private int intThreshold4; //LAA
+	private errorDetection errorDet;
+	
 	private File fileExcel;
 	private JFrame frameDialog;
 
@@ -33,6 +39,7 @@ public class Frame{
 
 
 	public Frame() {
+//		errorDet = new errorDetection();
 		frame = new JFrame("Deteta Efeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addFrameContent();
@@ -108,7 +115,23 @@ public class Frame{
 				intThreshold2= Integer.parseInt(thresholds2.getText());
 				valor1.setText(thresholds1.getText()); //pq n atualiza valor sozinho
 				valor2.setText(thresholds2.getText());
+				
+				int i;
+				intThreshold3= Integer.parseInt(thresholds2.getText()); //aqui a textbox deve ser 3
+				if(intThreshold3 != 99999)
+					i = 1 + 1;
+					//new errorDetection()
+				
+				intThreshold4= Integer.parseInt(thresholds2.getText()); //aqui a textbox deve ser 4
+				if(intThreshold4 != 99999)
+					i = 1 + 1;
+					//new errorDetection()
+				
+				
 				//new errorDetection()
+				
+				
+				
 				dialog.setVisible(false);
 			}
 		});
