@@ -177,9 +177,12 @@ public class Frame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int valor; int i = 0; 
+				int valor;
 				List<Method> aux1 = null;
+				List<Method> aux2 = null;
 				boolean usado = false;
+				boolean usado_lm = false;
+				boolean usado_fe = false;
 
 				if(text_loc.getText().matches("[0-9]+")) {
 					valor = Integer.parseInt(text_loc.getText());
@@ -189,96 +192,97 @@ public class Frame{
 					else
 						errorDet.thresholds_Loc(valor, false);
 
-					usado = true; i++;
+					usado = true;
 				}
 
 				if(text_cyclo.getText().matches("[0-9]+")) {
 					valor = Integer.parseInt(text_cyclo.getText());
 
 					if(check_cyclo.isSelected()) {
-						if(usado == false) {
+						if(usado == false) 
 							errorDet.thresholds_Cyclo(valor, true);
-							usado = true;
 
-						}	else {
-							aux1 = errorDet.segundoCriterio();
+						else {
+							aux1 = errorDet.segundoCriterio(true);
 							errorDet.thresholds_Cyclo(valor, true);
+							usado_lm = true;
 						}
 
 					}	else {
-						if(usado == false) {
+						if(usado == false)
 							errorDet.thresholds_Cyclo(valor, false);
-							usado = true;
 
-						}	else {
-							aux1 = errorDet.segundoCriterio();
+						else {
+							aux1 = errorDet.segundoCriterio(true);
 							errorDet.thresholds_Cyclo(valor, false);
+							usado_lm = true;
 						}
 
-					}	i++;
+					}
 				}
 
-				if(text_atfd.getText().matches("[0-9]+") && i!=2) {
+				usado = false;
+				if(text_atfd.getText().matches("[0-9]+")) {
 					valor = Integer.parseInt(text_atfd.getText());
 
-					if(check_atfd.isSelected()) {
-						if(!usado) {
-							errorDet.thresholds_Atfd(valor, true);
-							usado = true;
+					if(check_atfd.isSelected())
+						errorDet.thresholds_Atfd(valor, true);
+					else 
+						errorDet.thresholds_Atfd(valor, false);
 
-						}	else {	
-							aux1 = errorDet.segundoCriterio();
-							errorDet.thresholds_Atfd(valor, true);
-						}
-
-					}	else {
-						if(!usado) {
-							errorDet.thresholds_Atfd(valor, false);
-							usado = true;
-
-						}	else {
-							aux1 = errorDet.segundoCriterio();
-							errorDet.thresholds_Atfd(valor, false);
-						}
-
-					}	i++;
+					usado = true;
 				}	
 
-				if(text_laa.getText().matches("[0-9]+") && i!=2) {
-					valor = Integer.parseInt(text_laa.getText());
+				if(text_laa.getText().matches("[0-9]+")) {
+					double d = Double.parseDouble(text_laa.getText());
+					valor = (int) d;
 
 					if(check_cyclo.isSelected()) {
-						if(!usado)	{
+						if(!usado)
 							errorDet.thresholds_Laa(valor, true);
-							usado = true;
 
-						}	else {
-							aux1 = errorDet.segundoCriterio();
+						else {
+							aux2 = errorDet.segundoCriterio(false);
 							errorDet.thresholds_Laa(valor, true);
+							usado_fe = true;
 						}
 
 					}	else {
-						if(!usado)	errorDet.thresholds_Laa(valor, false);
-						else {
-							aux1 = errorDet.segundoCriterio();
+						if(!usado) 
 							errorDet.thresholds_Laa(valor, false);
-						}
 
-					}	i++;
+						else {
+							aux2 = errorDet.segundoCriterio(false);
+							errorDet.thresholds_Laa(valor, false);
+							usado_fe = true;
+						}
+					}
 				}
 
 
-				if(aux1 != null) {
-					for(Method m: methods) {
-						for(Method a1: aux1) {
+				for(Method m: methods) {
+
+					if(usado_lm) {
+						for(Method a1: aux1)
 							if( m.getMethodID() == a1.getMethodID() ) {
+
 								if(m.isIs_long_method_user() == true && a1.isIs_long_method_user() == true)
 									m.setIs_long_method_user(true);
 								else	m.setIs_long_method_user(false);
 							}
-						}
+					}
+
+					if(usado_fe) {
+						for(Method a2: aux2)
+							if( m.getMethodID() == a2.getMethodID() ) {
+
+								if(m.isIs_feature_envy_user() == true && a2.isIs_feature_envy_user() == true)
+									m.setIs_feature_envy_user(true);
+								else	m.setIs_feature_envy_user(false);
+							}
 					}
 				}
+
 
 				for(Method method: methods)
 					methodsJModel.addElement(method);

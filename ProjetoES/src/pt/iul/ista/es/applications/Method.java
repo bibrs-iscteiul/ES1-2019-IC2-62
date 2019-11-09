@@ -180,10 +180,6 @@ public class Method {
 		return is_long_method;
 	}
 
-	public void setIs_long_method(boolean is_long_method) {
-		this.is_long_method = is_long_method;
-	}
-
 	public boolean isIplasma() {
 		return iplasma;
 	}
@@ -198,10 +194,6 @@ public class Method {
 
 	public void setPmd(boolean pmd) {
 		this.pmd = pmd;
-	}
-
-	public boolean isIs_feature_envy() {
-		return is_feature_envy;
 	}
 
 	public void setIs_feature_envy(boolean is_feature_envy) {
