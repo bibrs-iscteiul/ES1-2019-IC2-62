@@ -23,10 +23,10 @@ public class ReadFromFile {
 
 	/** The row number. */
 	int rowNumber = 0;
-	
+
 	/** The col number. */
 	int colNumber = 0;
-	
+
 	/** A list with all methods which exists in excel file. */
 	List<Method> allMethods;
 
@@ -44,11 +44,11 @@ public class ReadFromFile {
 	 * @param sheetName the sheet name
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public void read(String fileName, String sheetName) throws IOException {
+	public List<Method> read(String fileName, int sheetIndex) throws IOException {
 
 		FileInputStream fis = new FileInputStream(new File(fileName));
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		XSSFSheet sheet = workbook.getSheet(sheetName);
+		XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
 		Iterator<Row> rowIterator;
 
 		Row row;
@@ -63,12 +63,10 @@ public class ReadFromFile {
 			row = rowIterator.next();
 			cellIterator = row.cellIterator();
 			Method method = new Method();
-			System.out.println("linha: " + row.getRowNum());
 
 			while (cellIterator.hasNext()) {
-				
 				cell = cellIterator.next();
-				
+
 				switch (cell.getColumnIndex()) {
 				case 0:
 					method.MethodID = (int) cell.getNumericCellValue();
@@ -122,15 +120,13 @@ public class ReadFromFile {
 					break;
 				}
 			}
-			
+
 			allMethods.add(method);
 
 			workbook.close();
 			fis.close();
-			
-			for (Method m : allMethods) 
-				System.out.println(allMethods.indexOf(m) + ": " + m.toString());
 		}
+		return this.allMethods;
 	}
 
 	/**
@@ -141,7 +137,7 @@ public class ReadFromFile {
 	public static void main(String[] args) {
 		ReadFromFile read = new ReadFromFile();
 		try {
-			read.read("Long-Method.xlsx", "long-method");
+			read.read("Long-Method.xlsx", 0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

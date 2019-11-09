@@ -140,7 +140,9 @@ public class Method {
 		return sb.toString();
 	}
 
-	
+	public int getMethodID() {
+		return MethodID;
+	}
 	
 	public int getLoc() {
 		return loc;
