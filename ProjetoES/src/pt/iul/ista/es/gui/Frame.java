@@ -1,11 +1,9 @@
 package pt.iul.ista.es.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,13 +11,13 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
@@ -30,7 +28,7 @@ import pt.iul.ista.es.applications.errorDetection;
 
 public class Frame {
 	private JFrame frame;
-
+	
 	private int intThresholdLoc;
 	private int intThresholdCyclo;
 	private int intThresholdAtfd;
@@ -40,11 +38,11 @@ public class Frame {
 	private JFrame frameDialog;
 
 	private ReadFromFile readFile;
-
+	
 	private List<Method> methods;
 	private JList<Method> methodsJList;
 	private DefaultListModel<Method> methodsJModel;
-
+	
 	private ChangeRules changeRules;
 	private errorDetection errorDet;
 
@@ -63,7 +61,7 @@ public class Frame {
 	public errorDetection getErrorDet() {
 		return errorDet;
 	}
-
+	
 	public Frame() {
 		frame = new JFrame("Deteta Defeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,7 +71,7 @@ public class Frame {
 		frame.setVisible(true);
 		
 		this.changeRules = new ChangeRules(this);
-
+		
 		// errorDet = new errorDetection(methods);
 	}
 
@@ -86,28 +84,28 @@ public class Frame {
 		// JLists
 		methodsJList = new JList();
 		this.methodsJModel = new DefaultListModel();
-
+		
 		// JTextFields
 		JPanel painel = new JPanel(); // o q esta dentro da janela
 		painel.setLayout(new BorderLayout());
 		JTextField thresholds1 = new JTextField("");
 		JTextField thresholds2 = new JTextField("");
 		JDialog dialog = new JDialog(); // janela
-		
+
 		JPanel painelThresholds = new JPanel();
 		painelThresholds.setLayout(new GridLayout(4, 1));
 		JLabel label = new JLabel("Valores Thresholds:");
 		JLabel valor1 = new JLabel("10");
 		JLabel valor2 = new JLabel("80");
-		
+
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
 		// JButtons
 		JButton escolherFicheiro = new JButton("Excel");
-		//JButton atualizaThresholds = new JButton("Thresholds"); // abre outra janela
-		JButton atualizar = new JButton("Atualizar");
-		JButton definirRegras = new JButton("Definir Regras");
+	//	JButton atualizaThresholds = new JButton("Thresholds"); // abre outra janela
+	//	JButton atualizar = new JButton("Atualizar");
+		JButton definirRegras = new JButton("Definir Regras"); // falta definir
 		JButton visualizarRegras = new JButton("Visualizar Regras"); // falta definir
 
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
@@ -123,13 +121,13 @@ public class Frame {
 
 					try {
 						methods = readFile.read(fileExcel.getName(), 0); // qqr cena para a sheet
-
-						for (Method method : methods)
+						
+						for (Method method : methods) 
 							methodsJModel.addElement(method);
-
+						
 						methodsJList.setModel(methodsJModel);
-
-						errorDet = new errorDetection(methods); // o que é isto???
+						
+						errorDet = new errorDetection(methods);
 						
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -138,34 +136,34 @@ public class Frame {
 			}
 		});
 
-		/*
-		atualizaThresholds.addActionListener(new ActionListener() {
+/*		atualizaThresholds.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dialog.setSize(700, 300);
 				dialog.setVisible(true); // equivalente a open
 			}
-		}); */
+		});
 
 		atualizar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				intThresholdLoc = Integer.parseInt(thresholds1.getText()); // p n dar string e dar int
-				intThresholdCyclo = Integer.parseInt(thresholds2.getText());
+				intThreshold1 = Integer.parseInt(thresholds1.getText()); // p n dar string e dar int
+				intThreshold2 = Integer.parseInt(thresholds2.getText());
 				valor1.setText(thresholds1.getText()); // pq n atualiza valor sozinho
 				valor2.setText(thresholds2.getText());
 				dialog.setVisible(false);
 			}
 		});
-
+*/
 		definirRegras.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				changeRules.open();
 			}
 		});
+		
+		// Painel com JButtons e JTextFields
 
 		// Dialog
 		painel.add(new JLabel("Valores de Thresholds"), BorderLayout.NORTH);
@@ -174,7 +172,7 @@ public class Frame {
 		painelTextField.add(thresholds1);
 		painelTextField.add(thresholds2);
 		painel.add(painelTextField, BorderLayout.NORTH);
-		painel.add(atualizar, BorderLayout.SOUTH);
+//		painel.add(atualizar, BorderLayout.SOUTH);
 		dialog.add(painel);
 
 		// South.West (valores thresholds)
@@ -190,9 +188,9 @@ public class Frame {
 
 		// painel South
 		JPanel painelSouth = new JPanel();
-		painelSouth.setLayout(new BorderLayout(1,2));
-		painelSouth.add(painelThresholds, BorderLayout.EAST);
+		painelSouth.setLayout(new GridLayout(1, 2));
 		painelSouth.add(painelBotoes, BorderLayout.WEST);
+		painelSouth.add(painelThresholds, BorderLayout.EAST);
 
 		// painel principal
 		JPanel painelPrincipal = new JPanel();
