@@ -2,16 +2,36 @@ package pt.iul.ista.es.applications;
 
 import java.util.List;
 
+
+/**
+ * The Class ErrorDetection.
+ * @author Gonçalo Almeida
+ * @since 2019-11-09
+ */
 public class ErrorDetection {
 
+	/** The methods. */
 	private List<Method> methods;
+	
+	/** The aux. */
 	private List<Method> aux;
 
+	/**
+	 * Instantiates a new error detection.
+	 *
+	 * @param methods the methods
+	 */
 	public ErrorDetection(List<Method> methods) {
 		this.methods = methods;
 		this.aux = methods;
 	}
 
+	/**
+	 * Segundo criterio.
+	 *
+	 * @param longM the long M
+	 * @return the list
+	 */
 	public List<Method> segundoCriterio(boolean longM) {
 
 		for(Method m: methods)
@@ -26,6 +46,12 @@ public class ErrorDetection {
 				}	return aux;
 	}
 
+	/**
+	 * Thresholds loc.
+	 *
+	 * @param loc the loc
+	 * @param locmaior the locmaior
+	 */
 	public void thresholds_Loc(int loc, boolean locmaior) {
 
 		for(Method method: methods) {
@@ -44,6 +70,12 @@ public class ErrorDetection {
 		}
 	}
 
+	/**
+	 * Thresholds cyclo.
+	 *
+	 * @param cyclo the cyclo
+	 * @param cyclomaior the cyclomaior
+	 */
 	public void thresholds_Cyclo(int cyclo, boolean cyclomaior) {
 
 		for(Method method: methods) {
@@ -62,6 +94,12 @@ public class ErrorDetection {
 		}
 	}
 
+	/**
+	 * Thresholds atfd.
+	 *
+	 * @param atfd the atfd
+	 * @param atfdmaior the atfdmaior
+	 */
 	public void thresholds_Atfd(int atfd, boolean atfdmaior) {
 
 		for(Method method: methods) {
@@ -80,6 +118,12 @@ public class ErrorDetection {
 		}
 	}
 
+	/**
+	 * Thresholds laa.
+	 *
+	 * @param laa the laa
+	 * @param laamaior the laamaior
+	 */
 	public void thresholds_Laa(double laa, boolean laamaior) {
 
 		for(Method method: methods) {

@@ -16,17 +16,37 @@ import javax.swing.JTextField;
 
 import pt.iul.ista.es.applications.Method;
 
+
+/**
+ * The Class ChangeRules.
+ * @author Gonçalo Almeida
+ * @since 2019-11-09
+ */
 public class ChangeRules {
 	
+	/** The define rules. */
 	JDialog defineRules = new JDialog();
 	
+	/** The threshold loc. */
 	int thresholdLoc;
+	
+	/** The threshold cyclo. */
 	int thresholdCyclo;
+	
+	/** The threshold atfd. */
 	int thresholdAtfd;
+	
+	/** The threshold laa. */
 	double thresholdLaa;
 	
+	/** The frame. */
 	Frame frame;
 	
+	/**
+	 * Instantiates a new change rules.
+	 *
+	 * @param frame the frame
+	 */
 	public ChangeRules(Frame frame) {
 		defineRules = new JDialog();
 		addFrameContent();
@@ -41,10 +61,17 @@ public class ChangeRules {
 		this.frame = frame;
 	}
 	
+	/**
+	 * Open.
+	 */
 	public void open() {
 		defineRules.setVisible(true);
 		
 	}
+	
+	/**
+	 * Adds the frame content.
+	 */
 	private void addFrameContent() {
 		
 		JLabel loc = new JLabel();

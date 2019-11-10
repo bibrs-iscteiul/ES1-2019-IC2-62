@@ -24,80 +24,175 @@ import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.ErrorDetection;
 
+/**
+ * The Class Frame.
+ * @author Beatriz Ragageles e Bernardo Gameiro
+ * @since 2019-11-02
+ */
 public class Frame {
+	
+	/** The frame. */
 	private JFrame frame;
 	
+	/** The threshold loc. */
 	private int thresholdLoc = 0;
+	
+	/** The threshold cyclo. */
 	private int thresholdCyclo = 0;
+	
+	/** The threshold atfd. */
 	private int thresholdAtfd = 0;
+	
+	/** The threshold laa. */
 	private double thresholdLaa = 0;
 	
+	/** The excel importado. */
 	private boolean excelImportado;
 	
+	/** The t loc. */
 	private JLabel tLoc;
+	
+	/** The t cyclo. */
 	private JLabel tCyclo;
+	
+	/** The t atfd. */
 	private JLabel tAtfd;
+	
+	/** The t laa. */
 	private JLabel tLaa;
 	
+	/** The file excel. */
 	private File fileExcel;
 
+	/** The read file. */
 	private ReadFromFile readFile;
 	
+	/** The methods. */
 	private List<Method> methods;
+	
+	/** The methods J list. */
 	private JList<Method> methodsJList;
+	
+	/** The methods J model. */
 	private DefaultListModel<Method> methodsJModel;
 	
+	/** The change rules. */
 	private ChangeRules changeRules;
+	
+	/** The error det. */
 	private ErrorDetection errorDet;
 
+	/**
+	 * Gets the methods.
+	 *
+	 * @return the methods
+	 */
 	public List<Method> getMethods() {
 		return methods;
 	}
 
+	/**
+	 * Gets the methods J list.
+	 *
+	 * @return the methods J list
+	 */
 	public JList<Method> getMethodsJList() {
 		return methodsJList;
 	}
 
+	/**
+	 * Gets the methods J model.
+	 *
+	 * @return the methods J model
+	 */
 	public DefaultListModel<Method> getMethodsJModel() {
 		return methodsJModel;
 	}
 
+	/**
+	 * Gets the error detection
+	 *
+	 * @return the error detection
+	 */
 	public ErrorDetection getErrorDet() {
 		return errorDet;
 	}
 	
+	/**
+	 * Gets the threshold loc.
+	 *
+	 * @return the threshold loc
+	 */
 	public int getThresholdLoc() {
 		return thresholdLoc;
 	}
 
+	/**
+	 * Sets the threshold loc.
+	 *
+	 * @param thresholdLoc the new threshold loc
+	 */
 	public void setThresholdLoc(int thresholdLoc) {
 		this.thresholdLoc = thresholdLoc;
 	}
 
+	/**
+	 * Gets the threshold cyclo.
+	 *
+	 * @return the threshold cyclo
+	 */
 	public int getThresholdCyclo() {
 		return thresholdCyclo;
 	}
 
+	/**
+	 * Sets the threshold cyclo.
+	 *
+	 * @param thresholdCyclo the new threshold cyclo
+	 */
 	public void setThresholdCyclo(int thresholdCyclo) {
 		this.thresholdCyclo = thresholdCyclo;
 	}
 
+	/**
+	 * Gets the threshold atfd.
+	 *
+	 * @return the threshold atfd
+	 */
 	public int getThresholdAtfd() {
 		return thresholdAtfd;
 	}
 
+	/**
+	 * Sets the threshold atfd.
+	 *
+	 * @param thresholdAtfd the new threshold atfd
+	 */
 	public void setThresholdAtfd(int thresholdAtfd) {
 		this.thresholdAtfd = thresholdAtfd;
 	}
 
+	/**
+	 * Gets the threshold laa.
+	 *
+	 * @return the threshold laa
+	 */
 	public double getThresholdLaa() {
 		return thresholdLaa;
 	}
 
+	/**
+	 * Sets the threshold laa.
+	 *
+	 * @param thresholdLaa the new threshold laa
+	 */
 	public void setThresholdLaa(double thresholdLaa) {
 		this.thresholdLaa = thresholdLaa;
 	}
 
+	/**
+	 * Instantiates a new frame.
+	 */
 	public Frame() {
 		frame = new JFrame("Deteta Defeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,10 +205,16 @@ public class Frame {
 		
 	}
 
+	/**
+	 * Open.
+	 */
 	public void open() {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Adds the frame content.
+	 */
 	private void addFrameContent() {
 
 		// JLists
@@ -224,6 +325,9 @@ public class Frame {
 		frame.add(painelPrincipal);
 	}
 
+	/**
+	 * Threshold update.
+	 */
 	public void thresholdUpdate() {
 		tLoc.setText("LOC: " + thresholdLoc);
 		tCyclo.setText("CYCLO: " + thresholdCyclo);
@@ -231,6 +335,11 @@ public class Frame {
 		tLaa.setText("LAA: " + thresholdLaa);
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Frame window = new Frame();
 		window.open();
