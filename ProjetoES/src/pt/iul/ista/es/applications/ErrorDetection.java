@@ -2,12 +2,12 @@ package pt.iul.ista.es.applications;
 
 import java.util.List;
 
-public class errorDetection {
+public class ErrorDetection {
 
 	private List<Method> methods;
 	private List<Method> aux;
 
-	public errorDetection(List<Method> methods) {
+	public ErrorDetection(List<Method> methods) {
 		this.methods = methods;
 		this.aux = methods;
 	}

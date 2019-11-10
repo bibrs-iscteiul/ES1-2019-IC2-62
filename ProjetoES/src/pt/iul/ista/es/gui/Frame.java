@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -17,14 +16,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
-import pt.iul.ista.es.applications.ChangeRules;
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
-import pt.iul.ista.es.applications.errorDetection;
+import pt.iul.ista.es.applications.ErrorDetection;
 
 public class Frame {
 	private JFrame frame;
@@ -35,7 +32,6 @@ public class Frame {
 	private int intThresholdLaa;
 	
 	private File fileExcel;
-	private JFrame frameDialog;
 
 	private ReadFromFile readFile;
 	
@@ -44,7 +40,7 @@ public class Frame {
 	private DefaultListModel<Method> methodsJModel;
 	
 	private ChangeRules changeRules;
-	private errorDetection errorDet;
+	private ErrorDetection errorDet;
 
 	public List<Method> getMethods() {
 		return methods;
@@ -58,7 +54,7 @@ public class Frame {
 		return methodsJModel;
 	}
 
-	public errorDetection getErrorDet() {
+	public ErrorDetection getErrorDet() {
 		return errorDet;
 	}
 	
@@ -103,8 +99,6 @@ public class Frame {
 
 		// JButtons
 		JButton escolherFicheiro = new JButton("Excel");
-	//	JButton atualizaThresholds = new JButton("Thresholds"); // abre outra janela
-	//	JButton atualizar = new JButton("Atualizar");
 		JButton definirRegras = new JButton("Definir Regras"); // falta definir
 		JButton visualizarRegras = new JButton("Visualizar Regras"); // falta definir
 
@@ -127,7 +121,7 @@ public class Frame {
 						
 						methodsJList.setModel(methodsJModel);
 						
-						errorDet = new errorDetection(methods);
+						errorDet = new ErrorDetection(methods);
 						
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -136,25 +130,6 @@ public class Frame {
 			}
 		});
 
-/*		atualizaThresholds.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dialog.setSize(700, 300);
-				dialog.setVisible(true); // equivalente a open
-			}
-		});
-
-		atualizar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				intThreshold1 = Integer.parseInt(thresholds1.getText()); // p n dar string e dar int
-				intThreshold2 = Integer.parseInt(thresholds2.getText());
-				valor1.setText(thresholds1.getText()); // pq n atualiza valor sozinho
-				valor2.setText(thresholds2.getText());
-				dialog.setVisible(false);
-			}
-		});
-*/
 		definirRegras.addActionListener(new ActionListener() {
 
 			@Override
@@ -172,14 +147,12 @@ public class Frame {
 		painelTextField.add(thresholds1);
 		painelTextField.add(thresholds2);
 		painel.add(painelTextField, BorderLayout.NORTH);
-//		painel.add(atualizar, BorderLayout.SOUTH);
 		dialog.add(painel);
 
 		// South.West (valores thresholds)
 		painelThresholds.add(label);
 		painelThresholds.add(valor1);
 		painelThresholds.add(valor2);
-//		painelThresholds.add(atualizaThresholds);
 
 		// South.East (restantes botoes)
 		painelBotoes.add(escolherFicheiro);

@@ -1,4 +1,4 @@
-package pt.iul.ista.es.applications;
+package pt.iul.ista.es.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pt.iul.ista.es.gui.Frame;
+import pt.iul.ista.es.applications.Method;
 
 public class ChangeRules {
 	
