@@ -24,6 +24,7 @@ import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.ErrorDetection;
 
+//falta CORRIGIR SCROLL
 /**
  * The Class Frame.
  * @author Beatriz Ragageles e Bernardo Gameiro
