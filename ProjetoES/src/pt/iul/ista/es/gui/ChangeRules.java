@@ -19,20 +19,24 @@ import pt.iul.ista.es.applications.Method;
 public class ChangeRules {
 	
 	JDialog defineRules = new JDialog();
-	/*
-	private int intThresholdLoc;
-	private int intThresholdCyclo;
-	private int intThresholdAtfd;
-	private int intThresholdLaa;
-	*/
+	
+	int thresholdLoc;
+	int thresholdCyclo;
+	int thresholdAtfd;
+	double thresholdLaa;
+	
 	Frame frame;
 	
 	public ChangeRules(Frame frame) {
 		defineRules = new JDialog();
-//		defineRules.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
 		addFrameContent();
 		defineRules.pack();
 		defineRules.setSize(700, 300);
+		
+		this.thresholdLoc = frame.getThresholdLoc();
+		this.thresholdCyclo = frame.getThresholdCyclo();
+		this.thresholdAtfd = frame.getThresholdAtfd();
+		this.thresholdLaa = frame.getThresholdLaa();
 		
 		this.frame = frame;
 	}
@@ -71,7 +75,6 @@ public class ChangeRules {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int valor;
 				List<Method> aux1 = null;
 				List<Method> aux2 = null;
 				boolean usado = false;
@@ -79,36 +82,38 @@ public class ChangeRules {
 				boolean usado_fe = false;
 
 				if (text_loc.getText().matches("[0-9]+")) {
-					valor = Integer.parseInt(text_loc.getText());
-
+					thresholdLoc = Integer.parseInt(text_loc.getText());
+					frame.setThresholdLoc(thresholdLoc);
+					
 					if (check_loc.isSelected())
-						frame.getErrorDet().thresholds_Loc(valor, true);
+						frame.getErrorDet().thresholds_Loc(thresholdLoc, true);
 					else
-						frame.getErrorDet().thresholds_Loc(valor, false);
+						frame.getErrorDet().thresholds_Loc(thresholdLoc, false);
 
 					usado = true;
 				}
 
 				if (text_cyclo.getText().matches("[0-9]+")) {
-					valor = Integer.parseInt(text_cyclo.getText());
-
+					thresholdCyclo = Integer.parseInt(text_cyclo.getText());
+					frame.setThresholdCyclo(thresholdCyclo);
+					
 					if (check_cyclo.isSelected()) {
 						if (usado == false)
-							frame.getErrorDet().thresholds_Cyclo(valor, true);
+							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, true);
 
 						else {
 							aux1 = frame.getErrorDet().segundoCriterio(true);
-							frame.getErrorDet().thresholds_Cyclo(valor, true);
+							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, true);
 							usado_lm = true;
 						}
 
 					} else {
 						if (usado == false)
-							frame.getErrorDet().thresholds_Cyclo(valor, false);
+							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, false);
 
 						else {
 							aux1 = frame.getErrorDet().segundoCriterio(true);
-							frame.getErrorDet().thresholds_Cyclo(valor, false);
+							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, false);
 							usado_lm = true;
 						}
 					}
@@ -116,37 +121,38 @@ public class ChangeRules {
 
 				usado = false;
 				if (text_atfd.getText().matches("[0-9]+")) {
-					valor = Integer.parseInt(text_atfd.getText());
-
+					thresholdAtfd = Integer.parseInt(text_atfd.getText());
+					frame.setThresholdAtfd(thresholdAtfd);
+					
 					if (check_atfd.isSelected())
-						frame.getErrorDet().thresholds_Atfd(valor, true);
+						frame.getErrorDet().thresholds_Atfd(thresholdAtfd, true);
 					else
-						frame.getErrorDet().thresholds_Atfd(valor, false);
+						frame.getErrorDet().thresholds_Atfd(thresholdAtfd, false);
 
 					usado = true;
 				}
 
 				if (text_laa.getText().matches("[0-9]+")) {
-					double d = Double.parseDouble(text_laa.getText());
-					valor = (int) d;
-
+					thresholdLaa = Double.parseDouble(text_laa.getText());
+					frame.setThresholdLaa(thresholdLaa);
+					
 					if (check_cyclo.isSelected()) {
 						if (!usado)
-							frame.getErrorDet().thresholds_Laa(valor, true);
+							frame.getErrorDet().thresholds_Laa(thresholdLaa, true);
 
 						else {
 							aux2 = frame.getErrorDet().segundoCriterio(false);
-							frame.getErrorDet().thresholds_Laa(valor, true);
+							frame.getErrorDet().thresholds_Laa(thresholdLaa, true);
 							usado_fe = true;
 						}
 
 					} else {
 						if (!usado)
-							frame.getErrorDet().thresholds_Laa(valor, false);
+							frame.getErrorDet().thresholds_Laa(thresholdLaa, false);
 
 						else {
 							aux2 = frame.getErrorDet().segundoCriterio(false);
-							frame.getErrorDet().thresholds_Laa(valor, false);
+							frame.getErrorDet().thresholds_Laa(thresholdLaa, false);
 							usado_fe = true;
 						}
 					}
@@ -181,6 +187,7 @@ public class ChangeRules {
 					frame.getMethodsJModel().addElement(method);
 				frame.getMethodsJList().setModel(frame.getMethodsJModel());
 
+				frame.thresholdUpdate();
 				defineRules.setVisible(false);
 			}
 		});

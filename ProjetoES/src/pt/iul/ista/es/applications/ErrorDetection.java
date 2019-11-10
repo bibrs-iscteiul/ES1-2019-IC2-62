@@ -80,19 +80,17 @@ public class ErrorDetection {
 		}
 	}
 
-	public void thresholds_Laa(int laa, boolean laamaior) {
+	public void thresholds_Laa(double laa, boolean laamaior) {
 
-		int value;
 		for(Method method: methods) {
-			value = (int) method.getLaa();
 			
 			if(laamaior == true) {
-				if(value >= laa)
+				if(method.getLaa() >= laa)
 					method.setIs_feature_envy_user(true);
 				else
 					method.setIs_feature_envy_user(false);
 			} else {
-				if(value < laa)
+				if(method.getLaa() < laa)
 					method.setIs_feature_envy_user(true);
 				else
 					method.setIs_feature_envy_user(false);

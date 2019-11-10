@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
@@ -26,10 +27,17 @@ import pt.iul.ista.es.applications.ErrorDetection;
 public class Frame {
 	private JFrame frame;
 	
-	private int intThresholdLoc;
-	private int intThresholdCyclo;
-	private int intThresholdAtfd;
-	private int intThresholdLaa;
+	private int thresholdLoc = 0;
+	private int thresholdCyclo = 0;
+	private int thresholdAtfd = 0;
+	private double thresholdLaa = 0;
+	
+	private boolean excelImportado;
+	
+	private JLabel tLoc;
+	private JLabel tCyclo;
+	private JLabel tAtfd;
+	private JLabel tLaa;
 	
 	private File fileExcel;
 
@@ -58,6 +66,38 @@ public class Frame {
 		return errorDet;
 	}
 	
+	public int getThresholdLoc() {
+		return thresholdLoc;
+	}
+
+	public void setThresholdLoc(int thresholdLoc) {
+		this.thresholdLoc = thresholdLoc;
+	}
+
+	public int getThresholdCyclo() {
+		return thresholdCyclo;
+	}
+
+	public void setThresholdCyclo(int thresholdCyclo) {
+		this.thresholdCyclo = thresholdCyclo;
+	}
+
+	public int getThresholdAtfd() {
+		return thresholdAtfd;
+	}
+
+	public void setThresholdAtfd(int thresholdAtfd) {
+		this.thresholdAtfd = thresholdAtfd;
+	}
+
+	public double getThresholdLaa() {
+		return thresholdLaa;
+	}
+
+	public void setThresholdLaa(double thresholdLaa) {
+		this.thresholdLaa = thresholdLaa;
+	}
+
 	public Frame() {
 		frame = new JFrame("Deteta Defeitos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,7 +108,6 @@ public class Frame {
 		
 		this.changeRules = new ChangeRules(this);
 		
-		// errorDet = new errorDetection(methods);
 	}
 
 	public void open() {
@@ -89,10 +128,12 @@ public class Frame {
 		JDialog dialog = new JDialog(); // janela
 
 		JPanel painelThresholds = new JPanel();
-		painelThresholds.setLayout(new GridLayout(4, 1));
+		painelThresholds.setLayout(new GridLayout(0, 1));
 		JLabel label = new JLabel("Valores Thresholds:");
-		JLabel valor1 = new JLabel("10");
-		JLabel valor2 = new JLabel("80");
+		tLoc = new JLabel("LOC: " + thresholdLoc);
+		tCyclo = new JLabel("CYCLO: " + thresholdCyclo);
+		tAtfd = new JLabel("ATFD: " + thresholdAtfd);
+		tLaa = new JLabel("LAA: " + thresholdLaa);
 
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setLayout(new GridLayout(3, 1));
@@ -123,6 +164,8 @@ public class Frame {
 						
 						errorDet = new ErrorDetection(methods);
 						
+						excelImportado = true;
+						
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -134,7 +177,12 @@ public class Frame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeRules.open();
+				if(excelImportado) {
+					changeRules.open();
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "No excel file imported");
+				}
 			}
 		});
 		
@@ -151,8 +199,10 @@ public class Frame {
 
 		// South.West (valores thresholds)
 		painelThresholds.add(label);
-		painelThresholds.add(valor1);
-		painelThresholds.add(valor2);
+		painelThresholds.add(tLoc, BorderLayout.NORTH);
+		painelThresholds.add(tCyclo, BorderLayout.CENTER);
+		painelThresholds.add(tAtfd, BorderLayout.CENTER);
+		painelThresholds.add(tLaa, BorderLayout.SOUTH);
 
 		// South.East (restantes botoes)
 		painelBotoes.add(escolherFicheiro);
@@ -174,6 +224,13 @@ public class Frame {
 		frame.add(painelPrincipal);
 	}
 
+	public void thresholdUpdate() {
+		tLoc.setText("LOC: " + thresholdLoc);
+		tCyclo.setText("CYCLO: " + thresholdCyclo);
+		tAtfd.setText("ATFD: " + thresholdAtfd);
+		tLaa.setText("LAA: " + thresholdLaa);
+	}
+	
 	public static void main(String[] args) {
 		Frame window = new Frame();
 		window.open();
