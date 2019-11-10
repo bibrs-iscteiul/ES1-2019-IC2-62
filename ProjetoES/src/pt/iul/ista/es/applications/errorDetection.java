@@ -18,9 +18,10 @@ public class errorDetection {
 			for(Method au: aux)
 				if(m.getMethodID() == au.getMethodID()) {
 
-					if(longM)	au.setIs_long_method_user(m.is_long_method_user);
-					else	au.setIs_feature_envy_user(m.is_feature_envy_user);
-
+					if(longM)	
+						au.setIs_long_method_user(m.is_long_method_user);
+					else	
+						au.setIs_feature_envy_user(m.is_feature_envy_user);
 
 				}	return aux;
 	}
