@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
@@ -24,7 +25,6 @@ import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.ErrorDetection;
 
-//falta CORRIGIR SCROLL
 /**
  * The Class Frame.
  * @author Beatriz Ragageles e Bernardo Gameiro
@@ -199,7 +199,7 @@ public class Frame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addFrameContent();
 		frame.pack();
-		frame.setSize(700, 400);
+		frame.setSize(900, 500);
 		frame.setVisible(true);
 		
 		this.changeRules = new ChangeRules(this);
@@ -221,6 +221,7 @@ public class Frame {
 		// JLists
 		methodsJList = new JList();
 		this.methodsJModel = new DefaultListModel();
+		JScrollPane scroll = new JScrollPane (methodsJList) ;
 		
 		// JTextFields
 		JPanel painel = new JPanel(); // o q esta dentro da janela
@@ -320,7 +321,7 @@ public class Frame {
 		// painel principal
 		JPanel painelPrincipal = new JPanel();
 		painelPrincipal.setLayout(new GridLayout(2, 1));
-		painelPrincipal.add(methodsJList);
+		painelPrincipal.add(scroll);
 		painelPrincipal.add(painelSouth);
 
 		frame.add(painelPrincipal);
