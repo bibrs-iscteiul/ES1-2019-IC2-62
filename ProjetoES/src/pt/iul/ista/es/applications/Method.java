@@ -1,5 +1,6 @@
 package pt.iul.ista.es.applications;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Method which represents a method specific.
  * @author Joana Cavalheiro
@@ -65,6 +66,8 @@ public class Method {
 	 * @param iplasma the iplasma
 	 * @param pmd the pmd
 	 * @param is_feature_envy the is feature envy
+	 * @param is_long_method_user the is long method user
+	 * @param is_feature_envy_user the is feature envy user
 	 */
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
 			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy, boolean is_long_method_user, 
@@ -140,78 +143,173 @@ public class Method {
 		return sb.toString();
 	}
 
+	/**
+	 * Gets the method ID.
+	 *
+	 * @return the method ID
+	 */
 	public int getMethodID() {
 		return MethodID;
 	}
 	
+	/**
+	 * Gets the loc.
+	 *
+	 * @return the loc
+	 */
 	public int getLoc() {
 		return loc;
 	}
 
+	/**
+	 * Sets the loc.
+	 *
+	 * @param loc the new loc
+	 */
 	public void setLoc(int loc) {
 		this.loc = loc;
 	}
 
+	/**
+	 * Gets the cyclo.
+	 *
+	 * @return the cyclo
+	 */
 	public int getCyclo() {
 		return cyclo;
 	}
 
+	/**
+	 * Sets the cyclo.
+	 *
+	 * @param cyclo the new cyclo
+	 */
 	public void setCyclo(int cyclo) {
 		this.cyclo = cyclo;
 	}
 
+	/**
+	 * Gets the atfd.
+	 *
+	 * @return the atfd
+	 */
 	public int getAtfd() {
 		return atfd;
 	}
 
+	/**
+	 * Sets the atfd.
+	 *
+	 * @param atfd the new atfd
+	 */
 	public void setAtfd(int atfd) {
 		this.atfd = atfd;
 	}
 
+	/**
+	 * Gets the laa.
+	 *
+	 * @return the laa
+	 */
 	public double getLaa() {
 		return laa;
 	}
 
+	/**
+	 * Sets the laa.
+	 *
+	 * @param laa the new laa
+	 */
 	public void setLaa(double laa) {
 		this.laa = laa;
 	}
 
+	/**
+	 * Checks if is checks if is long method.
+	 *
+	 * @return true, if is checks if is long method
+	 */
 	public boolean isIs_long_method() {
 		return is_long_method;
 	}
 
+	/**
+	 * Checks if is iplasma.
+	 *
+	 * @return true, if is iplasma
+	 */
 	public boolean isIplasma() {
 		return iplasma;
 	}
 
+	/**
+	 * Sets the iplasma.
+	 *
+	 * @param iplasma the new iplasma
+	 */
 	public void setIplasma(boolean iplasma) {
 		this.iplasma = iplasma;
 	}
 
+	/**
+	 * Checks if is pmd.
+	 *
+	 * @return true, if is pmd
+	 */
 	public boolean isPmd() {
 		return pmd;
 	}
 
+	/**
+	 * Sets the pmd.
+	 *
+	 * @param pmd the new pmd
+	 */
 	public void setPmd(boolean pmd) {
 		this.pmd = pmd;
 	}
 
+	/**
+	 * Sets the checks if is feature envy.
+	 *
+	 * @param is_feature_envy the new checks if is feature envy
+	 */
 	public void setIs_feature_envy(boolean is_feature_envy) {
 		this.is_feature_envy = is_feature_envy;
 	}
 
+	/**
+	 * Checks if is checks if is long method user.
+	 *
+	 * @return true, if is checks if is long method user
+	 */
 	public boolean isIs_long_method_user() {
 		return is_long_method_user;
 	}
 
+	/**
+	 * Sets the checks if is long method user.
+	 *
+	 * @param is_long_method_user the new checks if is long method user
+	 */
 	public void setIs_long_method_user(boolean is_long_method_user) {
 		this.is_long_method_user = is_long_method_user;
 	}
 
+	/**
+	 * Checks if is checks if is feature envy user.
+	 *
+	 * @return true, if is checks if is feature envy user
+	 */
 	public boolean isIs_feature_envy_user() {
 		return is_feature_envy_user;
 	}
 
+	/**
+	 * Sets the checks if is feature envy user.
+	 *
+	 * @param is_feature_envy_user the new checks if is feature envy user
+	 */
 	public void setIs_feature_envy_user(boolean is_feature_envy_user) {
 		this.is_feature_envy_user = is_feature_envy_user;
 	}
