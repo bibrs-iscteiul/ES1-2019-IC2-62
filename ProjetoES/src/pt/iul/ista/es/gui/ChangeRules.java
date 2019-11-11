@@ -20,7 +20,7 @@ import pt.iul.ista.es.applications.Method;
 /**
  * The Class ChangeRules.
  * @author Gonçalo Almeida
- * @since 2019-11-09
+ * @since 2019-11-10
  */
 public class ChangeRules {
 	

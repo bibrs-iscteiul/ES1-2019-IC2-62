@@ -3,7 +3,7 @@ package pt.iul.ista.es.applications;
 /**
  * The Class Method which represents a method specific.
  * @author Joana Cavalheiro
- * @since 2019-11-05
+ * @since 2019-11-04
  * 
  */
 public class Method {

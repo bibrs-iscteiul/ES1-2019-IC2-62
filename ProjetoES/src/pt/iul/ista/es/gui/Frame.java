@@ -28,7 +28,7 @@ import pt.iul.ista.es.applications.ErrorDetection;
 /**
  * The Class Frame.
  * @author Beatriz Ragageles e Bernardo Gameiro
- * @since 2019-11-02
+ * @since 2019-11-03
  */
 public class Frame {
 	

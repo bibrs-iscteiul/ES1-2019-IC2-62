@@ -6,14 +6,14 @@ import java.util.List;
 /**
  * The Class ErrorDetection.
  * @author Gonçalo Almeida
- * @since 2019-11-09
+ * @since 2019-11-10
  */
 public class ErrorDetection {
 
 	/** The methods. */
 	private List<Method> methods;
 	
-	/** The aux. */
+	/** The auxiliar List */
 	private List<Method> aux;
 
 	/**
