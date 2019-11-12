@@ -11,3 +11,4 @@ Membros:
 Má implementação/erros:
 - Corrigir sinais de thresholds e operações lógicos (and ou or)
 - Definir regras sem ser preciso importar excel 
+- Problema com LAA no feature_envy
