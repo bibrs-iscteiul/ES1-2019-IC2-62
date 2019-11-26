@@ -4,228 +4,238 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pt.iul.ista.es.applications.Method;
 
+
+/**
+ * The Class ChangeRules.
+ * @author Gonçalo Almeida
+ * @since 2019-11-10
+ */
 public class ChangeRules {
-	
+
+	/** The define rules. */
 	JDialog defineRules = new JDialog();
-	
+
+	/** The threshold loc. */
 	int thresholdLoc;
+
+	/** The threshold cyclo. */
 	int thresholdCyclo;
+
+	/** The threshold atfd. */
 	int thresholdAtfd;
+
+	/** The threshold laa. */
 	double thresholdLaa;
-	
+
+	/** The frame. */
 	Frame frame;
+
 	
+	boolean usado_lm = false;
+	boolean usado_fe = false;
+
+	public boolean isUsado_lm() {
+		return usado_lm;
+	}
+
+	public void setUsado_lm(boolean usado_lm) {
+		this.usado_lm = usado_lm;
+	}
+
+	public boolean isUsado_fe() {
+		return usado_fe;
+	}
+
+	public void setUsado_fe(boolean usado_fe) {
+		this.usado_fe = usado_fe;
+	}
+
+
+	/**
+	 * Instantiates a new change rules.
+	 *
+	 * @param frame the frame
+	 */
 	public ChangeRules(Frame frame) {
 		defineRules = new JDialog();
 		addFrameContent();
 		defineRules.pack();
 		defineRules.setSize(700, 300);
-		
+
 		this.thresholdLoc = frame.getThresholdLoc();
 		this.thresholdCyclo = frame.getThresholdCyclo();
 		this.thresholdAtfd = frame.getThresholdAtfd();
 		this.thresholdLaa = frame.getThresholdLaa();
-		
+
 		this.frame = frame;
 	}
-	
+
+	/**
+	 * Open.
+	 */
 	public void open() {
 		defineRules.setVisible(true);
-		
+
 	}
+
+	/**
+	 * Adds the frame content.
+	 */
 	private void addFrameContent() {
-		
+
+		String[] mmi = {" - ", "maior", "menor", "igual"};
+
 		JLabel loc = new JLabel();
 		loc.setText("Valor do LOC: ");
 		JTextField text_loc = new JTextField("LOC");
-		JCheckBox check_loc = new JCheckBox("Maior");
+		JComboBox<String> locBox = new JComboBox(mmi);
 
 		JLabel cyclo = new JLabel();
 		cyclo.setText("Valor do CYCLO: ");
 		JTextField text_cyclo = new JTextField("CYCLO");
-		JCheckBox check_cyclo = new JCheckBox("Maior");
+		JComboBox<String> cycloBox = new JComboBox(mmi);
 
 		JLabel atfd = new JLabel();
 		atfd.setText("Valor do ATFD: ");
 		JTextField text_atfd = new JTextField("ATDF");
-		JCheckBox check_atfd = new JCheckBox("Maior");
+		JComboBox<String> atfdBox = new JComboBox(mmi);
 
 		JLabel laa = new JLabel();
 		laa.setText("Valor do LAA: ");
 		JTextField text_laa = new JTextField("LAA");
-		JCheckBox check_laa = new JCheckBox("Maior");
-		
+		JComboBox<String> laaBox = new JComboBox(mmi);
+
+
+		String[] op = {" - ", "or", "and"};
+		JLabel lm_op = new JLabel("long_method operation: ");
+		JComboBox<String> lm_box = new JComboBox(op);
+		JLabel fe_op = new JLabel("feature_envy operation: ");
+		JComboBox<String> fe_box = new JComboBox(op);
+
 		JButton definir = new JButton("Definir");
-		
-		
+
 		definir.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				List<Method> aux1 = null;
-				List<Method> aux2 = null;
-				boolean usado = false;
-				boolean usado_lm = false;
-				boolean usado_fe = false;
-
 				if (text_loc.getText().matches("[0-9]+")) {
 					thresholdLoc = Integer.parseInt(text_loc.getText());
 					frame.setThresholdLoc(thresholdLoc);
-					
-					if (check_loc.isSelected())
-						frame.getErrorDet().thresholds_Loc(thresholdLoc, true);
-					else
-						frame.getErrorDet().thresholds_Loc(thresholdLoc, false);
 
-					usado = true;
+					String sloc = (String) locBox.getSelectedItem();
+					frame.setSloc(sloc);
+
+					frame.getErrorDet().setLongM(true);
 				}
 
 				if (text_cyclo.getText().matches("[0-9]+")) {
 					thresholdCyclo = Integer.parseInt(text_cyclo.getText());
 					frame.setThresholdCyclo(thresholdCyclo);
-					
-					if (check_cyclo.isSelected()) {
-						if (usado == false)
-							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, true);
 
-						else {
-							aux1 = frame.getErrorDet().segundoCriterio(true);
-							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, true);
-							usado_lm = true;
-						}
+					String scyclo = (String) cycloBox.getSelectedItem();
+					frame.setScyclo(scyclo);
 
-					} else {
-						if (usado == false)
-							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, false);
-
-						else {
-							aux1 = frame.getErrorDet().segundoCriterio(true);
-							frame.getErrorDet().thresholds_Cyclo(thresholdCyclo, false);
-							usado_lm = true;
-						}
-					}
+					usado_lm = true;
 				}
 
-				usado = false;
+
 				if (text_atfd.getText().matches("[0-9]+")) {
 					thresholdAtfd = Integer.parseInt(text_atfd.getText());
 					frame.setThresholdAtfd(thresholdAtfd);
-					
-					if (check_atfd.isSelected())
-						frame.getErrorDet().thresholds_Atfd(thresholdAtfd, true);
-					else
-						frame.getErrorDet().thresholds_Atfd(thresholdAtfd, false);
 
-					usado = true;
+					String satfd = (String) atfdBox.getSelectedItem();
+					frame.setSatfd(satfd);
+
+					frame.getErrorDet().setFeatureE(true);
 				}
 
 				if (text_laa.getText().matches("[0-9]+")) {
 					thresholdLaa = Double.parseDouble(text_laa.getText());
 					frame.setThresholdLaa(thresholdLaa);
+
+					String slaa = (String) laaBox.getSelectedItem();
+					frame.setSlaa(slaa);
 					
-					if (check_cyclo.isSelected()) {
-						if (!usado)
-							frame.getErrorDet().thresholds_Laa(thresholdLaa, true);
-
-						else {
-							aux2 = frame.getErrorDet().segundoCriterio(false);
-							frame.getErrorDet().thresholds_Laa(thresholdLaa, true);
-							usado_fe = true;
-						}
-
-					} else {
-						if (!usado)
-							frame.getErrorDet().thresholds_Laa(thresholdLaa, false);
-
-						else {
-							aux2 = frame.getErrorDet().segundoCriterio(false);
-							frame.getErrorDet().thresholds_Laa(thresholdLaa, false);
-							usado_fe = true;
-						}
-					}
+					usado_fe = true;
 				}
-
-				for (Method m : frame.getMethods()) {
-
-					if (usado_lm) {
-						for (Method a1 : aux1)
-							if (m.getMethodID() == a1.getMethodID()) {
-
-								if (m.isIs_long_method_user() == true && a1.isIs_long_method_user() == true)
-									m.setIs_long_method_user(true);
-								else
-									m.setIs_long_method_user(false);
-							}
-					}
-
-					if (usado_fe) {
-						for (Method a2 : aux2)
-							if (m.getMethodID() == a2.getMethodID()) {
-
-								if (m.isIs_feature_envy_user() == true && a2.isIs_feature_envy_user() == true)
-									m.setIs_feature_envy_user(true);
-								else
-									m.setIs_feature_envy_user(false);
-							}
-					}
+				
+				if(usado_lm) {
+					String s = (String) lm_box.getSelectedItem();
+					frame.getErrorDet().setLm_box(s);
 				}
-
-				for (Method method : frame.getMethods())
-					frame.getMethodsJModel().addElement(method);
-				frame.getMethodsJList().setModel(frame.getMethodsJModel());
+				
+				if(usado_fe) {
+					String s = (String) fe_box.getSelectedItem();
+					frame.getErrorDet().setFe_box(s);
+				}
 
 				frame.thresholdUpdate();
 				defineRules.setVisible(false);
 			}
 		});
 
-		
+
+
 		JPanel dr = new JPanel();
-		dr.setLayout(new GridLayout(5, 1));
+		dr.setLayout(new GridLayout(10, 1));
 
 		JPanel ploc = new JPanel();
-		ploc.setLayout(new GridLayout(0, 3));
+		JPanel ploc2 = new JPanel();
+		ploc.setLayout(new GridLayout(1, 2));
+		ploc2.setLayout(new GridLayout(1, 3));
 		ploc.add(loc);
 		ploc.add(text_loc);
-		ploc.add(check_loc);
+		ploc2.add(locBox);
 		dr.add(ploc);
+		dr.add(ploc2);
 
 		JPanel pcyclo = new JPanel();
-		pcyclo.setLayout(new GridLayout(0, 3));
+		JPanel pcyclo2 = new JPanel();
+		pcyclo.setLayout(new GridLayout(1, 2));
+		pcyclo2.setLayout(new GridLayout(1, 3));
 		pcyclo.add(cyclo);
 		pcyclo.add(text_cyclo);
-		pcyclo.add(check_cyclo);
+		pcyclo2.add(cycloBox);
 		dr.add(pcyclo);
+		dr.add(pcyclo2);
 
 		JPanel patfd = new JPanel();
-		patfd.setLayout(new GridLayout(0, 3));
+		JPanel patfd2 = new JPanel();
+		patfd.setLayout(new GridLayout(1, 2));
+		patfd2.setLayout(new GridLayout(1, 3));
 		patfd.add(atfd);
 		patfd.add(text_atfd);
-		patfd.add(check_atfd);
+		patfd2.add(atfdBox);
 		dr.add(patfd);
+		dr.add(patfd2);
 
 		JPanel plaa = new JPanel();
-		plaa.setLayout(new GridLayout(0, 3));
+		JPanel plaa2 = new JPanel();
+		plaa.setLayout(new GridLayout(1, 2));
+		plaa2.setLayout(new GridLayout(1, 3));
 		plaa.add(laa);
 		plaa.add(text_laa);
-		plaa.add(check_laa);
+		plaa2.add(laaBox);
 		dr.add(plaa);
+		dr.add(plaa2);
+
+		dr.add(lm_op);
+		dr.add(lm_box);
+		dr.add(fe_op);
+		dr.add(fe_box);
 
 		dr.add(definir, BorderLayout.SOUTH);
 		defineRules.add(dr);
 	}
-	
+
 }
