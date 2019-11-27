@@ -105,6 +105,12 @@ public class Frame {
 	public List<Method> getMethods() {
 		return methods;
 	}
+	
+
+	public void setMethods(List<Method> methods) {
+		this.methods = methods;
+	}
+
 
 	/**
 	 * Gets the methods J list.
@@ -323,6 +329,7 @@ public class Frame {
 
 						errorDet.start();
 						errorDet.work();
+						errorDet.update();
 
 						excelImportado = true;
 
@@ -345,8 +352,11 @@ public class Frame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(excelImportado)
+				if(excelImportado) {
+					errorDet.start();
 					errorDet.work();
+					errorDet.update();
+				}
 			}
 		});
 

@@ -81,6 +81,9 @@ public class ErrorDetection {
 
 
 	public void start() {
+		this.methods = frame.getMethods();
+		this.aux = frame.getMethods();
+		
 		this.loc = frame.getThresholdLoc();
 		this.cyclo = frame.getThresholdCyclo();
 		this.atfd = frame.getThresholdAtfd();
@@ -91,8 +94,6 @@ public class ErrorDetection {
 		this.satfd = frame.getSatfd();
 		this.slaa = frame.getSlaa();
 
-		this.methods = frame.getMethods();
-		this.aux = frame.getMethods();;
 	}
 
 	public void work() {
@@ -118,13 +119,16 @@ public class ErrorDetection {
 		frame.getChangeRules().setUsado_lm(false);
 		frame.getChangeRules().setUsado_fe(false);
 		
-		
-		for (Method method : frame.getMethods())
-			frame.getMethodsJModel().addElement(method);
-		frame.getMethodsJList().setModel(frame.getMethodsJModel());
 	}
 
-
+	public void update() {
+		
+		for (Method method : methods)
+			frame.getMethodsJModel().addElement(method);
+		frame.setMethods(methods);
+		frame.getMethodsJList().setModel(frame.getMethodsJModel());
+	}
+	
 	/**
 	 * Segundo criterio.
 	 *

@@ -178,7 +178,8 @@ public class ChangeRules {
 					String s = (String) fe_box.getSelectedItem();
 					frame.getErrorDet().setFe_box(s);
 				}
-
+				
+				frame.getErrorDet().start();
 				frame.thresholdUpdate();
 				defineRules.setVisible(false);
 			}
