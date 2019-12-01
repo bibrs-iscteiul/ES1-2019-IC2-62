@@ -306,8 +306,7 @@ public class Frame {
 		JButton escolherFicheiro = new JButton("Excel");
 		JButton definirRegras = new JButton("Definir Regras"); // falta definir
 		JButton visualizarRegras = new JButton("Visualizar Regras"); // falta definir
-		JButton atualizarRegras = new JButton("Atualizar Regras");
-
+		
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -345,13 +344,7 @@ public class Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changeRules.open();
-			}
-		});
-
-		atualizarRegras.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
+				
 				if(excelImportado) {
 					errorDet.start();
 					errorDet.work();
@@ -385,7 +378,6 @@ public class Frame {
 		painelBotoes.add(escolherFicheiro);
 		painelBotoes.add(definirRegras);
 		painelBotoes.add(visualizarRegras);
-		painelBotoes.add(atualizarRegras);
 
 		// painel South
 		JPanel painelSouth = new JPanel();

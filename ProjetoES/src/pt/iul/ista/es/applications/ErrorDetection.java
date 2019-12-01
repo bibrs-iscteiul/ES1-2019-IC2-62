@@ -322,12 +322,18 @@ public class ErrorDetection {
 				if (m.getMethodID() == a1.getMethodID()) {
 
 					if(lm_box.equals("or")) {
-						if (m.isIs_long_method_user() == true || a1.isIs_long_method_user() == true)
+						if (m.isIs_long_method_user() == true || a1.isIs_long_method_user() == true) 
 							m.setIs_long_method_user(true);
-
-						else
-							m.setIs_long_method_user(false);
+						
+//						else {
+//							if (a1.isIs_long_method_user() == true) 
+//								m.setIs_long_method_user(true);
+//							
+//							else 
+//								m.setIs_long_method_user(false);
+//						}
 					}
+					
 					if(lm_box.equals("and")) {
 						if (m.isIs_long_method_user() == true && a1.isIs_long_method_user() == true)
 							m.setIs_long_method_user(true);
