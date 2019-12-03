@@ -343,6 +343,9 @@ public class Frame {
 						e1.printStackTrace();
 					}
 				}
+					else
+						
+						JOptionPane.showMessageDialog(frame,"Ficheiro não suportado");
 			}
 		});
 
