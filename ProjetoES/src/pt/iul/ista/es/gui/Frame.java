@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,16 +14,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
-
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
-import pt.iul.ista.es.applications.ErrorDetection;
 
 /**
  * The Class Frame.
@@ -33,34 +28,11 @@ import pt.iul.ista.es.applications.ErrorDetection;
  */
 public class Frame {
 
-
 	/** The frame. */
 	private JFrame frame;
 
-	/** The threshold loc. */
-	private int thresholdLoc = 0;
-
-	/** The threshold cyclo. */
-	private int thresholdCyclo = 0;
-
-	/** The threshold atfd. */
-	private int thresholdAtfd = 0;
-
-	/** The threshold laa. */
-	private double thresholdLaa = 0;
-
-
-	private String sloc = ("");
-
-	private String scyclo = ("");
-
-	private String satfd = ("");
-
-	private String slaa = ("");
-
 	private JLabel lmLog;
 	private JLabel feLog;
-
 
 	/** The excel importado. */
 	private boolean excelImportado;
@@ -87,21 +59,22 @@ public class Frame {
 	private List<Method> methods;
 
 	/** The methods J list. */
-	private JList<Method> methodsJList;
+	private JList<String> methodsJList;
 
 	/** The methods J model. */
-	private DefaultListModel<Method> methodsJModel;
+	private DefaultListModel<String> methodsJModel;
 
 	/** The change rules. */
 	private ChangeRules changeRules;
-
-	/** The error det. */
-	private ErrorDetection errorDet;
 	
-	private int dci=0;
-	private int adci=0;
-	private int adii=0;
-	private int dii=0;
+	
+	public boolean isExcelImportado() {
+		return excelImportado;
+	}
+
+	public void setExcelImportado(boolean excelImportado) {
+		this.excelImportado = excelImportado;
+	}
 
 	/**
 	 * Gets the methods.
@@ -111,19 +84,13 @@ public class Frame {
 	public List<Method> getMethods() {
 		return methods;
 	}
-	
-
-	public void setMethods(List<Method> methods) {
-		this.methods = methods;
-	}
-
 
 	/**
 	 * Gets the methods J list.
 	 *
 	 * @return the methods J list
 	 */
-	public JList<Method> getMethodsJList() {
+	public JList<String> getMethodsJList() {
 		return methodsJList;
 	}
 
@@ -132,122 +99,8 @@ public class Frame {
 	 *
 	 * @return the methods J model
 	 */
-	public DefaultListModel<Method> getMethodsJModel() {
+	public DefaultListModel<String> getMethodsJModel() {
 		return methodsJModel;
-	}
-
-	/**
-	 * Gets the error detection
-	 *
-	 * @return the error detection
-	 */
-	public ErrorDetection getErrorDet() {
-		return errorDet;
-	}
-
-	/**
-	 * Gets the threshold loc.
-	 *
-	 * @return the threshold loc
-	 */
-	public int getThresholdLoc() {
-		return thresholdLoc;
-	}
-
-	/**
-	 * Sets the threshold loc.
-	 *
-	 * @param thresholdLoc the new threshold loc
-	 */
-	public void setThresholdLoc(int thresholdLoc) {
-		this.thresholdLoc = thresholdLoc;
-	}
-
-	/**
-	 * Gets the threshold cyclo.
-	 *
-	 * @return the threshold cyclo
-	 */
-	public int getThresholdCyclo() {
-		return thresholdCyclo;
-	}
-
-	/**
-	 * Sets the threshold cyclo.
-	 *
-	 * @param thresholdCyclo the new threshold cyclo
-	 */
-	public void setThresholdCyclo(int thresholdCyclo) {
-		this.thresholdCyclo = thresholdCyclo;
-	}
-
-	/**
-	 * Gets the threshold atfd.
-	 *
-	 * @return the threshold atfd
-	 */
-	public int getThresholdAtfd() {
-		return thresholdAtfd;
-	}
-
-	/**
-	 * Sets the threshold atfd.
-	 *
-	 * @param thresholdAtfd the new threshold atfd
-	 */
-	public void setThresholdAtfd(int thresholdAtfd) {
-		this.thresholdAtfd = thresholdAtfd;
-	}
-
-	/**
-	 * Gets the threshold laa.
-	 *
-	 * @return the threshold laa
-	 */
-	public double getThresholdLaa() {
-		return thresholdLaa;
-	}
-
-	/**
-	 * Sets the threshold laa.
-	 *
-	 * @param thresholdLaa the new threshold laa
-	 */
-	public void setThresholdLaa(double thresholdLaa) {
-		this.thresholdLaa = thresholdLaa;
-	}
-
-
-	public String getSloc() {
-		return sloc;
-	}
-
-	public void setSloc(String sloc) {
-		this.sloc = sloc;
-	}
-
-	public String getScyclo() {
-		return scyclo;
-	}
-
-	public void setScyclo(String scyclo) {
-		this.scyclo = scyclo;
-	}
-
-	public String getSatfd() {
-		return satfd;
-	}
-
-	public void setSatfd(String satfd) {
-		this.satfd = satfd;
-	}
-
-	public String getSlaa() {
-		return slaa;
-	}
-
-	public void setSlaa(String slaa) {
-		this.slaa = slaa;
 	}
 
 	public ChangeRules getChangeRules() {
@@ -266,7 +119,6 @@ public class Frame {
 		frame.setSize(900, 500);
 		frame.setVisible(true);
 
-		this.errorDet = new ErrorDetection(this);
 		this.changeRules = new ChangeRules(this);
 
 	}
@@ -289,7 +141,7 @@ public class Frame {
 		JScrollPane scroll = new JScrollPane (methodsJList) ;
 
 		// JTextFields
-		JPanel painel = new JPanel(); // o q esta dentro da janela
+		JPanel painel = new JPanel(); 
 		painel.setLayout(new BorderLayout());
 		JTextField thresholds1 = new JTextField("");
 		JTextField thresholds2 = new JTextField("");
@@ -298,30 +150,32 @@ public class Frame {
 		JPanel painelThresholds = new JPanel();
 		painelThresholds.setLayout(new GridLayout(0, 1));
 		JLabel label = new JLabel("Valores Thresholds:");
-		tLoc = new JLabel("LOC: " + thresholdLoc);
-		tCyclo = new JLabel("CYCLO: " + thresholdCyclo);
-		tAtfd = new JLabel("ATFD: " + thresholdAtfd);
-		tLaa = new JLabel("LAA: " + thresholdLaa);
-		lmLog = new JLabel("Operação Lógica do long_method_user: ");
-		feLog = new JLabel("Operação Lógica do feature_envy_user: ");
+		tLoc = new JLabel("LOC: " );
+		tCyclo = new JLabel("CYCLO: ");
+		tAtfd = new JLabel("ATFD: ");
+		tLaa = new JLabel("LAA: " );
+		lmLog = new JLabel("OperaÃ§Äƒo LÃ³gica do Long Method do Utilizador: ");
+		feLog = new JLabel("OperaÃ§Äƒo LÃ³gica do Feature Envy do Utilizador: ");
 
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
 		// JButtons
-		JButton compararFeatureEnvy = new JButton("Comparar Feature Envy");
-		JButton compararLongMethod = new JButton("Comparar Long Method");
 		JButton escolherFicheiro = new JButton("Excel");
-		JButton definirRegras = new JButton("Definir Regras"); // falta definir
-		JButton visualizarRegras = new JButton("Visualizar Regras"); // falta definir
+		JButton definirRegras = new JButton("Definir Regras"); 
 		
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				excelImportado = false;
+				methodsJModel.clear();
+				
 				JFileChooser excel = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 				excel.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int returnValue1 = excel.showOpenDialog(null); // linha default
-				if (excel.getSelectedFile().toString().endsWith(".xlsx")) { // se ficheiro escolhido é excel
+				
+				if (excel.getSelectedFile().toString().endsWith(".xlsx")) { // se ficheiro escolhido Ã© excel
 					fileExcel = excel.getSelectedFile();
 
 					readFile = new ReadFromFile();
@@ -330,23 +184,19 @@ public class Frame {
 						methods = readFile.read(fileExcel.getName(), 0); // qqr cena para a sheet
 
 						for (Method method : methods) 
-							methodsJModel.addElement(method);
+							methodsJModel.addElement(method.toString());
 
 						methodsJList.setModel(methodsJModel);
-
-						errorDet.start();
-						errorDet.work();
-						errorDet.update();
-
+			
 						excelImportado = true;
+						
+						if(changeRules.isDefinedRules()) 
+							changeRules.saveRules();
 
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
-					else
-						
-						JOptionPane.showMessageDialog(frame,"Ficheiro não suportado");
 			}
 		});
 
@@ -355,118 +205,8 @@ public class Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changeRules.open();
-				
-				if(excelImportado) {
-					errorDet.start();
-					errorDet.work();
-					errorDet.update();
-				}
 			}
 		});
-		
-		compararLongMethod.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dci = 0;
-				dii = 0;
-				adci = 0;
-				adii = 0;
-				JFrame f = new JFrame();
-				JPanel jpanel = new JPanel();
-				jpanel.setLayout(new GridLayout(4,1));
-				JRadioButton r1=new JRadioButton("A) iPlasma");    
-				JRadioButton r2=new JRadioButton("B) PMD"); 
-				JRadioButton r3=new JRadioButton("C) Long_Method_User"); 
-				JButton x = new JButton("Comparar");
-				r1.setBounds(75,50,100,30);    
-				r2.setBounds(75,100,100,30);
-				r3.setBounds(75,150,200,30);
-				x.setBounds(75,200,100,30);
-				f.add(r1);
-				f.add(r2); 
-				f.add(r3);
-				f.add(x);
-				f.add(jpanel);
-				f.setSize(300,300);    
-				f.setLayout(null);    
-				f.setVisible(true);
-
-				x.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						f.setVisible(false);
-						for(Method i: methods) {
-							if(r1.isSelected()) {
-								compare(i.isIplasma(), i.isIs_long_method());
-							}
-							if (r2.isSelected()){
-								compare(i.isPmd(), i.isIs_long_method());
-							}
-							if(r3.isSelected()) {
-								compare(i.isIs_long_method_user(), i.isIs_long_method());
-							}
-						}
-
-						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
-					}
-				});
-			}
-		});
-		
-		compararFeatureEnvy.addActionListener (new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dci = 0;
-				dii = 0;
-				adci = 0;
-				adii = 0;
-				JFrame f = new JFrame();
-				JPanel jpanel = new JPanel();
-				jpanel.setLayout(new GridLayout(4,1));
-				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
-				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
-				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
-				JButton x = new JButton("Comparar");
-				r1.setBounds(75,50,200,30);    
-				r2.setBounds(75,100,200,30);
-				r3.setBounds(75,150,200,30);
-				x.setBounds(75,200,100,30);
-				f.add(r1);
-				f.add(r2); 
-				f.add(r3);
-				f.add(x);
-				f.add(jpanel);
-				f.setSize(300,300);    
-				f.setLayout(null);    
-				f.setVisible(true);
-
-				x.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						f.setVisible(false);
-						for(Method i: methods) {
-							if(r1.isSelected()) {
-								compare(i.isIs_feature_envy_user(), i.isIs_feature_envy());
-							}
-							if (r2.isSelected()){
-								compare(i.isPmd(), i.isIs_feature_envy()); //ALTERAR
-							}
-							if(r3.isSelected()) {
-								compare(i.isIs_long_method_user(), i.isIs_feature_envy()); //ALTERAR
-							}
-						}
-
-						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
-					}
-				});
-			}
-		});
-				
-			
-
 
 		// Painel com JButtons e JTextFields
 
@@ -488,13 +228,9 @@ public class Frame {
 		painelThresholds.add(lmLog, BorderLayout.SOUTH);
 		painelThresholds.add(feLog, BorderLayout.SOUTH);
 
-
 		// South.East (restantes botoes)
 		painelBotoes.add(escolherFicheiro);
 		painelBotoes.add(definirRegras);
-		painelBotoes.add(visualizarRegras);
-		painelBotoes.add(compararLongMethod);
-		painelBotoes.add(compararFeatureEnvy);
 
 		// painel South
 		JPanel painelSouth = new JPanel();
@@ -510,45 +246,35 @@ public class Frame {
 
 		frame.add(painelPrincipal);
 	}
-
-	/**
-	 * Threshold update.
-	 */
-	public void thresholdUpdate() {
-		if(!(sloc.equals("")))
-			tLoc.setText("LOC: " + sloc + " que/a "+ thresholdLoc);
-		if(!(scyclo.equals("")))
-			tCyclo.setText("CYCLO: " + scyclo + " que/a "+ thresholdCyclo);
-		if(!(satfd.equals("")))
-			tAtfd.setText("ATFD: " + satfd + " que/a " + thresholdAtfd);
-		if(!(slaa.equals("")))
-			tLaa.setText("LAA: " + slaa + " que/a " + thresholdLaa);
-		if(!(sloc.equals("") && !(scyclo.equals(""))))
-			lmLog.setText("Operação Lógica do long_method_user: "+ errorDet.getLm_box());
-		if(!(satfd.equals("") && !(slaa.equals(""))))
-			feLog.setText("Operação Lógica do feature_envy_user: "+ errorDet.getFe_box());
-	}
+	
+	public void updateRulesInGUI() {
 		
-	public void compare(boolean a, boolean b){ 
-		if(a == true && b == true){
-			dci++;
-		}
-		if(a == true && b == false){
-			dii++;
-		}
-		if(a == false && b == false){
-			adci++;
-		}
-		if(a == false && b == true){
-			adii++;
-		}
+		if(!(changeRules.getLocThreeshold() == -1) && !(changeRules.getLocOperator().equals("-")))
+			tLoc.setText("LOC: " + changeRules.getLocOperator() + " que "+ changeRules.getLocThreeshold());
+		
+		if(!(changeRules.getCycloThreeshold() == -1) && !(changeRules.getCycloOperator().equals("-")))
+			tCyclo.setText("CYCLO: " + changeRules.getCycloOperator() + " que " + changeRules.getCycloThreeshold());
+		
+		if(!(changeRules.getAtfdThreeshold() == -1) && !(changeRules.getAtfdOperator().equals("-")))
+			tAtfd.setText("ATFD: " + changeRules.getAtfdOperator() + " que " + changeRules.getAtfdThreeshold());
+		
+		if(!(changeRules.getLaaThreeshold() == -1) && !(changeRules.getLaaOperator().equals("-")))
+			tLaa.setText("LAA: " + changeRules.getLaaOperator() + " que " + changeRules.getLaaThreeshold());
+		
+		if(!(changeRules.getLongMethodOperator().equals("-")))
+			lmLog.setText("OperaÃ§Äƒo LÃ³gica do Long Method do Utilizador: " + changeRules.getLongMethodOperator());
+		
+		if(!(changeRules.getFeatureEnvyOperator().equals("-")))
+			feLog.setText("OperaÃ§Äƒo LÃ³gica do Feature Envy do Utilizador: "+ changeRules.getFeatureEnvyOperator());
 	}
+	
 
 	/**
 	 * The main method.
 	 *
 	 * @param args the arguments
 	 */
+	
 	public static void main(String[] args) {
 		Frame window = new Frame();
 		window.open();

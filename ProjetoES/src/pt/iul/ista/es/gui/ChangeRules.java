@@ -4,19 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-
+import pt.iul.ista.es.applications.Method;
 
 /**
  * The Class ChangeRules.
- * @author Gon�alo Almeida
+ * @author Gonçalo Almeida
  * @since 2019-11-10
  */
 public class ChangeRules {
@@ -24,42 +23,37 @@ public class ChangeRules {
 	/** The define rules. */
 	JDialog defineRules = new JDialog();
 
-	/** The threshold loc. */
-	int thresholdLoc;
-
-	/** The threshold cyclo. */
-	int thresholdCyclo;
-
-	/** The threshold atfd. */
-	int thresholdAtfd;
-
-	/** The threshold laa. */
-	double thresholdLaa;
-
 	/** The frame. */
 	Frame frame;
-
 	
-	boolean usado_lm = false;
-	boolean usado_fe = false;
+	int locThreeshold = -1;
+	int cycloThreeshold = -1;
+	int laaThreeshold = -1;
+	int atfdThreeshold = -1;
+	
+	String locOperator;
+	String cycloOperator;
+	String laaOperator;
+	String atfdOperator;
 
-	public boolean isUsado_lm() {
-		return usado_lm;
-	}
-
-	public void setUsado_lm(boolean usado_lm) {
-		this.usado_lm = usado_lm;
-	}
-
-	public boolean isUsado_fe() {
-		return usado_fe;
-	}
-
-	public void setUsado_fe(boolean usado_fe) {
-		this.usado_fe = usado_fe;
-	}
-
-
+	String longMethodOperator;
+	String featureEnvyOperator;
+	
+	JTextField text_loc;
+	JTextField text_cyclo;
+	JTextField text_atfd;
+	JTextField text_laa;
+	
+	JComboBox<String> lmOperator;
+	JComboBox<String> feOperator;
+	
+	JComboBox<String> locBox;
+	JComboBox<String> cycloBox;
+	JComboBox<String> atfdBox;
+	JComboBox<String> laaBox;
+	
+	boolean definedRules;
+	
 	/**
 	 * Instantiates a new change rules.
 	 *
@@ -70,21 +64,68 @@ public class ChangeRules {
 		addFrameContent();
 		defineRules.pack();
 		defineRules.setSize(700, 300);
-
-		this.thresholdLoc = frame.getThresholdLoc();
-		this.thresholdCyclo = frame.getThresholdCyclo();
-		this.thresholdAtfd = frame.getThresholdAtfd();
-		this.thresholdLaa = frame.getThresholdLaa();
-
+		
 		this.frame = frame;
 	}
 
+	public Frame getFrame() {
+		return frame;
+	}
+	
+	public boolean isDefinedRules() {
+		return definedRules;
+	}
+
+	public void setDefinedRules(boolean definedRules) {
+		this.definedRules = definedRules;
+	}
+
+	public int getLocThreeshold() {
+		return locThreeshold;
+	}
+	
+	public int getCycloThreeshold() {
+		return cycloThreeshold;
+	}
+
+	public int getLaaThreeshold() {
+		return laaThreeshold;
+	}
+
+	public int getAtfdThreeshold() {
+		return atfdThreeshold;
+	}
+
+	public String getLocOperator() {
+		return locOperator;
+	}
+
+	public String getCycloOperator() {
+		return cycloOperator;
+	}
+	
+	public String getLaaOperator() {
+		return laaOperator;
+	}
+	
+	public String getAtfdOperator() {
+		return atfdOperator;
+	}
+	
+	public String getLongMethodOperator() {
+		return longMethodOperator;
+	}
+	
+	public String getFeatureEnvyOperator() {
+		return featureEnvyOperator;
+	}
+	
+	
 	/**
 	 * Open.
 	 */
 	public void open() {
 		defineRules.setVisible(true);
-
 	}
 
 	/**
@@ -92,34 +133,34 @@ public class ChangeRules {
 	 */
 	private void addFrameContent() {
 
-		String[] mmi = {" - ", "maior", "menor", "igual"};
+		String[] operadores = {"-", ">", "<", "="};
 
 		JLabel loc = new JLabel();
 		loc.setText("Valor do LOC: ");
-		JTextField text_loc = new JTextField("LOC");
-		JComboBox<String> locBox = new JComboBox(mmi);
+		text_loc = new JTextField("LOC");
+		locBox = new JComboBox(operadores);
 
 		JLabel cyclo = new JLabel();
 		cyclo.setText("Valor do CYCLO: ");
-		JTextField text_cyclo = new JTextField("CYCLO");
-		JComboBox<String> cycloBox = new JComboBox(mmi);
+		text_cyclo = new JTextField("CYCLO");
+		cycloBox = new JComboBox(operadores);
 
 		JLabel atfd = new JLabel();
 		atfd.setText("Valor do ATFD: ");
-		JTextField text_atfd = new JTextField("ATDF");
-		JComboBox<String> atfdBox = new JComboBox(mmi);
+		text_atfd = new JTextField("ATDF");
+		atfdBox = new JComboBox(operadores);
 
 		JLabel laa = new JLabel();
 		laa.setText("Valor do LAA: ");
-		JTextField text_laa = new JTextField("LAA");
-		JComboBox<String> laaBox = new JComboBox(mmi);
+		text_laa = new JTextField("LAA");
+		laaBox = new JComboBox(operadores);
 
 
-		String[] op = {" - ", "or", "and"};
-		JLabel lm_op = new JLabel("long_method operation: ");
-		JComboBox<String> lm_box = new JComboBox(op);
-		JLabel fe_op = new JLabel("feature_envy operation: ");
-		JComboBox<String> fe_box = new JComboBox(op);
+		String[] op = {"-", "or", "and"};
+		JLabel lm = new JLabel("Operaçăo do Long Method: ");
+		lmOperator = new JComboBox(op);
+		JLabel fe = new JLabel("Operaçăo do Feature Envy: ");
+		feOperator = new JComboBox(op);
 
 		JButton definir = new JButton("Definir");
 
@@ -127,65 +168,11 @@ public class ChangeRules {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if (text_loc.getText().matches("[0-9]+")) {
-					thresholdLoc = Integer.parseInt(text_loc.getText());
-					frame.setThresholdLoc(thresholdLoc);
-
-					String sloc = (String) locBox.getSelectedItem();
-					frame.setSloc(sloc);
-
-					frame.getErrorDet().setLongM(true);
-				}
-
-				if (text_cyclo.getText().matches("[0-9]+")) {
-					thresholdCyclo = Integer.parseInt(text_cyclo.getText());
-					frame.setThresholdCyclo(thresholdCyclo);
-
-					String scyclo = (String) cycloBox.getSelectedItem();
-					frame.setScyclo(scyclo);
-
-					usado_lm = true;
-				}
-
-
-				if (text_atfd.getText().matches("[0-9]+")) {
-					thresholdAtfd = Integer.parseInt(text_atfd.getText());
-					frame.setThresholdAtfd(thresholdAtfd);
-
-					String satfd = (String) atfdBox.getSelectedItem();
-					frame.setSatfd(satfd);
-
-					frame.getErrorDet().setFeatureE(true);
-				}
-
-				if (text_laa.getText().matches("[0-9]+")) {
-					thresholdLaa = Double.parseDouble(text_laa.getText());
-					frame.setThresholdLaa(thresholdLaa);
-
-					String slaa = (String) laaBox.getSelectedItem();
-					frame.setSlaa(slaa);
-					
-					usado_fe = true;
-				}
-				
-				if(usado_lm) {
-					String s = (String) lm_box.getSelectedItem();
-					frame.getErrorDet().setLm_box(s);
-				}
-				
-				if(usado_fe) {
-					String s = (String) fe_box.getSelectedItem();
-					frame.getErrorDet().setFe_box(s);
-				}
-				
-				frame.getErrorDet().start();
-				frame.thresholdUpdate();
-				defineRules.setVisible(false);
+				saveRules();
+			
+				//defineRules.setVisible(false);
 			}
 		});
-
-
 
 		JPanel dr = new JPanel();
 		dr.setLayout(new GridLayout(10, 1));
@@ -230,13 +217,127 @@ public class ChangeRules {
 		dr.add(plaa);
 		dr.add(plaa2);
 
-		dr.add(lm_op);
-		dr.add(lm_box);
-		dr.add(fe_op);
-		dr.add(fe_box);
+		dr.add(lm);
+		dr.add(lmOperator);
+		dr.add(fe);
+		dr.add(feOperator);
 
 		dr.add(definir, BorderLayout.SOUTH);
 		defineRules.add(dr);
 	}
+	
+	public void saveRules() {
+		
+		if (text_loc.getText().matches("[0-9]+")) {
+			locThreeshold = Integer.parseInt(text_loc.getText());
+			System.out.println("threeshold loc is " + locThreeshold);
+		}
 
+		if (text_cyclo.getText().matches("[0-9]+")) {
+			cycloThreeshold = Integer.parseInt(text_cyclo.getText());
+			System.out.println("threeshold cyclo is " + cycloThreeshold);
+		}
+
+		if (text_atfd.getText().matches("[0-9]+")) {
+			atfdThreeshold = Integer.parseInt(text_atfd.getText());
+			System.out.println("threeshold atfd is " + atfdThreeshold);
+		}
+
+		if (text_laa.getText().matches("[0-9]+")) {
+			laaThreeshold = Integer.parseInt(text_laa.getText());
+			System.out.println("threeshold laa is " + laaThreeshold);
+		}
+					
+		if(!(lmOperator.getSelectedItem().toString() == "null") || !(lmOperator.getSelectedItem().toString() == "-")) {
+			longMethodOperator = lmOperator.getSelectedItem().toString();
+			System.out.println("long method operator is " + longMethodOperator);
+		}
+		
+		if(!(feOperator.getSelectedItem().toString() == "null") || !(feOperator.getSelectedItem().toString() == "-")) {
+			featureEnvyOperator = feOperator.getSelectedItem().toString();
+			System.out.println("feature envy operator is " + featureEnvyOperator);
+		}
+		
+		if(!(locBox.getSelectedItem().toString() == "-")) {
+			locOperator = locBox.getSelectedItem().toString();
+			System.out.println("loc operator is " + locOperator);
+		}
+		
+		System.out.println("cyclo operator before if " + cycloBox.getSelectedItem().toString());
+		if(!(cycloBox.getSelectedItem().toString() == "-")) {
+			cycloOperator = cycloBox.getSelectedItem().toString();
+			System.out.println("cyclo operator is " + cycloOperator);
+		}
+		
+		if(!(laaBox.getSelectedItem().toString() == "-")) {
+			laaOperator = laaBox.getSelectedItem().toString();
+			System.out.println("laa operator is " + laaOperator);
+		}
+		
+		if(!(atfdBox.getSelectedItem().toString() == "-")) {
+			atfdOperator = atfdBox.getSelectedItem().toString();
+			System.out.println("atfd operator is " + atfdOperator);
+		}
+		
+		boolean longMethodValido;
+		boolean featureEnvyValido;
+		boolean metricasValidas;
+		
+		if(locThreeshold != -1 && cycloThreeshold != -1 && (longMethodOperator.equals("null") || longMethodOperator.equals("-"))) {
+			
+			longMethodValido = false;
+			System.out.println(longMethodValido);
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Long Method para continuar.", "Warning!", JOptionPane.WARNING_MESSAGE);
+		} else {
+			longMethodValido = true;
+			System.out.println(longMethodValido);
+		}
+		
+		if(atfdThreeshold != -1 && laaThreeshold != -1 && (featureEnvyOperator.equals("null") || featureEnvyOperator.equals("-"))) {
+			featureEnvyValido = false;
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Feature Envy para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
+		} else {
+			featureEnvyValido = true;
+		}
+		
+		if( (locThreeshold != -1 && locOperator == null) || (cycloThreeshold != -1 && cycloOperator == null) || (atfdThreeshold != -1 && atfdOperator == null) || (laaThreeshold != -1 && laaOperator == null) ) {
+			metricasValidas = false;
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador para as métricas definidas para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
+			System.out.println("valor metricas validas " + metricasValidas);
+		} else {
+			metricasValidas = true;
+			System.out.println("valor metricas validas " + metricasValidas);
+		}
+		
+		if(longMethodValido && featureEnvyValido && metricasValidas) {
+		
+			definedRules = true;
+		
+			frame.updateRulesInGUI();
+			
+			if(frame.isExcelImportado()) {
+			
+				System.out.println("entrei no if excel");
+				
+				for (Method method : frame.getMethods()) {
+	
+					boolean longMethodUser = method.isLongMethodUser(locThreeshold, locOperator, cycloThreeshold, cycloOperator, longMethodOperator);
+					method.setLongMethodUserBoolean(longMethodUser);
+					
+					boolean featureEnvyUser = method.isFeatureEnvyUser(atfdThreeshold, atfdOperator, laaThreeshold, laaOperator, featureEnvyOperator);
+					method.setFeatureEnvyUserBoolean(featureEnvyUser);
+				}
+				
+				frame.getMethodsJModel().clear();
+				
+				for (Method method : frame.getMethods()) 
+					if(method.isLongMethodUserBoolean() || method.isFeatureEnvyUserBoolean())
+						frame.getMethodsJModel().addElement("MethodID: " + method.getMethodID() + "; Long Method: " + method.isLongMethodUserBoolean() + "; Feature Envy: " + method.isFeatureEnvyUserBoolean());
+	
+				frame.getMethodsJList().setModel(frame.getMethodsJModel());
+			}
+			
+			defineRules.setVisible(false);
+		}
+	}
 }
