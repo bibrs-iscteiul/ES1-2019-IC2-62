@@ -232,6 +232,15 @@ public class Method {
 	public boolean isIs_long_method() {
 		return is_long_method;
 	}
+	
+	/**
+	 * Checks if is checks if is feature envy.
+	 *
+	 * @return true, if is checks if is feature envy
+	 */
+	public boolean isIs_feature_envy() {
+		return is_feature_envy;
+	}
 
 	/**
 	 * Checks if is iplasma.
@@ -286,6 +295,7 @@ public class Method {
 	public boolean isIs_long_method_user() {
 		return is_long_method_user;
 	}
+	
 
 	/**
 	 * Sets the checks if is long method user.

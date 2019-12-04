@@ -309,7 +309,8 @@ public class Frame {
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
 		// JButtons
-		JButton comparar = new JButton("Comparar Long Method");
+		JButton compararFeatureEnvy = new JButton("Comparar Feature Envy");
+		JButton compararLongMethod = new JButton("Comparar Long Method");
 		JButton escolherFicheiro = new JButton("Excel");
 		JButton definirRegras = new JButton("Definir Regras"); // falta definir
 		JButton visualizarRegras = new JButton("Visualizar Regras"); // falta definir
@@ -363,7 +364,7 @@ public class Frame {
 			}
 		});
 		
-		comparar.addActionListener(new ActionListener() {
+		compararLongMethod.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -380,7 +381,7 @@ public class Frame {
 				JButton x = new JButton("Comparar");
 				r1.setBounds(75,50,100,30);    
 				r2.setBounds(75,100,100,30);
-				r3.setBounds(75,150,100,30);
+				r3.setBounds(75,150,200,30);
 				x.setBounds(75,200,100,30);
 				f.add(r1);
 				f.add(r2); 
@@ -413,6 +414,59 @@ public class Frame {
 				});
 			}
 		});
+		
+		compararFeatureEnvy.addActionListener (new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dci = 0;
+				dii = 0;
+				adci = 0;
+				adii = 0;
+				JFrame f = new JFrame();
+				JPanel jpanel = new JPanel();
+				jpanel.setLayout(new GridLayout(4,1));
+				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
+				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
+				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
+				JButton x = new JButton("Comparar");
+				r1.setBounds(75,50,200,30);    
+				r2.setBounds(75,100,200,30);
+				r3.setBounds(75,150,200,30);
+				x.setBounds(75,200,100,30);
+				f.add(r1);
+				f.add(r2); 
+				f.add(r3);
+				f.add(x);
+				f.add(jpanel);
+				f.setSize(300,300);    
+				f.setLayout(null);    
+				f.setVisible(true);
+
+				x.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.setVisible(false);
+						for(Method i: methods) {
+							if(r1.isSelected()) {
+								compare(i.isIs_feature_envy_user(), i.isIs_feature_envy());
+							}
+							if (r2.isSelected()){
+								compare(i.isPmd(), i.isIs_feature_envy()); //ALTERAR
+							}
+							if(r3.isSelected()) {
+								compare(i.isIs_long_method_user(), i.isIs_feature_envy()); //ALTERAR
+							}
+						}
+
+						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
+					}
+				});
+			}
+		});
+				
+			
+
 
 		// Painel com JButtons e JTextFields
 
@@ -439,7 +493,8 @@ public class Frame {
 		painelBotoes.add(escolherFicheiro);
 		painelBotoes.add(definirRegras);
 		painelBotoes.add(visualizarRegras);
-		painelBotoes.add(comparar);
+		painelBotoes.add(compararLongMethod);
+		painelBotoes.add(compararFeatureEnvy);
 
 		// painel South
 		JPanel painelSouth = new JPanel();
