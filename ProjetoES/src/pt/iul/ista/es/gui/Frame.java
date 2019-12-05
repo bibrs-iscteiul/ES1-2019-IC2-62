@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
@@ -67,6 +68,11 @@ public class Frame {
 
 	/** The change rules. */
 	private ChangeRules changeRules;
+	
+	private int dci=0;
+	private int adci=0;
+	private int adii=0;
+	private int dii=0;
 
 
 	public boolean isExcelImportado() {
@@ -215,6 +221,107 @@ public class Frame {
 			}
 		});
 		
+		compararLongMethod.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dci = 0;
+				dii = 0;
+				adci = 0;
+				adii = 0;
+				JFrame f = new JFrame();
+				JPanel jpanel = new JPanel();
+				jpanel.setLayout(new GridLayout(4,1));
+				JRadioButton r1=new JRadioButton("A) iPlasma");    
+				JRadioButton r2=new JRadioButton("B) PMD"); 
+				JRadioButton r3=new JRadioButton("C) Long_Method_User"); 
+				JButton x = new JButton("Comparar");
+				r1.setBounds(75,50,100,30);    
+				r2.setBounds(75,100,100,30);
+				r3.setBounds(75,150,200,30);
+				x.setBounds(75,200,100,30);
+				f.add(r1);
+				f.add(r2); 
+				f.add(r3);
+				f.add(x);
+				f.add(jpanel);
+				f.setSize(300,300);    
+				f.setLayout(null);    
+				f.setVisible(true);
+
+				x.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.setVisible(false);
+						for(Method i: methods) {
+							if(r1.isSelected()) {
+								compare(i.isIplasma(), i.isIs_long_method());
+							}
+							if (r2.isSelected()){
+								compare(i.isPmd(), i.isIs_long_method());
+							}
+							if(r3.isSelected()) {
+								compare(i.isLongMethodUserBoolean(), i.isIs_long_method());
+							}
+						}
+
+						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
+					}
+				});
+			}
+		});
+		
+		compararFeatureEnvy.addActionListener (new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dci = 0;
+				dii = 0;
+				adci = 0;
+				adii = 0;
+				JFrame f = new JFrame();
+				JPanel jpanel = new JPanel();
+				jpanel.setLayout(new GridLayout(4,1));
+				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
+				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
+				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
+				JButton x = new JButton("Comparar");
+				r1.setBounds(75,50,200,30);    
+				r2.setBounds(75,100,200,30);
+				r3.setBounds(75,150,200,30);
+				x.setBounds(75,200,100,30);
+				f.add(r1);
+				f.add(r2); 
+				f.add(r3);
+				f.add(x);
+				f.add(jpanel);
+				f.setSize(300,300);    
+				f.setLayout(null);    
+				f.setVisible(true);
+
+				x.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.setVisible(false);
+						for(Method i: methods) {
+							if(r1.isSelected()) {
+								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy());
+							}
+							if (r2.isSelected()){
+								compare(i.isPmd(), i.isIs_feature_envy()); //ALTERAR
+							}
+							if(r3.isSelected()) {
+								compare(i.isIplasma(), i.isIs_feature_envy()); //ALTERAR
+							}
+						}
+
+						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
+					}
+				});
+			}
+		});
+		
 		
 
 
@@ -281,6 +388,21 @@ public class Frame {
 			feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: "+ changeRules.getFeatureEnvyOperator());
 	}
 
+	
+	public void compare(boolean a, boolean b){ 
+		if(a == true && b == true){
+			dci++;
+		}
+		if(a == true && b == false){
+			dii++;
+		}
+		if(a == false && b == false){
+			adci++;
+		}
+		if(a == false && b == true){
+			adii++;
+		}
+	}
 
 	/**
 	 * The main method.

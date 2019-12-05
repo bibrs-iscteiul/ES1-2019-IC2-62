@@ -50,6 +50,39 @@ public class Method {
 	/** The user's feature envy. */
 	boolean isFeatureEnvyUserBoolean;
 	
+	
+	public boolean isIs_long_method() {
+		return is_long_method;
+	}
+
+	public void setIs_long_method(boolean is_long_method) {
+		this.is_long_method = is_long_method;
+	}
+
+	public boolean isIplasma() {
+		return iplasma;
+	}
+
+	public void setIplasma(boolean iplasma) {
+		this.iplasma = iplasma;
+	}
+
+	public boolean isPmd() {
+		return pmd;
+	}
+
+	public void setPmd(boolean pmd) {
+		this.pmd = pmd;
+	}
+
+	public boolean isIs_feature_envy() {
+		return is_feature_envy;
+	}
+
+	public void setIs_feature_envy(boolean is_feature_envy) {
+		this.is_feature_envy = is_feature_envy;
+	}
+
 	/**
 	 * Instantiates a new method.
 	 *
