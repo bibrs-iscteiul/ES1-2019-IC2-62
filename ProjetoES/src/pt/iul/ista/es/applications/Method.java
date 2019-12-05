@@ -158,7 +158,7 @@ public class Method {
 	 */
 	public boolean isLongMethodUser (int thresholdLOC, String operatorLOC, int thresholdCYCLO, String operatorCYCLO, String operatorLongMethod) {
 	
-		if (operatorLongMethod == "and" && thresholdLOC != 0 && thresholdCYCLO != 0) {
+		if (operatorLongMethod == "and" && thresholdLOC != -1 && thresholdCYCLO != -1) {
 			//System.out.println("tem tudo long method and");
 			
 			if(operatorLOC == ">" && operatorCYCLO == ">") {
@@ -293,18 +293,48 @@ public class Method {
 		}
 		
 		else if (thresholdLOC != -1) {
-			System.out.println("tem loc");
-			if (this.loc > thresholdLOC)
-				return true;
-			else 
-				return false;
+			switch (operatorLOC) {
+			
+			case ">":
+				if (this.loc > thresholdLOC)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.loc < thresholdLOC)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.loc == thresholdLOC)
+					return true;
+				else 
+					return false;
+			}
 		}
 		else if (thresholdCYCLO != -1) {
-			System.out.println("tem cyclo");
-			if (this.loc > thresholdLOC)
-				return true;
-			else 
-				return false;	
+			switch (operatorCYCLO) {
+			
+			case ">":
+				if (this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
 		}
 		
 		return false;	
@@ -319,7 +349,7 @@ public class Method {
 	 */
 	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, int thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
 		
-		if (operatorFeatureEnvy == "and" && thresholdATFD != 0 && thresholdLAA != 0) {
+		if (operatorFeatureEnvy == "and" && thresholdATFD != -1 && thresholdLAA != -1) {
 			//System.out.println("tem tudo feature envy and");
 			
 			if(operatorATFD == ">" && operatorLAA == ">") {
@@ -387,8 +417,7 @@ public class Method {
 		}
 		
 		else if (operatorFeatureEnvy == "or" && thresholdATFD != -1 && thresholdLAA != -1) {
-		//	System.out.println("tem tudo feature envy or");
-			
+	
 			if(operatorATFD == ">" && operatorLAA == ">") {
 				if (this.atfd > thresholdATFD || this.laa > thresholdLAA)
 					return true;
@@ -454,18 +483,49 @@ public class Method {
 		}
 		
 		else if (thresholdATFD != -1) {
-			System.out.println("tem atfd");
-			if (this.atfd > thresholdATFD)
-				return true;
-			else 
-				return false;
+			switch (operatorATFD) {
+			
+			case ">":
+				if (this.atfd > thresholdATFD)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.atfd < thresholdATFD)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.atfd == thresholdATFD)
+					return true;
+				else 
+					return false;
+			}
 		}
+		
 		else if (thresholdLAA != -1) {
-			System.out.println("tem laa");
-			if (this.laa > thresholdLAA)
-				return true;
-			else 
-				return false;	
+			switch (operatorLAA) {
+			
+			case ">":
+				if (this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
 		}
 		
 		return false;	

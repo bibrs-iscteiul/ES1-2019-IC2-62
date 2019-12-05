@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
+import pt.iul.ista.es.applications.Rule;
 
 /**
  * The Class Frame.
@@ -68,12 +71,23 @@ public class Frame {
 
 	/** The change rules. */
 	private ChangeRules changeRules;
+	private ChooseRule chooseRule;
+	
+	private List<Rule> savedRules;
 	
 	private int dci=0;
 	private int adci=0;
 	private int adii=0;
 	private int dii=0;
 
+	
+	public ChooseRule getChooseRule() {
+		return chooseRule;
+	}
+	
+	public void setChooseRule(ChooseRule chooseRule) {
+		this.chooseRule = chooseRule;
+	}
 
 	public boolean isExcelImportado() {
 		return excelImportado;
@@ -114,6 +128,15 @@ public class Frame {
 		return changeRules;
 	}
 
+	public List<Rule> getSavedRules() {
+		return savedRules;
+	}
+
+	public void setSavedRules(List<Rule> savedRules) {
+		this.savedRules = savedRules;
+	}
+	
+	
 
 	/**
 	 * Instantiates a new frame.
@@ -127,7 +150,8 @@ public class Frame {
 		frame.setVisible(true);
 
 		this.changeRules = new ChangeRules(this);
-
+//		this.chooseRule = new ChooseRule(this);
+		this.savedRules = new ArrayList<Rule>();
 	}
 
 	/**
@@ -156,14 +180,10 @@ public class Frame {
 
 		JPanel painelThresholds = new JPanel();
 		painelThresholds.setLayout(new GridLayout(0, 1));
+		
 		JLabel label = new JLabel("Valores Thresholds:");
-		tLoc = new JLabel("LOC: " );
-		tCyclo = new JLabel("CYCLO: ");
-		tAtfd = new JLabel("ATFD: ");
-		tLaa = new JLabel("LAA: " );
-		lmLog = new JLabel("Operaçăo Lógica do Long Method do Utilizador: ");
-		feLog = new JLabel("Operaçăo Lógica do Feature Envy do Utilizador: ");
-
+		resetRulesInGUI();
+		
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
@@ -199,16 +219,17 @@ public class Frame {
 
 						excelImportado = true;
 
-						if(changeRules.isDefinedRules()) 
+						if(changeRules.isDefinedRules()) {
 							changeRules.saveRules();
+						//	chooseRule.rules = new JComboBox(savedRules.toArray());
+						}
 
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
 				else
-
-					JOptionPane.showMessageDialog(frame,"Ficheiro não suportado");
+					JOptionPane.showMessageDialog(frame,"Ficheiro não suportado", "Erro!", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 
@@ -275,10 +296,12 @@ public class Frame {
 		compararFeatureEnvy.addActionListener (new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
 				dci = 0;
 				dii = 0;
 				adci = 0;
 				adii = 0;
+			
 				JFrame f = new JFrame();
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
@@ -322,9 +345,20 @@ public class Frame {
 			}
 		});
 		
+		JButton escolherRegra = new JButton("Escolher Regra");
+		escolherRegra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(savedRules.size() != 0)
+					chooseRule.open();
+				else
+					JOptionPane.showMessageDialog(frame,"Não existem regras guardadas, terá de criar primeiro.", "Erro!", JOptionPane.ERROR_MESSAGE);
+			}
+		});
 		
-
-
+		
 		// Painel com JButtons e JTextFields
 
 		// Dialog
@@ -350,6 +384,7 @@ public class Frame {
 		painelBotoes.add(definirRegras);
 		painelBotoes.add(compararLongMethod);
 		painelBotoes.add(compararFeatureEnvy);
+		painelBotoes.add(escolherRegra);
 
 
 		// painel South
@@ -368,26 +403,38 @@ public class Frame {
 	}
 
 	public void updateRulesInGUI() {
+		Rule lastRule = savedRules.get(savedRules.size()-1);
+			
+		if(!(lastRule.getLocThreeshold() == -1) && !(lastRule.getLocOperator().equals("-")))
+			tLoc.setText("LOC: " + lastRule.getLocThreeshold() + " que " + lastRule.getLocOperator());
+		
+		if(!(lastRule.getCycloThreeshold() == -1) && !(lastRule.getCycloOperator().equals("-")))
+			tCyclo.setText("CYCLO: " + lastRule.getCycloOperator() + " que " + lastRule.getCycloThreeshold());
 
-		if(!(changeRules.getLocThreeshold() == -1) && !(changeRules.getLocOperator().equals("-")))
-			tLoc.setText("LOC: " + changeRules.getLocOperator() + " que "+ changeRules.getLocThreeshold());
+		if(!(lastRule.getAtfdThreeshold() == -1) && !(lastRule.getAtfdOperator().equals("-")))
+			tAtfd.setText("ATFD: " + lastRule.getAtfdOperator() + " que " + lastRule.getAtfdThreeshold());
 
-		if(!(changeRules.getCycloThreeshold() == -1) && !(changeRules.getCycloOperator().equals("-")))
-			tCyclo.setText("CYCLO: " + changeRules.getCycloOperator() + " que " + changeRules.getCycloThreeshold());
+		if(!(lastRule.getLaaThreeshold() == -1) && !(lastRule.getLaaOperator().equals("-")))
+			tLaa.setText("LAA: " + lastRule.getLaaOperator() + " que " + lastRule.getLaaThreeshold());
 
-		if(!(changeRules.getAtfdThreeshold() == -1) && !(changeRules.getAtfdOperator().equals("-")))
-			tAtfd.setText("ATFD: " + changeRules.getAtfdOperator() + " que " + changeRules.getAtfdThreeshold());
+		if(!(lastRule.getLongMethodOperator().equals("-")))
+			lmLog.setText("Operaçăo Lógica do Long Method do Utilizador: " + lastRule.getLongMethodOperator());
 
-		if(!(changeRules.getLaaThreeshold() == -1) && !(changeRules.getLaaOperator().equals("-")))
-			tLaa.setText("LAA: " + changeRules.getLaaOperator() + " que " + changeRules.getLaaThreeshold());
-
-		if(!(changeRules.getLongMethodOperator().equals("-")))
-			lmLog.setText("Operaçăo Lógica do Long Method do Utilizador: " + changeRules.getLongMethodOperator());
-
-		if(!(changeRules.getFeatureEnvyOperator().equals("-")))
-			feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: "+ changeRules.getFeatureEnvyOperator());
+		if(!(lastRule.getFeatureEnvyOperator().equals("-")))
+			feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: "+ lastRule.getFeatureEnvyOperator());
+		
+	//	chooseRule = new ChooseRule(this);
 	}
 
+	public void resetRulesInGUI()  {
+		
+		tLoc = new JLabel("LOC: " );
+		tCyclo = new JLabel("CYCLO: ");
+		tAtfd = new JLabel("ATFD: ");
+		tLaa = new JLabel("LAA: " );
+		lmLog = new JLabel("Operaçăo Lógica do Long Method do Utilizador: ");
+		feLog = new JLabel("Operaçăo Lógica do Feature Envy do Utilizador: ");
+	}
 	
 	public void compare(boolean a, boolean b){ 
 		if(a == true && b == true){
