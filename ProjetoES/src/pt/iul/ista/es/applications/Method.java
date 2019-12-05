@@ -1,6 +1,5 @@
 package pt.iul.ista.es.applications;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Method which represents a method specific.
  * @author Joana Cavalheiro
@@ -46,11 +45,44 @@ public class Method {
 	boolean is_feature_envy;
 	
 	/** The user's long method. */
-	boolean is_long_method_user;
+	boolean isLongMethodUserBoolean;
 	
 	/** The user's feature envy. */
-	boolean is_feature_envy_user;
+	boolean isFeatureEnvyUserBoolean;
 	
+	
+	public boolean isIs_long_method() {
+		return is_long_method;
+	}
+
+	public void setIs_long_method(boolean is_long_method) {
+		this.is_long_method = is_long_method;
+	}
+
+	public boolean isIplasma() {
+		return iplasma;
+	}
+
+	public void setIplasma(boolean iplasma) {
+		this.iplasma = iplasma;
+	}
+
+	public boolean isPmd() {
+		return pmd;
+	}
+
+	public void setPmd(boolean pmd) {
+		this.pmd = pmd;
+	}
+
+	public boolean isIs_feature_envy() {
+		return is_feature_envy;
+	}
+
+	public void setIs_feature_envy(boolean is_feature_envy) {
+		this.is_feature_envy = is_feature_envy;
+	}
+
 	/**
 	 * Instantiates a new method.
 	 *
@@ -86,8 +118,8 @@ public class Method {
 		this.pmd = pmd;
 		this.is_feature_envy = is_feature_envy;
 
-		this.is_long_method_user = is_long_method_user;
-		this.is_feature_envy_user = is_feature_envy_user;
+		this.isLongMethodUserBoolean= is_long_method_user;
+		this.isFeatureEnvyUserBoolean = is_feature_envy_user;
 	}
 	
 	/**
@@ -97,6 +129,26 @@ public class Method {
 		
 	}
 	
+	public int getMethodID() {
+		return MethodID;
+	}
+
+	public boolean isLongMethodUserBoolean() {
+		return isLongMethodUserBoolean;
+	}
+
+	public void setLongMethodUserBoolean(boolean isLongMethodUserBoolean) {
+		this.isLongMethodUserBoolean = isLongMethodUserBoolean;
+	}
+
+	public boolean isFeatureEnvyUserBoolean() {
+		return isFeatureEnvyUserBoolean;
+	}
+
+	public void setFeatureEnvyUserBoolean(boolean isFeatureEnvyUserBoolean) {
+		this.isFeatureEnvyUserBoolean = isFeatureEnvyUserBoolean;
+	}
+
 	/**
 	 * Checks if is long method.
 	 *
@@ -104,11 +156,188 @@ public class Method {
 	 * @param thresholdCYCLO the threshold CYCLO
 	 * @return true, if is long method
 	 */
-	public boolean isLongMethod (int thresholdLOC, int thresholdCYCLO) {
-		if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
-			return true;
-		else 
-			return false;
+	public boolean isLongMethodUser (int thresholdLOC, String operatorLOC, int thresholdCYCLO, String operatorCYCLO, String operatorLongMethod) {
+	
+		if (operatorLongMethod == "and" && thresholdLOC != -1 && thresholdCYCLO != -1) {
+			//System.out.println("tem tudo long method and");
+			
+			if(operatorLOC == ">" && operatorCYCLO == ">") {
+				if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == "<") {
+				if (this.loc < thresholdLOC && this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == "=") {
+				if (this.loc == thresholdLOC && this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == ">" && operatorCYCLO == "<") {
+				if (this.loc > thresholdLOC && this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == ">") {
+				if (this.loc < thresholdLOC && this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == ">" && operatorCYCLO == "=") {
+				if (this.loc > thresholdLOC && this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == "=") {
+				if (this.loc < thresholdLOC && this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == ">") {
+				if (this.loc == thresholdLOC && this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == "<") {
+				if (this.loc == thresholdLOC && this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		else if (operatorLongMethod == "or" && thresholdLOC != -1 && thresholdCYCLO != -1) {
+			//System.out.println("tem tudo long method or");
+			
+			if(operatorLOC == ">" && operatorCYCLO == ">") {
+				if (this.loc > thresholdLOC || this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == "<") {
+				if (this.loc < thresholdLOC || this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == "=") {
+				if (this.loc == thresholdLOC || this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == ">" && operatorCYCLO == "<") {
+				if (this.loc > thresholdLOC || this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == ">") {
+				if (this.loc < thresholdLOC || this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == ">" && operatorCYCLO == "=") {
+				if (this.loc > thresholdLOC || this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "<" && operatorCYCLO == "=") {
+				if (this.loc < thresholdLOC || this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == ">") {
+				if (this.loc == thresholdLOC || this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorLOC == "=" && operatorCYCLO == "<") {
+				if (this.loc == thresholdLOC || this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		else if (thresholdLOC != -1) {
+			switch (operatorLOC) {
+			
+			case ">":
+				if (this.loc > thresholdLOC)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.loc < thresholdLOC)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.loc == thresholdLOC)
+					return true;
+				else 
+					return false;
+			}
+		}
+		else if (thresholdCYCLO != -1) {
+			switch (operatorCYCLO) {
+			
+			case ">":
+				if (this.cyclo > thresholdCYCLO)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.cyclo < thresholdCYCLO)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.cyclo == thresholdCYCLO)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		return false;	
 	}
 	
 	/**
@@ -118,13 +347,189 @@ public class Method {
 	 * @param thresholdLAA the threshold LAA
 	 * @return true, if is feature envy
 	 */
-	public boolean isFeatureEnvy (int thresholdATFD, int thresholdLAA) {
-		if (this.atfd > thresholdATFD && this.laa < thresholdLAA) 
-			return true;
-		else 
-			return false;
-	}
+	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, int thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
+		
+		if (operatorFeatureEnvy == "and" && thresholdATFD != -1 && thresholdLAA != -1) {
+			//System.out.println("tem tudo feature envy and");
+			
+			if(operatorATFD == ">" && operatorLAA == ">") {
+				if (this.atfd > thresholdATFD && this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == "<") {
+				if (this.atfd < thresholdATFD && this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == "=") {
+				if (this.atfd == thresholdATFD && this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == ">" && operatorLAA == "<") {
+				if (this.atfd > thresholdATFD && this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == ">") {
+				if (this.atfd < thresholdATFD && this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == ">" && operatorLAA == "=") {
+				if (this.atfd > thresholdATFD && this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == "=") {
+				if (this.atfd < thresholdATFD && this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == ">") {
+				if (this.atfd == thresholdATFD && this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == "<") {
+				if (this.atfd == thresholdATFD && this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		else if (operatorFeatureEnvy == "or" && thresholdATFD != -1 && thresholdLAA != -1) {
 	
+			if(operatorATFD == ">" && operatorLAA == ">") {
+				if (this.atfd > thresholdATFD || this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == "<") {
+				if (this.atfd < thresholdATFD || this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == "=") {
+				if (this.atfd == thresholdATFD || this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == ">" && operatorLAA == "<") {
+				if (this.atfd > thresholdATFD || this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == ">") {
+				if (this.atfd < thresholdLAA || this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == ">" && operatorLAA == "=") {
+				if (this.atfd > thresholdATFD || this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "<" && operatorLAA == "=") {
+				if (this.atfd < thresholdATFD || this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == ">") {
+				if (this.atfd == thresholdATFD || this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+			
+			else if(operatorATFD == "=" && operatorLAA == "<") {
+				if (this.atfd == thresholdATFD || this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		else if (thresholdATFD != -1) {
+			switch (operatorATFD) {
+			
+			case ">":
+				if (this.atfd > thresholdATFD)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.atfd < thresholdATFD)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.atfd == thresholdATFD)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		else if (thresholdLAA != -1) {
+			switch (operatorLAA) {
+			
+			case ">":
+				if (this.laa > thresholdLAA)
+					return true;
+				else 
+					return false;
+				
+			case "<":
+				if (this.laa < thresholdLAA)
+					return true;
+				else 
+					return false;
+				
+			case "=":
+				if (this.laa == thresholdLAA)
+					return true;
+				else 
+					return false;
+			}
+		}
+		
+		return false;	
+	}
 	
 	/**
 	 * To string.
@@ -137,181 +542,8 @@ public class Method {
 		sb.append("ID: " + this.MethodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
 				"; Método: " + this.methodName + "; LOC: " + this.loc + "; CYCLO: " + this.cyclo + "; ATFD: " + this.atfd + "; LAA: " 
 				+ this.laa + "; isLongMethod: " + this.is_long_method + "; iPlasma: " + this.iplasma + "; PMD: " 
-				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy + "; isLongMethod_user: " + this.is_long_method_user + 
-				"; isFeatureEnvy_user: " + this.is_feature_envy_user);
+				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy);
 
 		return sb.toString();
 	}
-
-	/**
-	 * Gets the method ID.
-	 *
-	 * @return the method ID
-	 */
-	public int getMethodID() {
-		return MethodID;
-	}
-	
-	/**
-	 * Gets the loc.
-	 *
-	 * @return the loc
-	 */
-	public int getLoc() {
-		return loc;
-	}
-
-	/**
-	 * Sets the loc.
-	 *
-	 * @param loc the new loc
-	 */
-	public void setLoc(int loc) {
-		this.loc = loc;
-	}
-
-	/**
-	 * Gets the cyclo.
-	 *
-	 * @return the cyclo
-	 */
-	public int getCyclo() {
-		return cyclo;
-	}
-
-	/**
-	 * Sets the cyclo.
-	 *
-	 * @param cyclo the new cyclo
-	 */
-	public void setCyclo(int cyclo) {
-		this.cyclo = cyclo;
-	}
-
-	/**
-	 * Gets the atfd.
-	 *
-	 * @return the atfd
-	 */
-	public int getAtfd() {
-		return atfd;
-	}
-
-	/**
-	 * Sets the atfd.
-	 *
-	 * @param atfd the new atfd
-	 */
-	public void setAtfd(int atfd) {
-		this.atfd = atfd;
-	}
-
-	/**
-	 * Gets the laa.
-	 *
-	 * @return the laa
-	 */
-	public double getLaa() {
-		return laa;
-	}
-
-	/**
-	 * Sets the laa.
-	 *
-	 * @param laa the new laa
-	 */
-	public void setLaa(double laa) {
-		this.laa = laa;
-	}
-
-	/**
-	 * Checks if is checks if is long method.
-	 *
-	 * @return true, if is checks if is long method
-	 */
-	public boolean isIs_long_method() {
-		return is_long_method;
-	}
-
-	/**
-	 * Checks if is iplasma.
-	 *
-	 * @return true, if is iplasma
-	 */
-	public boolean isIplasma() {
-		return iplasma;
-	}
-
-	/**
-	 * Sets the iplasma.
-	 *
-	 * @param iplasma the new iplasma
-	 */
-	public void setIplasma(boolean iplasma) {
-		this.iplasma = iplasma;
-	}
-
-	/**
-	 * Checks if is pmd.
-	 *
-	 * @return true, if is pmd
-	 */
-	public boolean isPmd() {
-		return pmd;
-	}
-
-	/**
-	 * Sets the pmd.
-	 *
-	 * @param pmd the new pmd
-	 */
-	public void setPmd(boolean pmd) {
-		this.pmd = pmd;
-	}
-
-	/**
-	 * Sets the checks if is feature envy.
-	 *
-	 * @param is_feature_envy the new checks if is feature envy
-	 */
-	public void setIs_feature_envy(boolean is_feature_envy) {
-		this.is_feature_envy = is_feature_envy;
-	}
-
-	/**
-	 * Checks if is checks if is long method user.
-	 *
-	 * @return true, if is checks if is long method user
-	 */
-	public boolean isIs_long_method_user() {
-		return is_long_method_user;
-	}
-
-	/**
-	 * Sets the checks if is long method user.
-	 *
-	 * @param is_long_method_user the new checks if is long method user
-	 */
-	public void setIs_long_method_user(boolean is_long_method_user) {
-		this.is_long_method_user = is_long_method_user;
-	}
-
-	/**
-	 * Checks if is checks if is feature envy user.
-	 *
-	 * @return true, if is checks if is feature envy user
-	 */
-	public boolean isIs_feature_envy_user() {
-		return is_feature_envy_user;
-	}
-
-	/**
-	 * Sets the checks if is feature envy user.
-	 *
-	 * @param is_feature_envy_user the new checks if is feature envy user
-	 */
-	public void setIs_feature_envy_user(boolean is_feature_envy_user) {
-		this.is_feature_envy_user = is_feature_envy_user;
-	}
-	
 }
