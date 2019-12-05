@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -66,8 +67,8 @@ public class Frame {
 
 	/** The change rules. */
 	private ChangeRules changeRules;
-	
-	
+
+
 	public boolean isExcelImportado() {
 		return excelImportado;
 	}
@@ -161,20 +162,22 @@ public class Frame {
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
 		// JButtons
+		JButton compararFeatureEnvy = new JButton("Comparar Feature Envy");
+		JButton compararLongMethod = new JButton("Comparar Long Method");
 		JButton escolherFicheiro = new JButton("Excel");
 		JButton definirRegras = new JButton("Definir Regras"); 
-		
+
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				excelImportado = false;
 				methodsJModel.clear();
-				
+
 				JFileChooser excel = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 				excel.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int returnValue1 = excel.showOpenDialog(null); // linha default
-				
+
 				if (excel.getSelectedFile().toString().endsWith(".xlsx")) { // se ficheiro escolhido é excel
 					fileExcel = excel.getSelectedFile();
 
@@ -187,9 +190,9 @@ public class Frame {
 							methodsJModel.addElement(method.toString());
 
 						methodsJList.setModel(methodsJModel);
-			
+
 						excelImportado = true;
-						
+
 						if(changeRules.isDefinedRules()) 
 							changeRules.saveRules();
 
@@ -197,8 +200,12 @@ public class Frame {
 						e1.printStackTrace();
 					}
 				}
+				else
+
+					JOptionPane.showMessageDialog(frame,"Ficheiro não suportado");
 			}
 		});
+
 
 		definirRegras.addActionListener(new ActionListener() {
 
@@ -207,6 +214,9 @@ public class Frame {
 				changeRules.open();
 			}
 		});
+		
+		
+
 
 		// Painel com JButtons e JTextFields
 
@@ -231,6 +241,9 @@ public class Frame {
 		// South.East (restantes botoes)
 		painelBotoes.add(escolherFicheiro);
 		painelBotoes.add(definirRegras);
+		painelBotoes.add(compararLongMethod);
+		painelBotoes.add(compararFeatureEnvy);
+
 
 		// painel South
 		JPanel painelSouth = new JPanel();
@@ -246,35 +259,35 @@ public class Frame {
 
 		frame.add(painelPrincipal);
 	}
-	
+
 	public void updateRulesInGUI() {
-		
+
 		if(!(changeRules.getLocThreeshold() == -1) && !(changeRules.getLocOperator().equals("-")))
 			tLoc.setText("LOC: " + changeRules.getLocOperator() + " que "+ changeRules.getLocThreeshold());
-		
+
 		if(!(changeRules.getCycloThreeshold() == -1) && !(changeRules.getCycloOperator().equals("-")))
 			tCyclo.setText("CYCLO: " + changeRules.getCycloOperator() + " que " + changeRules.getCycloThreeshold());
-		
+
 		if(!(changeRules.getAtfdThreeshold() == -1) && !(changeRules.getAtfdOperator().equals("-")))
 			tAtfd.setText("ATFD: " + changeRules.getAtfdOperator() + " que " + changeRules.getAtfdThreeshold());
-		
+
 		if(!(changeRules.getLaaThreeshold() == -1) && !(changeRules.getLaaOperator().equals("-")))
 			tLaa.setText("LAA: " + changeRules.getLaaOperator() + " que " + changeRules.getLaaThreeshold());
-		
+
 		if(!(changeRules.getLongMethodOperator().equals("-")))
 			lmLog.setText("Operaçăo Lógica do Long Method do Utilizador: " + changeRules.getLongMethodOperator());
-		
+
 		if(!(changeRules.getFeatureEnvyOperator().equals("-")))
 			feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: "+ changeRules.getFeatureEnvyOperator());
 	}
-	
+
 
 	/**
 	 * The main method.
 	 *
 	 * @param args the arguments
 	 */
-	
+
 	public static void main(String[] args) {
 		Frame window = new Frame();
 		window.open();
