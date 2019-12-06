@@ -10,78 +10,45 @@ public class Method {
 
 	/** The Method ID. */
 	int MethodID;
-	
+
 	/** The package name. */
 	String packageName;
-	
+
 	/** The class name. */
 	String className;
-	
+
 	/** The method name. */
 	String methodName;
-	
+
 	/** The loc represents the number of lines of method code. */
 	int loc;
-	
+
 	/** The cyclo represents the cyclomatic complexity of the code. */
 	int cyclo;
-	
+
 	/** The atfd represents the acesses that the method makes to methods of other classes. */
 	int atfd;
-	
+
 	/** The laa represents the method acesses to attributes of the class itself. */
 	double laa;
-	
+
 	/** The long method. */
 	boolean is_long_method;
-	
+
 	/** The iplasma. */
 	boolean iplasma;
-	
+
 	/** The pmd. */
 	boolean pmd;
-	
+
 	/** The feature envy. */
 	boolean is_feature_envy;
-	
+
 	/** The user's long method. */
 	boolean isLongMethodUserBoolean;
-	
+
 	/** The user's feature envy. */
 	boolean isFeatureEnvyUserBoolean;
-	
-	
-	public boolean isIs_long_method() {
-		return is_long_method;
-	}
-
-	public void setIs_long_method(boolean is_long_method) {
-		this.is_long_method = is_long_method;
-	}
-
-	public boolean isIplasma() {
-		return iplasma;
-	}
-
-	public void setIplasma(boolean iplasma) {
-		this.iplasma = iplasma;
-	}
-
-	public boolean isPmd() {
-		return pmd;
-	}
-
-	public void setPmd(boolean pmd) {
-		this.pmd = pmd;
-	}
-
-	public boolean isIs_feature_envy() {
-		return is_feature_envy;
-	}
-
-	public void setIs_feature_envy(boolean is_feature_envy) {
-		this.is_feature_envy = is_feature_envy;
-	}
 
 	/**
 	 * Instantiates a new method.
@@ -104,7 +71,7 @@ public class Method {
 	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
 			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy, boolean is_long_method_user, 
 			boolean is_feature_envy_user) {
-	
+
 		this.MethodID = methodID;
 		this.packageName = packageName;
 		this.className = className;
@@ -121,16 +88,65 @@ public class Method {
 		this.isLongMethodUserBoolean= is_long_method_user;
 		this.isFeatureEnvyUserBoolean = is_feature_envy_user;
 	}
-	
+
 	/**
 	 * Instantiates a new method.
 	 */
 	public Method() {
-		
+
 	}
-	
+
 	public int getMethodID() {
 		return MethodID;
+	}
+
+	//gets que podem encher. tiram-se se não forem precisos para os 75%
+	
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public int getLoc() {
+		return loc;
+	}
+
+	public int getCyclo() {
+		return cyclo;
+	}
+
+	public int getAtfd() {
+		return atfd;
+	}
+
+	public double getLaa() {
+		return laa;
+	}
+
+
+	//agora isto volta a ser mesmo preciso
+	
+	public boolean isIs_long_method() {
+		return is_long_method;
+	}
+
+	public boolean isIplasma() {
+		return iplasma;
+	}
+
+	public boolean isPmd() {
+		return pmd;
+	}
+
+	public boolean isIs_feature_envy() {
+		return is_feature_envy;
 	}
 
 	public boolean isLongMethodUserBoolean() {
@@ -144,11 +160,10 @@ public class Method {
 	public boolean isFeatureEnvyUserBoolean() {
 		return isFeatureEnvyUserBoolean;
 	}
-
 	public void setFeatureEnvyUserBoolean(boolean isFeatureEnvyUserBoolean) {
 		this.isFeatureEnvyUserBoolean = isFeatureEnvyUserBoolean;
 	}
-
+	
 	/**
 	 * Checks if is long method.
 	 *
@@ -157,66 +172,66 @@ public class Method {
 	 * @return true, if is long method
 	 */
 	public boolean isLongMethodUser (int thresholdLOC, String operatorLOC, int thresholdCYCLO, String operatorCYCLO, String operatorLongMethod) {
-	
+
 		if (operatorLongMethod == "and" && thresholdLOC != -1 && thresholdCYCLO != -1) {
 			//System.out.println("tem tudo long method and");
-			
+
 			if(operatorLOC == ">" && operatorCYCLO == ">") {
 				if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == "<") {
 				if (this.loc < thresholdLOC && this.cyclo < thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == "=") {
 				if (this.loc == thresholdLOC && this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == ">" && operatorCYCLO == "<") {
 				if (this.loc > thresholdLOC && this.cyclo < thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == ">") {
 				if (this.loc < thresholdLOC && this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == ">" && operatorCYCLO == "=") {
 				if (this.loc > thresholdLOC && this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == "=") {
 				if (this.loc < thresholdLOC && this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == ">") {
 				if (this.loc == thresholdLOC && this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == "<") {
 				if (this.loc == thresholdLOC && this.cyclo < thresholdCYCLO)
 					return true;
@@ -224,66 +239,66 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		else if (operatorLongMethod == "or" && thresholdLOC != -1 && thresholdCYCLO != -1) {
 			//System.out.println("tem tudo long method or");
-			
+
 			if(operatorLOC == ">" && operatorCYCLO == ">") {
 				if (this.loc > thresholdLOC || this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == "<") {
 				if (this.loc < thresholdLOC || this.cyclo < thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == "=") {
 				if (this.loc == thresholdLOC || this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == ">" && operatorCYCLO == "<") {
 				if (this.loc > thresholdLOC || this.cyclo < thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == ">") {
 				if (this.loc < thresholdLOC || this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == ">" && operatorCYCLO == "=") {
 				if (this.loc > thresholdLOC || this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "<" && operatorCYCLO == "=") {
 				if (this.loc < thresholdLOC || this.cyclo == thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == ">") {
 				if (this.loc == thresholdLOC || this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorLOC == "=" && operatorCYCLO == "<") {
 				if (this.loc == thresholdLOC || this.cyclo < thresholdCYCLO)
 					return true;
@@ -291,22 +306,22 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		else if (thresholdLOC != -1) {
 			switch (operatorLOC) {
-			
+
 			case ">":
 				if (this.loc > thresholdLOC)
 					return true;
 				else 
 					return false;
-				
+
 			case "<":
 				if (this.loc < thresholdLOC)
 					return true;
 				else 
 					return false;
-				
+
 			case "=":
 				if (this.loc == thresholdLOC)
 					return true;
@@ -316,19 +331,19 @@ public class Method {
 		}
 		else if (thresholdCYCLO != -1) {
 			switch (operatorCYCLO) {
-			
+
 			case ">":
 				if (this.cyclo > thresholdCYCLO)
 					return true;
 				else 
 					return false;
-				
+
 			case "<":
 				if (this.cyclo < thresholdCYCLO)
 					return true;
 				else 
 					return false;
-				
+
 			case "=":
 				if (this.cyclo == thresholdCYCLO)
 					return true;
@@ -336,10 +351,10 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		return false;	
 	}
-	
+
 	/**
 	 * Checks if is feature envy.
 	 *
@@ -347,67 +362,67 @@ public class Method {
 	 * @param thresholdLAA the threshold LAA
 	 * @return true, if is feature envy
 	 */
-	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, int thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
-		
+	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, double thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
+
 		if (operatorFeatureEnvy == "and" && thresholdATFD != -1 && thresholdLAA != -1) {
 			//System.out.println("tem tudo feature envy and");
-			
+
 			if(operatorATFD == ">" && operatorLAA == ">") {
 				if (this.atfd > thresholdATFD && this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == "<") {
 				if (this.atfd < thresholdATFD && this.laa < thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == "=") {
 				if (this.atfd == thresholdATFD && this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == ">" && operatorLAA == "<") {
 				if (this.atfd > thresholdATFD && this.laa < thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == ">") {
 				if (this.atfd < thresholdATFD && this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == ">" && operatorLAA == "=") {
 				if (this.atfd > thresholdATFD && this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == "=") {
 				if (this.atfd < thresholdATFD && this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == ">") {
 				if (this.atfd == thresholdATFD && this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == "<") {
 				if (this.atfd == thresholdATFD && this.laa < thresholdLAA)
 					return true;
@@ -415,65 +430,65 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		else if (operatorFeatureEnvy == "or" && thresholdATFD != -1 && thresholdLAA != -1) {
-	
+
 			if(operatorATFD == ">" && operatorLAA == ">") {
 				if (this.atfd > thresholdATFD || this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == "<") {
 				if (this.atfd < thresholdATFD || this.laa < thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == "=") {
 				if (this.atfd == thresholdATFD || this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == ">" && operatorLAA == "<") {
 				if (this.atfd > thresholdATFD || this.laa < thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == ">") {
 				if (this.atfd < thresholdLAA || this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == ">" && operatorLAA == "=") {
 				if (this.atfd > thresholdATFD || this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "<" && operatorLAA == "=") {
 				if (this.atfd < thresholdATFD || this.laa == thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == ">") {
 				if (this.atfd == thresholdATFD || this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
 			}
-			
+
 			else if(operatorATFD == "=" && operatorLAA == "<") {
 				if (this.atfd == thresholdATFD || this.laa < thresholdLAA)
 					return true;
@@ -481,22 +496,22 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		else if (thresholdATFD != -1) {
 			switch (operatorATFD) {
-			
+
 			case ">":
 				if (this.atfd > thresholdATFD)
 					return true;
 				else 
 					return false;
-				
+
 			case "<":
 				if (this.atfd < thresholdATFD)
 					return true;
 				else 
 					return false;
-				
+
 			case "=":
 				if (this.atfd == thresholdATFD)
 					return true;
@@ -504,22 +519,22 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		else if (thresholdLAA != -1) {
 			switch (operatorLAA) {
-			
+
 			case ">":
 				if (this.laa > thresholdLAA)
 					return true;
 				else 
 					return false;
-				
+
 			case "<":
 				if (this.laa < thresholdLAA)
 					return true;
 				else 
 					return false;
-				
+
 			case "=":
 				if (this.laa == thresholdLAA)
 					return true;
@@ -527,10 +542,10 @@ public class Method {
 					return false;
 			}
 		}
-		
+
 		return false;	
 	}
-	
+
 	/**
 	 * To string.
 	 *

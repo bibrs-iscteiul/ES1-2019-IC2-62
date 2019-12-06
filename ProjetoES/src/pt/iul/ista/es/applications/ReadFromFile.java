@@ -28,7 +28,7 @@ public class ReadFromFile {
 	int colNumber = 0;
 
 	/** A list with all methods which exists in excel file. */
-	List<Method> allMethods;
+	ArrayList<Method> allMethods;
 
 	/**
 	 * Instantiates a new read from file.
@@ -44,7 +44,7 @@ public class ReadFromFile {
 	 * @param sheetName the sheet name
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public List<Method> read(String fileName, int sheetIndex) throws IOException {
+	public ArrayList<Method> read(String fileName, int sheetIndex) throws IOException {
 
 		FileInputStream fis = new FileInputStream(new File(fileName));
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
