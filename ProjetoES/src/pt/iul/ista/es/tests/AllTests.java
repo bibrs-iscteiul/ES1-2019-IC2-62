@@ -6,8 +6,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	MethodTest.class
+	MethodTest.class,
+	ReadFromFileTest.class
 })
-public class AllTests {
 
+public class AllTests {
 }
