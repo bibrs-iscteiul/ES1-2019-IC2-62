@@ -1,6 +1,7 @@
 package pt.iul.ista.es.gui;
 
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import pt.iul.ista.es.applications.Rule;
@@ -20,6 +23,8 @@ public class ChooseRule {
 	
 	JComboBox<Rule> rules;
 	JButton chooseButton;
+	
+	private Rule selectedRule;
 
 	public ChooseRule(Frame frame) {
 		chooseRule = new JDialog();
@@ -29,17 +34,22 @@ public class ChooseRule {
 		chooseRule.pack();
 		chooseRule.setSize(500, 300);
 		
-		
 	}
 	
+	public Rule getSelectedRule() {
+		return selectedRule;
+	}
+
 	public void open() {
 		chooseRule.setVisible(true);
 	}
 	
 	private void addFrameContent() {
 		
-		System.out.println("tamanho array: " + frame.getSavedRules().toArray().length);
-		rules = new JComboBox(frame.getSavedRules().toArray());
+		if(frame.getSavedRules().size() != 0)
+			rules = new JComboBox(frame.getSavedRules().toArray());
+		else
+			rules = new JComboBox<Rule>();
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(3, 1));
@@ -50,8 +60,20 @@ public class ChooseRule {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+								
+				if(rules.getSelectedItem() == null)
+					System.out.println("nada selecionado");
 				
+				else {
+					System.out.println("selecionada " + rules.getSelectedItem().toString());
+					frame.getChangeRules().updateMethods((Rule)rules.getSelectedItem());
+					selectedRule = (Rule)rules.getSelectedItem();
 				
+					//frame.resetRulesInGUI();
+					frame.updateRulesInGUI(selectedRule);
+				}
+				
+				chooseRule.setVisible(false);
 			}
 		});
 		
@@ -62,10 +84,4 @@ public class ChooseRule {
 		chooseRule.add(panel);
 		
 	}
-/*
-	public static void main(String[] args) {
-		ChooseRule cr = new ChooseRule(new Frame());
-		
-		cr.open();
-	} */
 }

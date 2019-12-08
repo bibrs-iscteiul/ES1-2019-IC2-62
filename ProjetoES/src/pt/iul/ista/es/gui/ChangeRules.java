@@ -116,7 +116,6 @@ public class ChangeRules {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				saveRules();
-				frame.setChooseRule(new ChooseRule(frame));
 			}
 		});
 
@@ -176,8 +175,10 @@ public class ChangeRules {
 
 		Rule rule = new Rule();
 
-		if (text_loc.getText().matches("[0-9]+"))
+		if (text_loc.getText().matches("[0-9]+")) {
+			System.out.println("mudei o loc");
 			rule.setLocThreeshold(Integer.parseInt(text_loc.getText()));
+		}
 
 		if (text_cyclo.getText().matches("[0-9]+"))
 			rule.setCycloThreeshold(Integer.parseInt(text_cyclo.getText()));
@@ -194,9 +195,10 @@ public class ChangeRules {
 		if (!(feOperator.getSelectedItem().toString() == "null") || !(feOperator.getSelectedItem().toString() == "-"))
 			rule.setFeatureEnvyOperator(feOperator.getSelectedItem().toString());
 
-		if (!(locBox.getSelectedItem().toString() == "-"))
+		if (!(locBox.getSelectedItem().toString() == "-")) {
+			System.out.println("mudei o loc operator");
 			rule.setLocOperator(locBox.getSelectedItem().toString());
-
+		}
 		if (!(cycloBox.getSelectedItem().toString() == "-"))
 			rule.setCycloOperator(cycloBox.getSelectedItem().toString());
 
@@ -210,21 +212,32 @@ public class ChangeRules {
 		boolean featureEnvyValido;
 		boolean metricasValidas;
 
-		if (rule.getLocThreeshold() != -1 && rule.getCycloThreeshold() != -1 && (rule.getLongMethodOperator().equals("null") || rule.getLongMethodOperator().equals("-"))) {
+		if (rule.getLocThreeshold() != -1 && rule.getCycloThreeshold() != -1
+				&& (rule.getLongMethodOperator().equals("null") || rule.getLongMethodOperator().equals("-"))) {
 			longMethodValido = false;
-			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Long Method para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules,
+					"É necessário que introduza um operador do Long Method para continuar.", "Error!",
+					JOptionPane.ERROR_MESSAGE);
 		} else
 			longMethodValido = true;
 
-		if (rule.getAtfdThreeshold() != -1 && rule.getLaaThreeshold() != -1 && (rule.getFeatureEnvyOperator().equals("null") || rule.getFeatureEnvyOperator().equals("-"))) {
+		if (rule.getAtfdThreeshold() != -1 && rule.getLaaThreeshold() != -1
+				&& (rule.getFeatureEnvyOperator().equals("null") || rule.getFeatureEnvyOperator().equals("-"))) {
 			featureEnvyValido = false;
-			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Feature Envy para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules,
+					"É necessário que introduza um operador do Feature Envy para continuar.", "Error!",
+					JOptionPane.ERROR_MESSAGE);
 		} else
 			featureEnvyValido = true;
 
-		if ((rule.getLocThreeshold() != -1 && rule.getLocOperator() == null) || (rule.getCycloThreeshold() != -1 && rule.getCycloOperator() == null) || (rule.getAtfdThreeshold() != -1 && rule.getAtfdOperator() == null) || (rule.getLaaThreeshold() != -1 && rule.getLaaOperator() == null)) {
+		if ((rule.getLocThreeshold() != -1 && rule.getLocOperator() == null)
+				|| (rule.getCycloThreeshold() != -1 && rule.getCycloOperator() == null)
+				|| (rule.getAtfdThreeshold() != -1 && rule.getAtfdOperator() == null)
+				|| (rule.getLaaThreeshold() != -1 && rule.getLaaOperator() == null)) {
 			metricasValidas = false;
-			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador para as métricas definidas para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules,
+					"É necessário que introduza um operador para as métricas definidas para continuar.", "Error!",
+					JOptionPane.ERROR_MESSAGE);
 		} else
 			metricasValidas = true;
 
@@ -236,43 +249,51 @@ public class ChangeRules {
 			rule.addRuleToList(frame.getSavedRules());
 			System.out.println(frame.getSavedRules().size());
 
-			frame.updateRulesInGUI();
+		//	frame.updateRulesInGUI();
+			frame.setChooseRule(new ChooseRule(frame));
+		}
+		
+		defineRules.setVisible(false);
+	}
 
-			if (frame.isExcelImportado()) {
+	public void updateMethods(Rule rule) {
 
-				for (Method method : frame.getMethods()) {
+		if (frame.isExcelImportado()) {
 
-					boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(), rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
-					method.setLongMethodUserBoolean(longMethodUser);
+			for (Method method : frame.getMethods()) {
 
-					boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getFeatureEnvyOperator());
-					method.setFeatureEnvyUserBoolean(featureEnvyUser);
-				}
+				boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(),
+						rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
+				method.setLongMethodUserBoolean(longMethodUser);
 
-				frame.getMethodsJModel().clear();
-
-				for (Method method : frame.getMethods())
-					if (method.isLongMethodUserBoolean() || method.isFeatureEnvyUserBoolean())
-						frame.getMethodsJModel().addElement("MethodID: " + method.getMethodID() + "; Long Method: " + method.isLongMethodUserBoolean() + "; Feature Envy: " + method.isFeatureEnvyUserBoolean());
-
-				frame.getMethodsJList().setModel(frame.getMethodsJModel());
+				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(),
+						rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getFeatureEnvyOperator());
+				method.setFeatureEnvyUserBoolean(featureEnvyUser);
 			}
 
-			//frame.setChooseRule(new ChooseRule(frame));
-			defineRules.setVisible(false);
+			frame.getMethodsJModel().clear();
+
+			for (Method method : frame.getMethods())
+				if (method.isLongMethodUserBoolean() || method.isFeatureEnvyUserBoolean())
+					frame.getMethodsJModel().addElement("MethodID: " + method.getMethodID() + "; Long Method: " + method.isLongMethodUserBoolean() + "; Feature Envy: " + method.isFeatureEnvyUserBoolean());
+
+			frame.getMethodsJList().setModel(frame.getMethodsJModel());
 		}
 	}
-	/*
-	 * public void resetRules() {
-	 * 
-	 * locThreeshold = -1; cycloThreeshold = -1; atfdThreeshold = -1; laaThreeshold
-	 * = -1;
-	 * 
-	 * locOperator = null; cycloOperator = null; atfdOperator = null; laaOperator =
-	 * null;
-	 * 
-	 * longMethodOperator = null; featureEnvyOperator = null;
-	 * 
-	 * }
-	 */
+
+	public void resetRules() {
+
+		text_loc.setText("LOC");
+		text_cyclo.setText("CYCLO");
+		text_atfd.setText("ATFD");
+		text_laa.setText("LAA");
+
+		locBox.setSelectedItem("-");
+		cycloBox.setSelectedItem("-");
+		atfdBox.setSelectedItem("-");
+		laaBox.setSelectedItem("-");
+		
+		lmOperator.setSelectedItem("-");
+		feOperator.setSelectedItem("-");
+	}	
 }

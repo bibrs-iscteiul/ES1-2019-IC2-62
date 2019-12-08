@@ -334,9 +334,24 @@ public class Rule {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("REGRAS - " + "LOC " + locOperator + " " + locThreeshold + " " + longMethodOperator + " " + "CYCLO "
-				+ cycloOperator + " " + cycloThreeshold + "; " + "ATFD " + atfdOperator + " " + atfdThreeshold + " "
-				+ featureEnvyOperator + " " + "LAA " + laaOperator + " " + laaThreeshold + "\n");
+	
+		if(locThreeshold != -1)
+			sb.append("LOC " + locOperator + " " + locThreeshold + " ");
+		
+		if(locThreeshold != -1 && cycloThreeshold != -1)
+			sb.append(longMethodOperator + " ");
+	
+		if(cycloThreeshold != -1)
+			sb.append("CYCLO " + cycloOperator + " " + cycloThreeshold + " ");
+		
+		if(atfdThreeshold != -1)
+			sb.append("ATFD " + atfdOperator + " " + atfdThreeshold + " ");
+		
+		if(atfdThreeshold != -1 && laaThreeshold != -1)
+			sb.append(featureEnvyOperator + " ");
+		
+		if(laaThreeshold != -1)
+			sb.append("LAA " + laaOperator + " " + laaThreeshold + " ");
 
 		return sb.toString();
 	}
