@@ -120,7 +120,7 @@ public class ChangeRules {
 		});
 
 		JPanel dr = new JPanel();
-		dr.setLayout(new GridLayout(10, 1));
+		dr.setLayout(new GridLayout(7, 1));
 
 		JPanel ploc = new JPanel();
 		JPanel ploc2 = new JPanel();
@@ -175,11 +175,9 @@ public class ChangeRules {
 
 		Rule rule = new Rule();
 
-		if (text_loc.getText().matches("[0-9]+")) {
-			System.out.println("mudei o loc");
+		if (text_loc.getText().matches("[0-9]+")) 
 			rule.setLocThreeshold(Integer.parseInt(text_loc.getText()));
-		}
-
+	
 		if (text_cyclo.getText().matches("[0-9]+"))
 			rule.setCycloThreeshold(Integer.parseInt(text_cyclo.getText()));
 
@@ -212,32 +210,21 @@ public class ChangeRules {
 		boolean featureEnvyValido;
 		boolean metricasValidas;
 
-		if (rule.getLocThreeshold() != -1 && rule.getCycloThreeshold() != -1
-				&& (rule.getLongMethodOperator().equals("null") || rule.getLongMethodOperator().equals("-"))) {
+		if (rule.getLocThreeshold() != -1 && rule.getCycloThreeshold() != -1 && (rule.getLongMethodOperator().equals("null") || rule.getLongMethodOperator().equals("-"))) {
 			longMethodValido = false;
-			JOptionPane.showMessageDialog(defineRules,
-					"É necessário que introduza um operador do Long Method para continuar.", "Error!",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Long Method para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			longMethodValido = true;
 
-		if (rule.getAtfdThreeshold() != -1 && rule.getLaaThreeshold() != -1
-				&& (rule.getFeatureEnvyOperator().equals("null") || rule.getFeatureEnvyOperator().equals("-"))) {
+		if (rule.getAtfdThreeshold() != -1 && rule.getLaaThreeshold() != -1 && (rule.getFeatureEnvyOperator().equals("null") || rule.getFeatureEnvyOperator().equals("-"))) {
 			featureEnvyValido = false;
-			JOptionPane.showMessageDialog(defineRules,
-					"É necessário que introduza um operador do Feature Envy para continuar.", "Error!",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Feature Envy para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			featureEnvyValido = true;
 
-		if ((rule.getLocThreeshold() != -1 && rule.getLocOperator() == null)
-				|| (rule.getCycloThreeshold() != -1 && rule.getCycloOperator() == null)
-				|| (rule.getAtfdThreeshold() != -1 && rule.getAtfdOperator() == null)
-				|| (rule.getLaaThreeshold() != -1 && rule.getLaaOperator() == null)) {
+		if ((rule.getLocThreeshold() != -1 && rule.getLocOperator() == null) || (rule.getCycloThreeshold() != -1 && rule.getCycloOperator() == null) || (rule.getAtfdThreeshold() != -1 && rule.getAtfdOperator() == null) || (rule.getLaaThreeshold() != -1 && rule.getLaaOperator() == null)) {
 			metricasValidas = false;
-			JOptionPane.showMessageDialog(defineRules,
-					"É necessário que introduza um operador para as métricas definidas para continuar.", "Error!",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador para as métricas definidas para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			metricasValidas = true;
 
@@ -247,9 +234,9 @@ public class ChangeRules {
 
 			System.out.println("adicionar: " + rule.toString());
 			rule.addRuleToList(frame.getSavedRules());
-			System.out.println(frame.getSavedRules().size());
+			
+			frame.setLastRuleDefined(rule);
 
-		//	frame.updateRulesInGUI();
 			frame.setChooseRule(new ChooseRule(frame));
 		}
 		
@@ -262,12 +249,10 @@ public class ChangeRules {
 
 			for (Method method : frame.getMethods()) {
 
-				boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(),
-						rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
+				boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(), rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
 				method.setLongMethodUserBoolean(longMethodUser);
 
-				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(),
-						rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getFeatureEnvyOperator());
+				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getFeatureEnvyOperator());
 				method.setFeatureEnvyUserBoolean(featureEnvyUser);
 			}
 

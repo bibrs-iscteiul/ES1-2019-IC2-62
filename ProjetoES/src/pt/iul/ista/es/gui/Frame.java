@@ -75,6 +75,8 @@ public class Frame {
 	
 	private List<Rule> savedRules;
 	
+	private Rule lastRuleDefined;
+	
 	private int dci=0;
 	private int adci=0;
 	private int adii=0;
@@ -135,6 +137,15 @@ public class Frame {
 	public void setSavedRules(List<Rule> savedRules) {
 		this.savedRules = savedRules;
 	}
+
+	public Rule getLastRuleDefined() {
+		return lastRuleDefined;
+	}
+
+	public void setLastRuleDefined(Rule lastRuleDefined) {
+		this.lastRuleDefined = lastRuleDefined;
+	}
+	
 	
 
 	/**
@@ -200,7 +211,6 @@ public class Frame {
 			public void actionPerformed(ActionEvent e) {
 
 				excelImportado = false;
-				Boolean savedRule = false;
 				
 				methodsJModel.clear();
 				methodsJList.clearSelection();
@@ -224,9 +234,8 @@ public class Frame {
 
 						excelImportado = true;
 
-						if(changeRules.isDefinedRules() && !savedRule) {
+						if(changeRules.isDefinedRules() && lastRuleDefined != savedRules.get(savedRules.size()-1)) {
 							changeRules.saveRules();
-							savedRule = true;
 						}
 						
 						if(chooseRule.getSelectedRule() != null)
@@ -243,7 +252,6 @@ public class Frame {
 		});
 
 
-		
 		definirRegras.addActionListener(new ActionListener() {
 
 			@Override
@@ -258,21 +266,28 @@ public class Frame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				dci = 0;
 				dii = 0;
 				adci = 0;
 				adii = 0;
+				
 				JFrame f = new JFrame();
+				
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
+				
 				JRadioButton r1=new JRadioButton("A) iPlasma");    
 				JRadioButton r2=new JRadioButton("B) PMD"); 
 				JRadioButton r3=new JRadioButton("C) Long Method"); 
+				
 				JButton x = new JButton("Comparar");
+				
 				r1.setBounds(75,50,100,30);    
 				r2.setBounds(75,100,100,30);
 				r3.setBounds(75,150,200,30);
 				x.setBounds(75,200,100,30);
+				
 				f.add(r1);
 				f.add(r2); 
 				f.add(r3);
@@ -286,7 +301,9 @@ public class Frame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
 						f.setVisible(false);
+						
 						for(Method i: methods) {
 							if(r1.isSelected()) {
 								compare(i.isIplasma(), i.isIs_long_method());
@@ -315,16 +332,21 @@ public class Frame {
 				adii = 0;
 			
 				JFrame f = new JFrame();
+				
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
+				
 				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
 				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
 				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
+				
 				JButton x = new JButton("Comparar");
+				
 				r1.setBounds(75,50,200,30);    
 				r2.setBounds(75,100,200,30);
 				r3.setBounds(75,150,200,30);
 				x.setBounds(75,200,100,30);
+				
 				f.add(r1);
 				f.add(r2); 
 				f.add(r3);
@@ -338,8 +360,11 @@ public class Frame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
 						f.setVisible(false);
+						
 						for(Method i: methods) {
+							
 							if(r1.isSelected()) {
 								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy());
 							}
@@ -447,6 +472,7 @@ public class Frame {
 	}
 	
 	public void compare(boolean a, boolean b){ 
+		
 		if(a == true && b == true){
 			dci++;
 		}
