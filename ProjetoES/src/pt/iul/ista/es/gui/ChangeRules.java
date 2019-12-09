@@ -183,10 +183,10 @@ public class ChangeRules {
 
 		if (text_atfd.getText().matches("[0-9]+"))
 			rule.setAtfdThreeshold(Integer.parseInt(text_atfd.getText()));
-
-		if (text_laa.getText().matches("[0-9]+"))
-			rule.setLaaThreeshold(Integer.parseInt(text_laa.getText()));
-
+		
+		if (text_laa.getText().matches(".*[0-9]+.*")) 
+			rule.setLaaThreeshold(Double.parseDouble(text_laa.getText()));
+		
 		if (!(lmOperator.getSelectedItem().toString() == "null") || !(lmOperator.getSelectedItem().toString() == "-"))
 			rule.setLongMethodOperator(lmOperator.getSelectedItem().toString());
 
@@ -252,7 +252,7 @@ public class ChangeRules {
 				boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(), rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
 				method.setLongMethodUserBoolean(longMethodUser);
 
-				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getFeatureEnvyOperator());
+				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getLaaThreeshold(), rule.getLaaOperator(), rule.getFeatureEnvyOperator());
 				method.setFeatureEnvyUserBoolean(featureEnvyUser);
 			}
 

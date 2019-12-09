@@ -347,69 +347,71 @@ public class Method {
 	 * @param thresholdLAA the threshold LAA
 	 * @return true, if is feature envy
 	 */
-	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, int thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
+	
+	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, double thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
+		
+		System.out.println("Valor laa: " + laa + "; valor threeshold: " + thresholdLAA + "; " + Double.compare(laa, thresholdLAA));
 		
 		if (operatorFeatureEnvy == "and" && thresholdATFD != -1 && thresholdLAA != -1) {
-			//System.out.println("tem tudo feature envy and");
 			
 			if(operatorATFD == ">" && operatorLAA == ">") {
-				if (this.atfd > thresholdATFD && this.laa > thresholdLAA)
+				if (this.atfd > thresholdATFD && Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == "<") {
-				if (this.atfd < thresholdATFD && this.laa < thresholdLAA)
+				if (this.atfd < thresholdATFD && Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == "=") {
-				if (this.atfd == thresholdATFD && this.laa == thresholdLAA)
+				if (this.atfd == thresholdATFD && Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == ">" && operatorLAA == "<") {
-				if (this.atfd > thresholdATFD && this.laa < thresholdLAA)
+				if (this.atfd > thresholdATFD && Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == ">") {
-				if (this.atfd < thresholdATFD && this.laa > thresholdLAA)
+				if (this.atfd < thresholdATFD && Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == ">" && operatorLAA == "=") {
-				if (this.atfd > thresholdATFD && this.laa == thresholdLAA)
+				if (this.atfd > thresholdATFD && Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == "=") {
-				if (this.atfd < thresholdATFD && this.laa == thresholdLAA)
+				if (this.atfd < thresholdATFD && Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == ">") {
-				if (this.atfd == thresholdATFD && this.laa > thresholdLAA)
+				if (this.atfd == thresholdATFD && Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == "<") {
-				if (this.atfd == thresholdATFD && this.laa < thresholdLAA)
+				if (this.atfd == thresholdATFD && Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
@@ -419,63 +421,63 @@ public class Method {
 		else if (operatorFeatureEnvy == "or" && thresholdATFD != -1 && thresholdLAA != -1) {
 	
 			if(operatorATFD == ">" && operatorLAA == ">") {
-				if (this.atfd > thresholdATFD || this.laa > thresholdLAA)
+				if (this.atfd > thresholdATFD || Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == "<") {
-				if (this.atfd < thresholdATFD || this.laa < thresholdLAA)
+				if (this.atfd < thresholdATFD || Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == "=") {
-				if (this.atfd == thresholdATFD || this.laa == thresholdLAA)
+				if (this.atfd == thresholdATFD || Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == ">" && operatorLAA == "<") {
-				if (this.atfd > thresholdATFD || this.laa < thresholdLAA)
+				if (this.atfd > thresholdATFD || Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == ">") {
-				if (this.atfd < thresholdLAA || this.laa > thresholdLAA)
+				if (this.atfd < thresholdLAA || Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == ">" && operatorLAA == "=") {
-				if (this.atfd > thresholdATFD || this.laa == thresholdLAA)
+				if (this.atfd > thresholdATFD || Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "<" && operatorLAA == "=") {
-				if (this.atfd < thresholdATFD || this.laa == thresholdLAA)
+				if (this.atfd < thresholdATFD || Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == ">") {
-				if (this.atfd == thresholdATFD || this.laa > thresholdLAA)
+				if (this.atfd == thresholdATFD || Double.compare(this.laa, thresholdLAA) == 1)
 					return true;
 				else 
 					return false;
 			}
 			
 			else if(operatorATFD == "=" && operatorLAA == "<") {
-				if (this.atfd == thresholdATFD || this.laa < thresholdLAA)
+				if (this.atfd == thresholdATFD || Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
@@ -509,19 +511,19 @@ public class Method {
 			switch (operatorLAA) {
 			
 			case ">":
-				if (this.laa > thresholdLAA)
+				if(Double.compare(this.laa, thresholdLAA) == 1) 
 					return true;
 				else 
 					return false;
 				
 			case "<":
-				if (this.laa < thresholdLAA)
+				if (Double.compare(this.laa, thresholdLAA) == -1)
 					return true;
 				else 
 					return false;
 				
 			case "=":
-				if (this.laa == thresholdLAA)
+				if (Double.compare(this.laa, thresholdLAA) == 0)
 					return true;
 				else 
 					return false;
