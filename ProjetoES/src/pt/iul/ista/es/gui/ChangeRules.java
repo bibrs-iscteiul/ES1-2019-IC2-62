@@ -258,7 +258,7 @@ public class ChangeRules {
 					rule.setCycloOperator(auxRule.getCycloOperator());
 				}
 				
-				if(auxRule.getLocThreeshold() != -1 && auxRule.getLocThreeshold() != -1)
+				if(auxRule.getLocThreeshold() != -1 && auxRule.getCycloThreeshold() != -1)
 					rule.setLongMethodOperator(auxRule.getLongMethodOperator());		
 				
 				System.out.println("adicionar: " + rule.toString());
@@ -280,12 +280,12 @@ public class ChangeRules {
 					rule.setAtfdOperator(auxRule.getAtfdOperator());
 				}
 				
-				if(auxRule.getLaaThreeshold() != -1) {
+				if(!(Double.compare(auxRule.getLaaThreeshold(), -1) == 0)) {
 					rule.setLaaThreeshold(auxRule.getLaaThreeshold());
 					rule.setLaaOperator(auxRule.getLaaOperator());
 				}
 				
-				if(auxRule.getAtfdThreeshold() != -1 && auxRule.getLaaThreeshold() != -1) {
+				if(auxRule.getAtfdThreeshold() != -1 && !(Double.compare(auxRule.getLaaThreeshold(), -1) == 0)) {
 					System.out.println("entrei no if, o valor é " + auxRule.getFeatureEnvyOperator());
 					rule.setFeatureEnvyOperator(auxRule.getFeatureEnvyOperator());		
 				}
@@ -302,27 +302,42 @@ public class ChangeRules {
 		}
 	}
 
-	
-	//vou ter de mudar p ter duas regras
-	public void updateMethods(Rule rule) {
+	public void updateMethods(Rule ruleLongMethod, Rule ruleFeatureEnvy) {
 
 		if (frame.isExcelImportado()) {
 
 			for (Method method : frame.getMethods()) {
-
-				boolean longMethodUser = method.isLongMethodUser(rule.getLocThreeshold(), rule.getLocOperator(), rule.getCycloThreeshold(), rule.getCycloOperator(), rule.getLongMethodOperator());
-				method.setLongMethodUserBoolean(longMethodUser);
-
-				boolean featureEnvyUser = method.isFeatureEnvyUser(rule.getAtfdThreeshold(), rule.getAtfdOperator(), rule.getLaaThreeshold(), rule.getLaaOperator(), rule.getFeatureEnvyOperator());
-				method.setFeatureEnvyUserBoolean(featureEnvyUser);
+				
+				if(!(ruleLongMethod.toString().equals(""))) {
+					boolean longMethodUser = method.isLongMethodUser(ruleLongMethod.getLocThreeshold(), ruleLongMethod.getLocOperator(), ruleLongMethod.getCycloThreeshold(), ruleLongMethod.getCycloOperator(), ruleLongMethod.getLongMethodOperator());
+					method.setLongMethodUserBoolean(longMethodUser);
+				}
+				
+				System.out.println(ruleFeatureEnvy.toString() + " VER ISTO");
+				if(!(ruleFeatureEnvy.toString().equals(""))) {
+					boolean featureEnvyUser = method.isFeatureEnvyUser(ruleFeatureEnvy.getAtfdThreeshold(), ruleFeatureEnvy.getAtfdOperator(), ruleFeatureEnvy.getLaaThreeshold(), ruleFeatureEnvy.getLaaOperator(), ruleFeatureEnvy.getFeatureEnvyOperator());
+					method.setFeatureEnvyUserBoolean(featureEnvyUser);
+				}
 			}
 
 			frame.getMethodsJModel().clear();
 
-			for (Method method : frame.getMethods())
-				if (method.isLongMethodUserBoolean() || method.isFeatureEnvyUserBoolean())
-					frame.getMethodsJModel().addElement("MethodID: " + method.getMethodID() + "; Long Method: " + method.isLongMethodUserBoolean() + "; Feature Envy: " + method.isFeatureEnvyUserBoolean());
-
+			for (Method method : frame.getMethods()) {
+				if (method.isLongMethodUserBoolean() || method.isFeatureEnvyUserBoolean()) {
+					StringBuilder sb = new StringBuilder();
+					
+					sb.append("MethodID: " + method.getMethodID() + "; ");
+					
+					if(ruleLongMethod.isLongMethod())
+						sb.append("Long Method: " + method.isLongMethodUserBoolean() + "; ");
+					
+					if(ruleFeatureEnvy.isFeatureEnvy())
+						sb.append("Feature Envy: " + method.isFeatureEnvyUserBoolean() + "; ");
+					
+					frame.getMethodsJModel().addElement(sb.toString());
+				}
+			}
+			
 			frame.getMethodsJList().setModel(frame.getMethodsJModel());
 		}
 	}

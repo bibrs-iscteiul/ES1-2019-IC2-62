@@ -30,8 +30,6 @@ public class ChooseRule {
 	
 	JButton chooseButton;
 	
-	private Rule selectedRule;
-	
 	private Rule selectedRuleLongMethod;
 	private Rule selectedRuleFeatureEnvy;
 	
@@ -46,8 +44,12 @@ public class ChooseRule {
 		
 	}
 	
-	public Rule getSelectedRule() {
-		return selectedRule;
+	public Rule getSelectedRuleLongMethod() {
+		return selectedRuleLongMethod;
+	}
+
+	public Rule getSelectedRuleFeatureEnvy() {
+		return selectedRuleFeatureEnvy;
 	}
 
 	public void open() {
@@ -96,20 +98,23 @@ public class ChooseRule {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-								
+				
+				//frame.resetRulesInGUI();
+				
 				if( !(rulesLongMethod.getSelectedItem().toString().equals("")) ) {
 					selectedRuleLongMethod = (Rule)rulesLongMethod.getSelectedItem();
 					System.out.println("selecionada long method: " + selectedRuleLongMethod);
-				}
+				} else 
+					selectedRuleLongMethod = new Rule();
 				
 				if( !(rulesFeatureEnvy.getSelectedItem().toString().equals("")) ) {
 					selectedRuleFeatureEnvy = (Rule)rulesFeatureEnvy.getSelectedItem();
 					System.out.println("selecionada feature envy: " + selectedRuleFeatureEnvy);
-				}
+				} else
+					selectedRuleFeatureEnvy = new Rule();
 				
-			//		frame.getChangeRules().updateMethods((Rule)rules.getSelectedItem());
-				
-					//frame.updateRulesInGUI(selectedRule);
+				frame.getChangeRules().updateMethods(selectedRuleLongMethod, selectedRuleFeatureEnvy);
+				frame.updateRulesInGUI((Rule)rulesLongMethod.getSelectedItem(), (Rule)rulesFeatureEnvy.getSelectedItem());
 				
 				chooseRule.setVisible(false);
 			}

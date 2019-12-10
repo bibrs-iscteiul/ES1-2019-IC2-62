@@ -10,7 +10,7 @@ public class Rule {
 	private int cycloThreeshold = -1;
 	private String cycloOperator;
 
-	private String longMethodOperator;
+	private String longMethodOperator = "";
 	
 	private boolean longMethod; 
 
@@ -20,13 +20,13 @@ public class Rule {
 	private Double laaThreeshold = (double) -1;
 	private String laaOperator;
 
-	private String featureEnvyOperator;
+	private String featureEnvyOperator = "";
 	
 	private boolean featureEnvy;
 
 	
 	public Rule() {
-		
+	
 	}
 
 	public Rule(int locThreeshold, String locOperator, int cycloThreeshold, String cycloOperator,
@@ -38,6 +38,7 @@ public class Rule {
 		this.cycloThreeshold = cycloThreeshold;
 		this.cycloOperator = cycloOperator;
 		this.longMethodOperator = longMethodOperator;
+		
 		this.atfdThreeshold = atfdThreeshold;
 		this.atfdOperator = atfdOperator;
 		this.laaThreeshold = laaThreeshold;
