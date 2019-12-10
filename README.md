@@ -6,7 +6,7 @@ Membros:
 - Bernardo Gameiro, nº82596
 - Gonçalo Almeida, nº82983
 - Joana Cavalheiro, nº82182
-- Miguel Clemente, nº
+
 
 Má implementação/erros:
 - Corrigir sinais de thresholds e operações lógicos (and ou or)
