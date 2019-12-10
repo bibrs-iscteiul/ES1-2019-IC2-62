@@ -17,7 +17,7 @@ import pt.iul.ista.es.applications.Rule;
 /**
  * The Class ChangeRules.
  * 
- * @author Gonçalo Almeida
+ * @author Joana Cavalheiro
  * @since 2019-11-10
  */
 public class ChangeRules {
@@ -169,6 +169,7 @@ public class ChangeRules {
 
 		dr.add(definir, BorderLayout.SOUTH);
 		defineRules.add(dr);
+		
 	}
 
 	public void saveRules() {

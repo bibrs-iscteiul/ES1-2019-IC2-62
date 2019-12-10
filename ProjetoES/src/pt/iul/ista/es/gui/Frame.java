@@ -38,6 +38,7 @@ public class Frame {
 
 	private JLabel lmLog;
 	private JLabel feLog;
+	JComboBox<Rule> rules;
 
 	/** The excel importado. */
 	private boolean excelImportado;
@@ -72,21 +73,21 @@ public class Frame {
 	/** The change rules. */
 	private ChangeRules changeRules;
 	private ChooseRule chooseRule;
-	
+
 	private List<Rule> savedRules;
-	
+
 	private Rule lastRuleDefined;
-	
+
 	private int dci=0;
 	private int adci=0;
 	private int adii=0;
 	private int dii=0;
 
-	
+
 	public ChooseRule getChooseRule() {
 		return chooseRule;
 	}
-	
+
 	public void setChooseRule(ChooseRule chooseRule) {
 		this.chooseRule = chooseRule;
 	}
@@ -145,8 +146,8 @@ public class Frame {
 	public void setLastRuleDefined(Rule lastRuleDefined) {
 		this.lastRuleDefined = lastRuleDefined;
 	}
-	
-	
+
+
 
 	/**
 	 * Instantiates a new frame.
@@ -158,12 +159,12 @@ public class Frame {
 		frame.pack();
 		frame.setSize(1500, 700);
 		frame.setVisible(true);
-		
+
 		this.savedRules = new ArrayList<Rule>();
-		
+
 		this.changeRules = new ChangeRules(this);
 		this.chooseRule = new ChooseRule(this);
-		
+
 	}
 
 	/**
@@ -192,10 +193,10 @@ public class Frame {
 
 		JPanel painelThresholds = new JPanel();
 		painelThresholds.setLayout(new GridLayout(0, 1));
-		
+
 		JLabel label = new JLabel("Valores Thresholds:");
 		resetRulesInGUI();
-		
+
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setLayout(new GridLayout(3, 1));
 
@@ -206,12 +207,12 @@ public class Frame {
 		JButton definirRegras = new JButton("Definir Regras"); 
 
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				excelImportado = false;
-				
+
 				methodsJModel.clear();
 				methodsJList.clearSelection();
 
@@ -237,10 +238,10 @@ public class Frame {
 						if(changeRules.isDefinedRules() && lastRuleDefined != savedRules.get(savedRules.size()-1)) {
 							changeRules.saveRules();
 						}
-						
+
 						if(chooseRule.getSelectedRule() != null)
 							changeRules.updateMethods(chooseRule.getSelectedRule());
-		
+
 
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -256,43 +257,46 @@ public class Frame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				changeRules.resetRules();
 				changeRules.open();
 			}
 		});
-		
+
 		compararLongMethod.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				dci = 0;
 				dii = 0;
 				adci = 0;
 				adii = 0;
-				
+
 				JFrame f = new JFrame();
-				
+
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
-				
-				JRadioButton r1=new JRadioButton("A) iPlasma");    
-				JRadioButton r2=new JRadioButton("B) PMD"); 
-				JRadioButton r3=new JRadioButton("C) Long Method"); 
-				
+
+
+				String[] nStrings = { "Ipmd", "Iplasma", "Regra Escolhida" }; 
+
+				rules = new JComboBox(nStrings);
+
+				//				JRadioButton r1=new JRadioButton("A) iPlasma");    
+				//				JRadioButton r2=new JRadioButton("B) PMD"); 
+				//				JRadioButton r3=new JRadioButton("C) Long Method"); 
+				//				
 				JButton x = new JButton("Comparar");
-				
-				r1.setBounds(75,50,100,30);    
-				r2.setBounds(75,100,100,30);
-				r3.setBounds(75,150,200,30);
-				x.setBounds(75,200,100,30);
-				
-				f.add(r1);
-				f.add(r2); 
-				f.add(r3);
+				//				
+				//				r1.setBounds(75,50,100,30);    
+								rules.setBounds(75,100,100,30);
+				//				r3.setBounds(75,150,200,30);
+								x.setBounds(75,200,100,30);
+
+				f.add(rules);
 				f.add(x);
-				f.add(jpanel);
+//				f.add(jpanel);
 				f.setSize(300,300);    
 				f.setLayout(null);    
 				f.setVisible(true);
@@ -301,52 +305,53 @@ public class Frame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+
 						f.setVisible(false);
-						
+
 						for(Method i: methods) {
-							if(r1.isSelected()) {
-								compare(i.isIplasma(), i.isIs_long_method());
-							}
-							if (r2.isSelected()){
+							if(rules.getSelectedItem().equals("Ipmd")) {
 								compare(i.isPmd(), i.isIs_long_method());
 							}
-							if(r3.isSelected()) {
+							if (rules.getSelectedItem().equals("Iplasma")){
+								compare(i.isIplasma(), i.isIs_long_method());
+							}
+							if(savedRules.size() != 0) {
+							if(rules.getSelectedItem().equals("Regra Escolhida")) {
 								compare(i.isLongMethodUserBoolean(), i.isIs_long_method());
 							}
+							}
 						}
-
 						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
 					}
 				});
 			}
 		});
-		
+
 		compararFeatureEnvy.addActionListener (new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+
 				dci = 0;
 				dii = 0;
 				adci = 0;
 				adii = 0;
-			
+
 				JFrame f = new JFrame();
-				
+
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
-				
+
 				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
 				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
 				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
-				
+
 				JButton x = new JButton("Comparar");
-				
+
 				r1.setBounds(75,50,200,30);    
 				r2.setBounds(75,100,200,30);
 				r3.setBounds(75,150,200,30);
 				x.setBounds(75,200,100,30);
-				
+
 				f.add(r1);
 				f.add(r2); 
 				f.add(r3);
@@ -360,11 +365,11 @@ public class Frame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+
 						f.setVisible(false);
-						
+
 						for(Method i: methods) {
-							
+
 							if(r1.isSelected()) {
 								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy());
 							}
@@ -381,21 +386,21 @@ public class Frame {
 				});
 			}
 		});
-		
+
 		JButton escolherRegra = new JButton("Escolher Regra");
 		escolherRegra.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if(savedRules.size() != 0)
 					chooseRule.open();
 				else
 					JOptionPane.showMessageDialog(frame,"Não existem regras guardadas, terá de criar primeiro.", "Erro!", JOptionPane.ERROR_MESSAGE);
 			}
 		});
-		
-		
+
+
 		// Painel com JButtons e JTextFields
 
 		// Dialog
@@ -440,10 +445,10 @@ public class Frame {
 	}
 
 	public void updateRulesInGUI(Rule rule) {
-	
+
 		if(!(rule.getLocThreeshold() == -1) && !(rule.getLocOperator().equals("-")))
 			tLoc.setText("LOC: " + rule.getLocOperator() + " que " + rule.getLocThreeshold());
-		
+
 		if(!(rule.getCycloThreeshold() == -1) && !(rule.getCycloOperator().equals("-")))
 			tCyclo.setText("CYCLO: " + rule.getCycloOperator() + " que " + rule.getCycloThreeshold());
 
@@ -458,11 +463,11 @@ public class Frame {
 
 		if(!(rule.getFeatureEnvyOperator().equals("-")))
 			feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: "+ rule.getFeatureEnvyOperator());
-		
+
 	}
 
 	public void resetRulesInGUI()  {
-		
+
 		tLoc = new JLabel("LOC: " );
 		tCyclo = new JLabel("CYCLO: ");
 		tAtfd = new JLabel("ATFD: ");
@@ -470,9 +475,9 @@ public class Frame {
 		lmLog = new JLabel("Operaçăo Lógica do Long Method do Utilizador: ");
 		feLog = new JLabel("Operaçăo Lógica do Feature Envy do Utilizador: ");
 	}
-	
+
 	public void compare(boolean a, boolean b){ 
-		
+
 		if(a == true && b == true){
 			dci++;
 		}
