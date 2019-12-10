@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
@@ -205,6 +204,7 @@ public class Frame {
 		JButton compararLongMethod = new JButton("Comparar Long Method");
 		JButton escolherFicheiro = new JButton("Excel");
 		JButton definirRegras = new JButton("Definir Regras"); 
+		JButton escolherRegra = new JButton("Escolher Regra");
 
 		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
 
@@ -374,7 +374,6 @@ public class Frame {
 			}
 		});
 
-		JButton escolherRegra = new JButton("Escolher Regra");
 		escolherRegra.addActionListener(new ActionListener() {
 
 			@Override
@@ -399,7 +398,7 @@ public class Frame {
 		painel.add(painelTextField, BorderLayout.NORTH);
 		dialog.add(painel);
 
-		// South.West (valores thresholds)
+		// South.East (valores thresholds)
 		painelThresholds.add(label);
 		painelThresholds.add(tLoc, BorderLayout.NORTH);
 		painelThresholds.add(tCyclo, BorderLayout.CENTER);
@@ -408,12 +407,14 @@ public class Frame {
 		painelThresholds.add(lmLog, BorderLayout.SOUTH);
 		painelThresholds.add(feLog, BorderLayout.SOUTH);
 
-		// South.East (restantes botoes)
-		painelBotoes.add(escolherFicheiro);
+		// South.West (restantes botoes)
+	
 		painelBotoes.add(definirRegras);
+		painelBotoes.add(escolherRegra);
 		painelBotoes.add(compararLongMethod);
 		painelBotoes.add(compararFeatureEnvy);
-		painelBotoes.add(escolherRegra);
+		painelBotoes.add(escolherFicheiro);
+		
 
 
 		// painel South
