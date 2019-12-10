@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,9 +24,17 @@ public class ChooseRule {
 	JDialog chooseRule;
 	
 	JComboBox<Rule> rules;
+	
+	JComboBox<Rule> rulesLongMethod;
+	JComboBox<Rule> rulesFeatureEnvy;
+	
 	JButton chooseButton;
 	
 	private Rule selectedRule;
+	
+	private Rule selectedRuleLongMethod;
+	private Rule selectedRuleFeatureEnvy;
+	
 
 	public ChooseRule(Frame frame) {
 		chooseRule = new JDialog();
@@ -46,13 +56,39 @@ public class ChooseRule {
 	
 	private void addFrameContent() {
 		
-		if(frame.getSavedRules().size() != 0)
-			rules = new JComboBox(frame.getSavedRules().toArray());
-		else
-			rules = new JComboBox<Rule>();
+		List<Rule> rulesLongMethodList = new ArrayList<Rule>();
+		List<Rule> rulesFeatureEnvyList = new ArrayList<Rule>();
+		
+		Rule r = new Rule();
+		System.out.println("regra:" + r.toString());
+		rulesLongMethodList.add(r);
+		rulesFeatureEnvyList.add(r);
+		
+		if(frame.getSavedRules().size() != 0) {
+			
+			for (Rule rule : frame.getSavedRules()) {
+				
+				System.out.println(rule.isLongMethod() + " " + rule.isFeatureEnvy());
+				
+				if(rule.isLongMethod()) {
+					System.out.println("adicionei long method");
+					rulesLongMethodList.add(rule);
+				}
+				
+				if(rule.isFeatureEnvy())
+					rulesFeatureEnvyList.add(rule);
+			}
+		
+		this.rulesLongMethod = new JComboBox(rulesLongMethodList.toArray());
+		this.rulesFeatureEnvy = new JComboBox(rulesFeatureEnvyList.toArray());
+		
+		} else {
+			this.rulesLongMethod = new JComboBox<Rule>();
+			this.rulesFeatureEnvy = new JComboBox<Rule>();
+		}
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(3, 1));
+		panel.setLayout(new GridLayout(6, 1));
 		
 		chooseButton = new JButton("Escolher");
 		
@@ -61,24 +97,32 @@ public class ChooseRule {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 								
-				if(rules.getSelectedItem() == null)
-					System.out.println("nada selecionado");
-				
-				else {
-					System.out.println("selecionada " + rules.getSelectedItem().toString());
-					frame.getChangeRules().updateMethods((Rule)rules.getSelectedItem());
-					selectedRule = (Rule)rules.getSelectedItem();
-				
-					//frame.resetRulesInGUI();
-					frame.updateRulesInGUI(selectedRule);
+				if( !(rulesLongMethod.getSelectedItem().toString().equals("")) ) {
+					selectedRuleLongMethod = (Rule)rulesLongMethod.getSelectedItem();
+					System.out.println("selecionada long method: " + selectedRuleLongMethod);
 				}
+				
+				if( !(rulesFeatureEnvy.getSelectedItem().toString().equals("")) ) {
+					selectedRuleFeatureEnvy = (Rule)rulesFeatureEnvy.getSelectedItem();
+					System.out.println("selecionada feature envy: " + selectedRuleFeatureEnvy);
+				}
+				
+			//		frame.getChangeRules().updateMethods((Rule)rules.getSelectedItem());
+				
+					//frame.updateRulesInGUI(selectedRule);
 				
 				chooseRule.setVisible(false);
 			}
 		});
 		
 		panel.add(new JLabel("Escolha a regra que quer usar para analisar os erros: "));
-		panel.add(rules);
+		
+		panel.add(new JLabel("Long Method: "));
+		panel.add(this.rulesLongMethod);
+		
+		panel.add(new JLabel("Feature Envy: "));
+		panel.add(this.rulesFeatureEnvy);
+		
 		panel.add(chooseButton);
 		
 		chooseRule.add(panel);

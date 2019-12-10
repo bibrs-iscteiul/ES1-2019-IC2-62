@@ -11,6 +11,8 @@ public class Rule {
 	private String cycloOperator;
 
 	private String longMethodOperator;
+	
+	private boolean longMethod; 
 
 	private int atfdThreeshold = -1;
 	private String atfdOperator;
@@ -19,6 +21,9 @@ public class Rule {
 	private String laaOperator;
 
 	private String featureEnvyOperator;
+	
+	private boolean featureEnvy;
+
 	
 	public Rule() {
 		
@@ -120,7 +125,24 @@ public class Rule {
 	public void setFeatureEnvyOperator(String featureEnvyOperator) {
 		this.featureEnvyOperator = featureEnvyOperator;
 	}
+	
+	public boolean isLongMethod() {
+		return longMethod;
+	}
 
+	public void setLongMethod(boolean longMethod) {
+		this.longMethod = longMethod;
+	}
+
+	public boolean isFeatureEnvy() {
+		return featureEnvy;
+	}
+
+	public void setFeatureEnvy(boolean featureEnvy) {
+		this.featureEnvy = featureEnvy;
+	}
+
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

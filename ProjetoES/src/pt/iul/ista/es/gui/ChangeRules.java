@@ -174,76 +174,136 @@ public class ChangeRules {
 
 	public void saveRules() {
 
-		Rule rule = new Rule();
+		Rule auxRule = new Rule();
 
 		if (text_loc.getText().matches("[0-9]+")) 
-			rule.setLocThreeshold(Integer.parseInt(text_loc.getText()));
+			auxRule.setLocThreeshold(Integer.parseInt(text_loc.getText()));
 	
 		if (text_cyclo.getText().matches("[0-9]+"))
-			rule.setCycloThreeshold(Integer.parseInt(text_cyclo.getText()));
+			auxRule.setCycloThreeshold(Integer.parseInt(text_cyclo.getText()));
 
 		if (text_atfd.getText().matches("[0-9]+"))
-			rule.setAtfdThreeshold(Integer.parseInt(text_atfd.getText()));
+			auxRule.setAtfdThreeshold(Integer.parseInt(text_atfd.getText()));
 		
 		if (text_laa.getText().matches(".*[0-9]+.*")) 
-			rule.setLaaThreeshold(Double.parseDouble(text_laa.getText()));
+			auxRule.setLaaThreeshold(Double.parseDouble(text_laa.getText()));
 		
 		if (!(lmOperator.getSelectedItem().toString() == "null") || !(lmOperator.getSelectedItem().toString() == "-"))
-			rule.setLongMethodOperator(lmOperator.getSelectedItem().toString());
+			auxRule.setLongMethodOperator(lmOperator.getSelectedItem().toString());
 
 		if (!(feOperator.getSelectedItem().toString() == "null") || !(feOperator.getSelectedItem().toString() == "-"))
-			rule.setFeatureEnvyOperator(feOperator.getSelectedItem().toString());
+			auxRule.setFeatureEnvyOperator(feOperator.getSelectedItem().toString());
 
 		if (!(locBox.getSelectedItem().toString() == "-")) {
 			System.out.println("mudei o loc operator");
-			rule.setLocOperator(locBox.getSelectedItem().toString());
+			auxRule.setLocOperator(locBox.getSelectedItem().toString());
 		}
 		if (!(cycloBox.getSelectedItem().toString() == "-"))
-			rule.setCycloOperator(cycloBox.getSelectedItem().toString());
+			auxRule.setCycloOperator(cycloBox.getSelectedItem().toString());
 
 		if (!(laaBox.getSelectedItem().toString() == "-"))
-			rule.setLaaOperator(laaBox.getSelectedItem().toString());
+			auxRule.setLaaOperator(laaBox.getSelectedItem().toString());
 
 		if (!(atfdBox.getSelectedItem().toString() == "-"))
-			rule.setAtfdOperator(atfdBox.getSelectedItem().toString());
+			auxRule.setAtfdOperator(atfdBox.getSelectedItem().toString());
 
 		boolean longMethodValido;
 		boolean featureEnvyValido;
 		boolean metricasValidas;
 
-		if (rule.getLocThreeshold() != -1 && rule.getCycloThreeshold() != -1 && (rule.getLongMethodOperator().equals("null") || rule.getLongMethodOperator().equals("-"))) {
+		if (auxRule.getLocThreeshold() != -1 && auxRule.getCycloThreeshold() != -1 && (auxRule.getLongMethodOperator().equals("null") || auxRule.getLongMethodOperator().equals("-"))) {
 			longMethodValido = false;
 			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Long Method para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			longMethodValido = true;
 
-		if (rule.getAtfdThreeshold() != -1 && rule.getLaaThreeshold() != -1 && (rule.getFeatureEnvyOperator().equals("null") || rule.getFeatureEnvyOperator().equals("-"))) {
+		if (auxRule.getAtfdThreeshold() != -1 && auxRule.getLaaThreeshold() != -1 && (auxRule.getFeatureEnvyOperator().equals("null") || auxRule.getFeatureEnvyOperator().equals("-"))) {
 			featureEnvyValido = false;
 			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador do Feature Envy para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			featureEnvyValido = true;
 
-		if ((rule.getLocThreeshold() != -1 && rule.getLocOperator() == null) || (rule.getCycloThreeshold() != -1 && rule.getCycloOperator() == null) || (rule.getAtfdThreeshold() != -1 && rule.getAtfdOperator() == null) || (rule.getLaaThreeshold() != -1 && rule.getLaaOperator() == null)) {
+		if ((auxRule.getLocThreeshold() != -1 && auxRule.getLocOperator() == null) || (auxRule.getCycloThreeshold() != -1 && auxRule.getCycloOperator() == null) || (auxRule.getAtfdThreeshold() != -1 && auxRule.getAtfdOperator() == null) || (auxRule.getLaaThreeshold() != -1 && auxRule.getLaaOperator() == null)) {
 			metricasValidas = false;
 			JOptionPane.showMessageDialog(defineRules, "É necessário que introduza um operador para as métricas definidas para continuar.", "Error!", JOptionPane.ERROR_MESSAGE);
-		} else
+		} else if (auxRule.getLocThreeshold() == -1 && auxRule.getAtfdThreeshold() == -1 && auxRule.getCycloThreeshold() == -1 && Double.compare(auxRule.getLaaThreeshold(), -1) == 0)
+			metricasValidas = false;
+		else
 			metricasValidas = true;
-
+		
+		if(auxRule.getLocThreeshold() != -1 || auxRule.getCycloThreeshold() != -1)
+			auxRule.setLongMethod(true);
+		
+		if(auxRule.getAtfdThreeshold() != -1 || auxRule.getLaaThreeshold() != -1)
+			auxRule.setFeatureEnvy(true);
+		
+		Rule rule;
+		
 		if (longMethodValido && featureEnvyValido && metricasValidas) {
 
 			definedRules = true;
-
-			System.out.println("adicionar: " + rule.toString());
-			rule.addRuleToList(frame.getSavedRules());
 			
-			frame.setLastRuleDefined(rule);
+			if(auxRule.isLongMethod()) {
+				rule = new Rule();
+				
+				rule.setLongMethod(true);
+				
+				if(auxRule.getLocThreeshold() != -1) {
+					rule.setLocThreeshold(auxRule.getLocThreeshold());
+					rule.setLocOperator(auxRule.getLocOperator());
+				}
+				
+				if(auxRule.getCycloThreeshold() != -1) {
+					rule.setCycloThreeshold(auxRule.getCycloThreeshold());
+					rule.setCycloOperator(auxRule.getCycloOperator());
+				}
+				
+				if(auxRule.getLocThreeshold() != -1 && auxRule.getLocThreeshold() != -1)
+					rule.setLongMethodOperator(auxRule.getLongMethodOperator());		
+				
+				System.out.println("adicionar: " + rule.toString());
+				rule.addRuleToList(frame.getSavedRules());
+				
+				frame.setLastRuleDefined(rule);
+				
+				defineRules.setVisible(false);
+			}
+			
+			
+			if(auxRule.isFeatureEnvy()) {
+				rule = new Rule();
+				
+				rule.setFeatureEnvy(true);
+				
+				if(auxRule.getAtfdThreeshold() != -1) {
+					rule.setAtfdThreeshold(auxRule.getAtfdThreeshold());
+					rule.setAtfdOperator(auxRule.getAtfdOperator());
+				}
+				
+				if(auxRule.getLaaThreeshold() != -1) {
+					rule.setLaaThreeshold(auxRule.getLaaThreeshold());
+					rule.setLaaOperator(auxRule.getLaaOperator());
+				}
+				
+				if(auxRule.getAtfdThreeshold() != -1 && auxRule.getLaaThreeshold() != -1) {
+					System.out.println("entrei no if, o valor é " + auxRule.getFeatureEnvyOperator());
+					rule.setFeatureEnvyOperator(auxRule.getFeatureEnvyOperator());		
+				}
+				
+				System.out.println("adicionar: " + rule.toString());
+				rule.addRuleToList(frame.getSavedRules());
+				
+				frame.setLastRuleDefined(rule);
+				
+				defineRules.setVisible(false);
+			}
 
 			frame.setChooseRule(new ChooseRule(frame));
 		}
-		
-		defineRules.setVisible(false);
 	}
 
+	
+	//vou ter de mudar p ter duas regras
 	public void updateMethods(Rule rule) {
 
 		if (frame.isExcelImportado()) {

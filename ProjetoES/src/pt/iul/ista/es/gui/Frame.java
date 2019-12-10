@@ -240,7 +240,7 @@ public class Frame {
 						}
 
 						if(chooseRule.getSelectedRule() != null)
-							changeRules.updateMethods(chooseRule.getSelectedRule());
+							changeRules.updateMethods(chooseRule.getSelectedRule()); 		//mudar
 
 
 					} catch (IOException e1) {
@@ -279,7 +279,7 @@ public class Frame {
 				jpanel.setLayout(new GridLayout(4,1));
 
 
-				String[] nStrings = { "Ipmd", "Iplasma", "Regra Escolhida" }; 
+				String[] nStrings = { "PMD", "iPlasma", "Regra Escolhida" }; 
 
 				rules = new JComboBox(nStrings);
 
@@ -304,10 +304,10 @@ public class Frame {
 						f.setVisible(false);
 
 						for(Method i: methods) {
-							if(rules.getSelectedItem().equals("Ipmd")) {
+							if(rules.getSelectedItem().equals("PMD")) {
 								compare(i.isPmd(), i.isIs_long_method());
 							}
-							if (rules.getSelectedItem().equals("Iplasma")){
+							if (rules.getSelectedItem().equals("iPlasma")){
 								compare(i.isIplasma(), i.isIs_long_method());
 							}
 							
