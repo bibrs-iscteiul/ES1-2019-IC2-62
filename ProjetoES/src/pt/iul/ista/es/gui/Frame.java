@@ -283,20 +283,15 @@ public class Frame {
 
 				rules = new JComboBox(nStrings);
 
-				//				JRadioButton r1=new JRadioButton("A) iPlasma");    
-				//				JRadioButton r2=new JRadioButton("B) PMD"); 
-				//				JRadioButton r3=new JRadioButton("C) Long Method"); 
-				//				
+								
 				JButton x = new JButton("Comparar");
-				//				
-				//				r1.setBounds(75,50,100,30);    
-								rules.setBounds(75,100,100,30);
-				//				r3.setBounds(75,150,200,30);
-								x.setBounds(75,200,100,30);
+								
+				    
+				rules.setBounds(75,100,100,30);
+				x.setBounds(75,200,100,30);
 
 				f.add(rules);
 				f.add(x);
-//				f.add(jpanel);
 				f.setSize(300,300);    
 				f.setLayout(null);    
 				f.setVisible(true);
@@ -315,11 +310,11 @@ public class Frame {
 							if (rules.getSelectedItem().equals("Iplasma")){
 								compare(i.isIplasma(), i.isIs_long_method());
 							}
-							if(savedRules.size() != 0) {
+							
 							if(rules.getSelectedItem().equals("Regra Escolhida")) {
 								compare(i.isLongMethodUserBoolean(), i.isIs_long_method());
 							}
-							}
+							
 						}
 						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
 					}
@@ -341,22 +336,19 @@ public class Frame {
 				JPanel jpanel = new JPanel();
 				jpanel.setLayout(new GridLayout(4,1));
 
-				JRadioButton r1=new JRadioButton("A) Feature_Envy_User");    
-				JRadioButton r2=new JRadioButton("B) regra2blablabla"); 
-				JRadioButton r3=new JRadioButton("C) regra3blablabla"); 
+				String[] nStrings = { "Regra Escolhida" }; 
 
+				rules = new JComboBox(nStrings);
+
+								
 				JButton x = new JButton("Comparar");
-
-				r1.setBounds(75,50,200,30);    
-				r2.setBounds(75,100,200,30);
-				r3.setBounds(75,150,200,30);
+								
+				    
+				rules.setBounds(75,100,100,30);
 				x.setBounds(75,200,100,30);
 
-				f.add(r1);
-				f.add(r2); 
-				f.add(r3);
+				f.add(rules);
 				f.add(x);
-				f.add(jpanel);
 				f.setSize(300,300);    
 				f.setLayout(null);    
 				f.setVisible(true);
@@ -370,15 +362,10 @@ public class Frame {
 
 						for(Method i: methods) {
 
-							if(r1.isSelected()) {
-								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy());
+							if(rules.getSelectedItem().equals("Regra Escolhida")) {
+								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy()); 
 							}
-							if (r2.isSelected()){
-								compare(i.isPmd(), i.isIs_feature_envy()); //ALTERAR
-							}
-							if(r3.isSelected()) {
-								compare(i.isIplasma(), i.isIs_feature_envy()); //ALTERAR
-							}
+							
 						}
 
 						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
