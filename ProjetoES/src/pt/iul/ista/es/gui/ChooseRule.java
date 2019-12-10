@@ -18,22 +18,43 @@ import javax.swing.JTextField;
 
 import pt.iul.ista.es.applications.Rule;
 
+/**
+ * The Class ChooseRule.
+ * @author Joana Cavalheiro
+ * @since 2019-11-14
+ */
 public class ChooseRule {
 	
+	/** The frame. */
 	Frame frame;
+	
+	/** The choose rule. */
 	JDialog chooseRule;
 	
+	/** The rules. */
 	JComboBox<Rule> rules;
 	
+	/** The rules long method. */
 	JComboBox<Rule> rulesLongMethod;
+	
+	/** The rules feature envy. */
 	JComboBox<Rule> rulesFeatureEnvy;
 	
+	/** The choose button. */
 	JButton chooseButton;
 	
+	/** The selected rule long method. */
 	private Rule selectedRuleLongMethod;
+	
+	/** The selected rule feature envy. */
 	private Rule selectedRuleFeatureEnvy;
 	
 
+	/**
+	 * Instantiates a new choose rule.
+	 *
+	 * @param frame the frame
+	 */
 	public ChooseRule(Frame frame) {
 		chooseRule = new JDialog();
 		this.frame = frame;
@@ -44,18 +65,34 @@ public class ChooseRule {
 		
 	}
 	
+	/**
+	 * Gets the selected rule long method.
+	 *
+	 * @return the selected rule long method
+	 */
 	public Rule getSelectedRuleLongMethod() {
 		return selectedRuleLongMethod;
 	}
 
+	/**
+	 * Gets the selected rule feature envy.
+	 *
+	 * @return the selected rule feature envy
+	 */
 	public Rule getSelectedRuleFeatureEnvy() {
 		return selectedRuleFeatureEnvy;
 	}
 
+	/**
+	 * Open.
+	 */
 	public void open() {
 		chooseRule.setVisible(true);
 	}
 	
+	/**
+	 * Adds the frame content.
+	 */
 	private void addFrameContent() {
 		
 		List<Rule> rulesLongMethodList = new ArrayList<Rule>();

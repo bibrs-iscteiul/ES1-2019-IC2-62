@@ -1,5 +1,6 @@
 package pt.iul.ista.es.applications;
 
+
 /**
  * The Class Method which represents a method specific.
  * @author Joana Cavalheiro
@@ -51,34 +52,74 @@ public class Method {
 	boolean isFeatureEnvyUserBoolean;
 	
 	
+	/**
+	 * Checks if is checks if is long method.
+	 *
+	 * @return true, if is checks if is long method
+	 */
 	public boolean isIs_long_method() {
 		return is_long_method;
 	}
 
+	/**
+	 * Sets the checks if is long method.
+	 *
+	 * @param is_long_method the new checks if is long method
+	 */
 	public void setIs_long_method(boolean is_long_method) {
 		this.is_long_method = is_long_method;
 	}
 
+	/**
+	 * Checks if is iplasma.
+	 *
+	 * @return true, if is iplasma
+	 */
 	public boolean isIplasma() {
 		return iplasma;
 	}
 
+	/**
+	 * Sets the iplasma.
+	 *
+	 * @param iplasma the new iplasma
+	 */
 	public void setIplasma(boolean iplasma) {
 		this.iplasma = iplasma;
 	}
 
+	/**
+	 * Checks if is pmd.
+	 *
+	 * @return true, if is pmd
+	 */
 	public boolean isPmd() {
 		return pmd;
 	}
 
+	/**
+	 * Sets the pmd.
+	 *
+	 * @param pmd the new pmd
+	 */
 	public void setPmd(boolean pmd) {
 		this.pmd = pmd;
 	}
 
+	/**
+	 * Checks if is checks if is feature envy.
+	 *
+	 * @return true, if is checks if is feature envy
+	 */
 	public boolean isIs_feature_envy() {
 		return is_feature_envy;
 	}
 
+	/**
+	 * Sets the checks if is feature envy.
+	 *
+	 * @param is_feature_envy the new checks if is feature envy
+	 */
 	public void setIs_feature_envy(boolean is_feature_envy) {
 		this.is_feature_envy = is_feature_envy;
 	}
@@ -129,22 +170,47 @@ public class Method {
 		
 	}
 	
+	/**
+	 * Gets the method ID.
+	 *
+	 * @return the method ID
+	 */
 	public int getMethodID() {
 		return MethodID;
 	}
 
+	/**
+	 * Checks if is long method user boolean.
+	 *
+	 * @return true, if is long method user boolean
+	 */
 	public boolean isLongMethodUserBoolean() {
 		return isLongMethodUserBoolean;
 	}
 
+	/**
+	 * Sets the long method user boolean.
+	 *
+	 * @param isLongMethodUserBoolean the new long method user boolean
+	 */
 	public void setLongMethodUserBoolean(boolean isLongMethodUserBoolean) {
 		this.isLongMethodUserBoolean = isLongMethodUserBoolean;
 	}
 
+	/**
+	 * Checks if is feature envy user boolean.
+	 *
+	 * @return true, if is feature envy user boolean
+	 */
 	public boolean isFeatureEnvyUserBoolean() {
 		return isFeatureEnvyUserBoolean;
 	}
 
+	/**
+	 * Sets the feature envy user boolean.
+	 *
+	 * @param isFeatureEnvyUserBoolean the new feature envy user boolean
+	 */
 	public void setFeatureEnvyUserBoolean(boolean isFeatureEnvyUserBoolean) {
 		this.isFeatureEnvyUserBoolean = isFeatureEnvyUserBoolean;
 	}
@@ -153,7 +219,10 @@ public class Method {
 	 * Checks if is long method.
 	 *
 	 * @param thresholdLOC the threshold LOC
+	 * @param operatorLOC the operator LOC
 	 * @param thresholdCYCLO the threshold CYCLO
+	 * @param operatorCYCLO the operator CYCLO
+	 * @param operatorLongMethod the operator long method
 	 * @return true, if is long method
 	 */
 	public boolean isLongMethodUser (int thresholdLOC, String operatorLOC, int thresholdCYCLO, String operatorCYCLO, String operatorLongMethod) {
@@ -344,7 +413,10 @@ public class Method {
 	 * Checks if is feature envy.
 	 *
 	 * @param thresholdATFD the threshold ATFD
+	 * @param operatorATFD the operator ATFD
 	 * @param thresholdLAA the threshold LAA
+	 * @param operatorLAA the operator LAA
+	 * @param operatorFeatureEnvy the operator feature envy
 	 * @return true, if is feature envy
 	 */
 	

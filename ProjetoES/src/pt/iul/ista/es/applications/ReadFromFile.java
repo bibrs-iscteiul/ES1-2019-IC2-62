@@ -41,7 +41,8 @@ public class ReadFromFile {
 	 * Read from a file.
 	 *
 	 * @param fileName the file name
-	 * @param sheetName the sheet name
+	 * @param sheetIndex the sheet index
+	 * @return the list
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public List<Method> read(String fileName, int sheetIndex) throws IOException {

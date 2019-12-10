@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.Rule;
 
+
 /**
  * The Class ChangeRules.
  * 
@@ -28,19 +29,37 @@ public class ChangeRules {
 	/** The frame. */
 	Frame frame;
 
+	/** The text loc. */
 	JTextField text_loc;
+	
+	/** The text cyclo. */
 	JTextField text_cyclo;
+	
+	/** The text atfd. */
 	JTextField text_atfd;
+	
+	/** The text laa. */
 	JTextField text_laa;
 
+	/** The lm operator. */
 	JComboBox<String> lmOperator;
+	
+	/** The fe operator. */
 	JComboBox<String> feOperator;
 
+	/** The loc box. */
 	JComboBox<String> locBox;
+	
+	/** The cyclo box. */
 	JComboBox<String> cycloBox;
+	
+	/** The atfd box. */
 	JComboBox<String> atfdBox;
+	
+	/** The laa box. */
 	JComboBox<String> laaBox;
 
+	/** The defined rules. */
 	boolean definedRules;
 
 	/**
@@ -57,14 +76,29 @@ public class ChangeRules {
 		this.frame = frame;
 	}
 
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public Frame getFrame() {
 		return frame;
 	}
 
+	/**
+	 * Checks if is defined rules.
+	 *
+	 * @return true, if is defined rules
+	 */
 	public boolean isDefinedRules() {
 		return definedRules;
 	}
 
+	/**
+	 * Sets the defined rules.
+	 *
+	 * @param definedRules the new defined rules
+	 */
 	public void setDefinedRules(boolean definedRules) {
 		this.definedRules = definedRules;
 	}
@@ -172,6 +206,9 @@ public class ChangeRules {
 		
 	}
 
+	/**
+	 * Save rules.
+	 */
 	public void saveRules() {
 
 		Rule auxRule = new Rule();
@@ -302,9 +339,15 @@ public class ChangeRules {
 		}
 	}
 
+	/**
+	 * Update methods.
+	 *
+	 * @param ruleLongMethod the rule long method
+	 * @param ruleFeatureEnvy the rule feature envy
+	 */
 	public void updateMethods(Rule ruleLongMethod, Rule ruleFeatureEnvy) {
 
-		if (frame.isExcelImportado()) {
+		if (frame.isExcelImported()) {
 
 			for (Method method : frame.getMethods()) {
 				
@@ -342,6 +385,9 @@ public class ChangeRules {
 		}
 	}
 
+	/**
+	 * Reset rules.
+	 */
 	public void resetRules() {
 
 		text_loc.setText("LOC");

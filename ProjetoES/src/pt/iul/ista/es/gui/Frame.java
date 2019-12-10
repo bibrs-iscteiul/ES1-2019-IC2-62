@@ -25,6 +25,8 @@ import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.Rule;
 
+
+
 /**
  * The Class Frame.
  * @author Beatriz Ragageles e Bernardo Gameiro
@@ -35,8 +37,13 @@ public class Frame {
 	/** The frame. */
 	private JFrame frame;
 
+	/** The lm log. */
 	private JLabel lmLog;
+	
+	/** The fe log. */
 	private JLabel feLog;
+	
+	/** The rules. */
 	JComboBox<Rule> rules;
 
 	/** The excel importado. */
@@ -71,31 +78,64 @@ public class Frame {
 
 	/** The change rules. */
 	private ChangeRules changeRules;
+	
+	/** The choose rule. */
 	private ChooseRule chooseRule;
 
+	/** The saved rules. */
 	private List<Rule> savedRules;
 
+	/** The last rule defined. */
 	private Rule lastRuleDefined;
 
+	/** The dci. */
 	private int dci=0;
+	
+	/** The adci. */
 	private int adci=0;
+	
+	/** The adii. */
 	private int adii=0;
+	
+	/** The dii. */
 	private int dii=0;
 
 
+	/**
+	 * Gets the choose rule.
+	 *
+	 * @return the choose rule
+	 */
 	public ChooseRule getChooseRule() {
 		return chooseRule;
 	}
 
+	/**
+	 * Sets the choose rule.
+	 *
+	 * @param chooseRule the new choose rule
+	 */
 	public void setChooseRule(ChooseRule chooseRule) {
 		this.chooseRule = chooseRule;
 	}
 
-	public boolean isExcelImportado() {
+
+	/**
+	 * Checks if is excel imported.
+	 *
+	 * @return true, if is excel imported
+	 */
+	public boolean isExcelImported() {
 		return excelImportado;
 	}
 
-	public void setExcelImportado(boolean excelImportado) {
+
+	/**
+	 * Sets the excel imported.
+	 *
+	 * @param excelImportado the new excel imported
+	 */
+	public void setExcelImported(boolean excelImportado) {
 		this.excelImportado = excelImportado;
 	}
 
@@ -126,22 +166,47 @@ public class Frame {
 		return methodsJModel;
 	}
 
+	/**
+	 * Gets the change rules.
+	 *
+	 * @return the change rules
+	 */
 	public ChangeRules getChangeRules() {
 		return changeRules;
 	}
 
+	/**
+	 * Gets the saved rules.
+	 *
+	 * @return the saved rules
+	 */
 	public List<Rule> getSavedRules() {
 		return savedRules;
 	}
 
+	/**
+	 * Sets the saved rules.
+	 *
+	 * @param savedRules the new saved rules
+	 */
 	public void setSavedRules(List<Rule> savedRules) {
 		this.savedRules = savedRules;
 	}
 
+	/**
+	 * Gets the last rule defined.
+	 *
+	 * @return the last rule defined
+	 */
 	public Rule getLastRuleDefined() {
 		return lastRuleDefined;
 	}
 
+	/**
+	 * Sets the last rule defined.
+	 *
+	 * @param lastRuleDefined the new last rule defined
+	 */
 	public void setLastRuleDefined(Rule lastRuleDefined) {
 		this.lastRuleDefined = lastRuleDefined;
 	}
@@ -414,6 +479,12 @@ public class Frame {
 		frame.add(painelPrincipal);
 	}
 
+	/**
+	 * Update rules in GUI.
+	 *
+	 * @param ruleLongMethod the rule long method
+	 * @param ruleFeatureEnvy the rule feature envy
+	 */
 	public void updateRulesInGUI(Rule ruleLongMethod, Rule ruleFeatureEnvy) {
 
 		if(!(ruleLongMethod.toString().equals(""))) {
@@ -439,6 +510,9 @@ public class Frame {
 		}
 	}
 
+	/**
+	 * Reset rules in GUI.
+	 */
 	public void resetRulesInGUI()  {
 		
 		tLoc.setText("LOC: ");
@@ -449,6 +523,12 @@ public class Frame {
 		feLog.setText("Operaçăo Lógica do Feature Envy do Utilizador: ");
 	}
 
+	/**
+	 * Compare.
+	 *
+	 * @param a the a
+	 * @param b the b
+	 */
 	public void compare(boolean a, boolean b){ 
 
 		if(a == true && b == true){
