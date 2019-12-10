@@ -283,10 +283,10 @@ public class Frame {
 
 				rules = new JComboBox(nStrings);
 
-								
+
 				JButton x = new JButton("Comparar");
-								
-				    
+
+
 				rules.setBounds(75,100,100,30);
 				x.setBounds(75,200,100,30);
 
@@ -310,11 +310,11 @@ public class Frame {
 							if (rules.getSelectedItem().equals("iPlasma")){
 								compare(i.isIplasma(), i.isIs_long_method());
 							}
-							
+
 							if(rules.getSelectedItem().equals("Regra Escolhida")) {
 								compare(i.isLongMethodUserBoolean(), i.isIs_long_method());
 							}
-							
+
 						}
 						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
 					}
@@ -322,7 +322,9 @@ public class Frame {
 			}
 		});
 
-		compararFeatureEnvy.addActionListener (new ActionListener() {
+
+		compararFeatureEnvy.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -331,48 +333,16 @@ public class Frame {
 				adci = 0;
 				adii = 0;
 
-				JFrame f = new JFrame();
+				for(Method i: methods) {
+					compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy());
+				}
 
-				JPanel jpanel = new JPanel();
-				jpanel.setLayout(new GridLayout(4,1));
+				JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
 
-				String[] nStrings = { "Regra Escolhida" }; 
-
-				rules = new JComboBox(nStrings);
-
-								
-				JButton x = new JButton("Comparar");
-								
-				    
-				rules.setBounds(75,100,100,30);
-				x.setBounds(75,200,100,30);
-
-				f.add(rules);
-				f.add(x);
-				f.setSize(300,300);    
-				f.setLayout(null);    
-				f.setVisible(true);
-
-				x.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						f.setVisible(false);
-
-						for(Method i: methods) {
-
-							if(rules.getSelectedItem().equals("Regra Escolhida")) {
-								compare(i.isFeatureEnvyUserBoolean(), i.isIs_feature_envy()); 
-							}
-							
-						}
-
-						JOptionPane.showMessageDialog(frame, "DCI: " +  dci + "\n" + "DII: " + dii + "\n" + "ADCI: " + adci + "\n" + "ADII: " + adii);
-					}
-				});
 			}
+
 		});
+
 
 		escolherRegra.addActionListener(new ActionListener() {
 
@@ -408,13 +378,13 @@ public class Frame {
 		painelThresholds.add(feLog, BorderLayout.SOUTH);
 
 		// South.West (restantes botoes)
-	
+
 		painelBotoes.add(definirRegras);
 		painelBotoes.add(escolherRegra);
 		painelBotoes.add(compararLongMethod);
 		painelBotoes.add(compararFeatureEnvy);
 		painelBotoes.add(escolherFicheiro);
-		
+
 
 
 		// painel South
