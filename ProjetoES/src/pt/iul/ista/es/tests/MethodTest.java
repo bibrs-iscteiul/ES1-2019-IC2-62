@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.applications.Method;
+import pt.iul.ista.es.gui.Method;
 
 class MethodTest {
 
@@ -20,92 +20,6 @@ class MethodTest {
 
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@Test
-	void testGetMethodID() {
-		assertEquals(method.getMethodID(), 0);
-	}
-
-	@Test
-	void testGetPackageName() {
-		assertEquals(method.getPackageName(), "package");
-	}
-
-	@Test
-	void testGetClassName() {
-		assertEquals(method.getClassName(), "class");
-	}
-
-	@Test
-	void testGetMethodName() {
-		assertEquals(method.getMethodName(), "methodname");
-	}
-
-	@Test
-	void testGetLoc() {
-		assertEquals(method.getLoc(), 10);
-	}
-
-	@Test
-	void testGetCyclo() {
-		assertEquals(method.getCyclo(), 10);
-	}
-
-	@Test
-	void testGetAtfd() {
-		assertEquals(method.getAtfd(), 10);
-	}
-
-	@Test
-	void testGetLaa() {
-		assertEquals(method.getLaa(), 0.5);
-	}
-
-	@Test
-	void testIsIs_long_method() {
-		assertEquals(method.isIs_long_method(), true);
-	}
-
-	@Test
-	void testIsIplasma() {
-		assertEquals(method.isIplasma(), true);
-	}
-
-	@Test
-	void testIsPmd() {
-		assertEquals(method.isPmd(), true);
-	}
-
-	@Test
-	void testIsIs_feature_envy() {
-		assertEquals(method.isIs_feature_envy(), true);
-	}
-
-	@Test
-	void testIsLongMethodUserBoolean() {
-		assertEquals(method.isLongMethodUserBoolean(), false);
-	}
-	
-	@Test
-	void testSetLongMethodUserBoolean() {
-		method.setLongMethodUserBoolean(false);
-		assertEquals(method.isLongMethodUserBoolean(), false);
-	}
-
-	@Test
-	void testIsFeatureEnvyUserBoolean() {
-		assertEquals(method.isFeatureEnvyUserBoolean(), false);
-	}
-	
-	@Test
-	void testSetFeatureEnvyUserBoolean() {
-		method.setFeatureEnvyUserBoolean(false);
-		assertEquals(method.isFeatureEnvyUserBoolean(), false);
-	}
-
 	@Test
 	void testIsLongMethodUser() {
 
@@ -114,7 +28,6 @@ class MethodTest {
 
 
 		//ands
-
 		assertEquals(method.isLongMethodUser(5, ">", 5, ">", "and"), true);
 		assertEquals(method.isLongMethodUser(5, ">", 15, ">", "and"), false);
 
@@ -144,7 +57,6 @@ class MethodTest {
 
 
 		//ors
-
 		assertEquals(method.isLongMethodUser(5, ">", 5, ">", "or"), true);
 		assertEquals(method.isLongMethodUser(10, ">", 10, ">", "or"), false);
 
@@ -174,7 +86,6 @@ class MethodTest {
 
 
 		//quando é só o loc
-
 		assertEquals(method.isLongMethodUser(5, ">", -1, "=", "-"), true);
 		assertEquals(method.isLongMethodUser(15, ">", -1, "=", "-"), false);
 
@@ -186,7 +97,6 @@ class MethodTest {
 
 
 		//quando é só o cyclo
-
 		assertEquals(method.isLongMethodUser(-1, "=", 5, ">", "-"), true);
 		assertEquals(method.isLongMethodUser(-1, "=", 15, ">", "-"), false);
 
@@ -288,6 +198,66 @@ class MethodTest {
 		assertEquals(method.isFeatureEnvyUser(-1, "=", 15, "=", "-"), false);
 	}
 
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+
+		//testSetMethodID
+		method.setMethodID(1);
+		assertEquals(method.getMethodID(), 1);
+
+		//testSetPackageName
+		method.setPackageName("a");
+		assertEquals(method.getPackageName(),"a");
+
+		//testSetClassName
+		method.setClassName("a");
+		assertEquals(method.getClassName(),"a");
+		
+		//testSetMethodName
+		method.setMethodName("a");
+		assertEquals(method.getMethodName(),"a");
+		
+		//testSetLoc
+		method.setLoc(1);
+		assertEquals(method.getLoc(),1);
+		
+		//testSetCyclo
+		method.setCyclo(1);
+		assertEquals(method.getCyclo(),1);
+		
+		//testSetAtfd
+		method.setAtfd(1);
+		assertEquals(method.getAtfd(),1);
+		
+		//testSetLaa
+		method.setLaa(0.1);
+		assertEquals(method.getLaa(),0.1);
+		
+		//testSetIsLongMethod
+		method.setIs_long_method(false);
+		assertEquals(method.isIs_long_method(), false);
+
+		//testSetIplasma
+		method.setIplasma(false);
+		assertEquals(method.isIplasma(), false);
+
+		//testSetPmd
+		method.setPmd(false);
+		assertEquals(method.isPmd(), false);
+
+		//testSetIsFeatureEnvy
+		method.setIs_feature_envy(false);
+		assertEquals(method.isIs_feature_envy(), false);
+
+		//testSetLongMethodUserBoolean
+		method.setLongMethodUserBoolean(false);
+		assertEquals(method.isLongMethodUserBoolean(), false);
+
+		//testSetFeatureEnvyUserBoolean
+		method.setFeatureEnvyUserBoolean(false);
+		assertEquals(method.isFeatureEnvyUserBoolean(), false);
+	}
+	
 	@Test
 	void testToString() {
 		String s = ("ID: " + method.getMethodID() + "; Package: " + method.getPackageName() + "; Classe: " + method.getClassName() + 
@@ -296,6 +266,5 @@ class MethodTest {
 				+ method.isPmd() + "; isFeatureEnvy: " + method.isIs_feature_envy());
 		assertEquals(method.toString(), s);
 	}
-
 
 }
