@@ -8,7 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.applications.Rule;
+import pt.iul.ista.es.gui.Rule;
 
 class RuleTest {
 
@@ -21,66 +21,6 @@ class RuleTest {
 
 		ruleConstrutor1 = new Rule(5, "loc", 5, "cyclo", "longMethod",
 				5, "atfd", 0.5, "laa", "featureEnvy");
-	}
-
-	@Test
-	void testGetLocThreeshold() {
-		assertEquals(ruleConstrutor1.getLocThreeshold(), 5);
-	}
-
-	@Test
-	void testGetLocOperator() {
-		assertEquals(ruleConstrutor1.getLocOperator(), "loc");
-	}
-
-	@Test
-	void testGetCycloThreeshold() {
-		assertEquals(ruleConstrutor1.getCycloThreeshold(), 5);
-	}
-
-	@Test
-	void testGetCycloOperator() {
-		assertEquals(ruleConstrutor1.getCycloOperator(), "cyclo");
-	}
-
-	@Test
-	void testGetLongMethodOperator() {
-		assertEquals(ruleConstrutor1.getLongMethodOperator(), "longMethod");
-	}
-
-	@Test
-	void testGetAtfdThreeshold() {
-		assertEquals(ruleConstrutor1.getAtfdThreeshold(), 5);
-	}
-
-	@Test
-	void testGetAtfdOperator() {
-		assertEquals(ruleConstrutor1.getAtfdOperator(), "atfd");
-	}
-
-	@Test
-	void testGetLaaThreeshold() {
-		assertEquals(ruleConstrutor1.getLaaThreeshold(), 0.5);
-	}
-
-	@Test
-	void testGetLaaOperator() {
-		assertEquals(ruleConstrutor1.getLaaOperator(), "laa");
-	}
-
-	@Test
-	void testGetFeatureEnvyOperator() {
-		assertEquals(ruleConstrutor1.getFeatureEnvyOperator(), "featureEnvy");
-	}
-
-	@Test
-	void testIsLongMethod() {
-		assertEquals(ruleConstrutor1.isLongMethod(), false);
-	}
-
-	@Test
-	void testIsFeatureEnvy() {
-		assertEquals(ruleConstrutor1.isFeatureEnvy(), false);
 	}
 
 	@Test

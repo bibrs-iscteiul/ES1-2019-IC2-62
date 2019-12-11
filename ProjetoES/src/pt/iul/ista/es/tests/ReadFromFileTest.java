@@ -7,11 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.applications.Method;
-import pt.iul.ista.es.applications.ReadFromFile;
+import pt.iul.ista.es.gui.Method;
+import pt.iul.ista.es.gui.ReadFromFile;
 
 class ReadFromFileTest {
 
@@ -33,6 +32,18 @@ class ReadFromFileTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {	
+
+		//testSetRowNumber
+		readFile.setRowNumber(1);
+		assertEquals(readFile.getRowNumber(), 1);
+
+		//testSetColNumber
+		readFile.setColNumber(1);
+		assertEquals(readFile.getColNumber(), 1);
 	}
 
 }
