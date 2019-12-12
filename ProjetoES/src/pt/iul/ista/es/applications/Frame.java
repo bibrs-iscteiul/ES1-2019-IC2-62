@@ -129,7 +129,7 @@ public class Frame {
 	/**
 	 * Sets the lm log.
 	 *
-	 * @param lm log the new lm log
+	 * @param lmLog the new lm log
 	 */
 	public void setLmLog(JLabel lmLog) {
 		this.lmLog = lmLog;
@@ -147,7 +147,7 @@ public class Frame {
 	/**
 	 * Sets the fe log.
 	 *
-	 * @param fe log the new fe log
+	 * @param feLog the new fe log
 	 */
 	public void setFeLog(JLabel feLog) {
 		this.feLog = feLog;
@@ -201,7 +201,7 @@ public class Frame {
 	/**
 	 * Sets the read file.
 	 *
-	 * @param read file the new read file
+	 * @param readFile the new read file
 	 */
 	public void setReadFile(ReadFromFile readFile) {
 		this.readFile = readFile;

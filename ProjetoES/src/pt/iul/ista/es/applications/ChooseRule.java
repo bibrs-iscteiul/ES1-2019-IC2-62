@@ -73,7 +73,7 @@ public class ChooseRule {
 	/**
 	 * Sets the selected rule long method.
 	 *
-	 * @param selected rule long method the new selected rule long method
+	 * @param selectedRuleLongMethod the new selected rule long method
 	 */
 	public void setSelectedRuleLongMethod(Rule selectedRuleLongMethod) {
 		this.selectedRuleLongMethod = selectedRuleLongMethod;
@@ -91,7 +91,7 @@ public class ChooseRule {
 	/**
 	 * Sets the selected rule feature envy.
 	 *
-	 * @param selected rule feature envy the new selected rule feature envy
+	 * @param selectedRuleFeatureEnvy the new selected rule feature envy
 	 */
 	public void setSelectedRuleFeatureEnvy(Rule selectedRuleFeatureEnvy) {
 		this.selectedRuleFeatureEnvy = selectedRuleFeatureEnvy;
