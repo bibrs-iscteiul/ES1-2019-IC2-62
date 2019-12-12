@@ -9,7 +9,4 @@ Membros:
 
 
 Má implementação/erros:
-- Corrigir sinais de thresholds e operações lógicos (and ou or)
-- Definir regras sem ser preciso importar excel 
-- Problema com LAA no feature_envy
-- Quando não se seleciona nenhum ficheiro excel dá erro e quando não é excel não envia mensagem
+- Nada a apontar.
