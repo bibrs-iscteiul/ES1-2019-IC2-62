@@ -176,7 +176,6 @@ public class ReadFromFile {
 		try {
 			read.read("Long-Method.xlsx", 0);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

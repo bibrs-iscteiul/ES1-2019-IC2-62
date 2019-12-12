@@ -362,8 +362,7 @@ public class Method {
 	public boolean isLongMethodUser (int thresholdLOC, String operatorLOC, int thresholdCYCLO, String operatorCYCLO, String operatorLongMethod) {
 	
 		if (operatorLongMethod == "and" && thresholdLOC != -1 && thresholdCYCLO != -1) {
-			//System.out.println("tem tudo long method and");
-			
+		
 			if(operatorLOC == ">" && operatorCYCLO == ">") {
 				if (this.loc > thresholdLOC && this.cyclo > thresholdCYCLO)
 					return true;
@@ -429,7 +428,6 @@ public class Method {
 		}
 		
 		else if (operatorLongMethod == "or" && thresholdLOC != -1 && thresholdCYCLO != -1) {
-			//System.out.println("tem tudo long method or");
 			
 			if(operatorLOC == ">" && operatorCYCLO == ">") {
 				if (this.loc > thresholdLOC || this.cyclo > thresholdCYCLO)
@@ -555,8 +553,6 @@ public class Method {
 	 */
 	
 	public boolean isFeatureEnvyUser (int thresholdATFD, String operatorATFD, double thresholdLAA, String operatorLAA, String operatorFeatureEnvy) {
-		
-		System.out.println("Valor laa: " + laa + "; valor threeshold: " + thresholdLAA + "; " + Double.compare(laa, thresholdLAA));
 		
 		if (operatorFeatureEnvy == "and" && thresholdATFD != -1 && thresholdLAA != -1) {
 			

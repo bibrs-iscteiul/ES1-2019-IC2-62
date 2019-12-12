@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import pt.iul.ista.es.applications.Rule;
 
 /**
- * The Class ChooseRule.
+ * The Class ChooseRule opens a new frame which is necessary to choose a rule from those that exist.
  * @author Joana Cavalheiro
  * @since 2019-11-14
  */
@@ -113,7 +113,6 @@ public class ChooseRule {
 		List<Rule> rulesFeatureEnvyList = new ArrayList<Rule>();
 
 		Rule r = new Rule();
-		//System.out.println("regra:" + r.toString());
 		rulesLongMethodList.add(r);
 		rulesFeatureEnvyList.add(r);
 
@@ -121,12 +120,8 @@ public class ChooseRule {
 
 			for (Rule rule : frame.getSavedRules()) {
 
-				System.out.println(rule.isLongMethod() + " " + rule.isFeatureEnvy());
-
-				if(rule.isLongMethod()) {
-					System.out.println("adicionei long method");
+				if(rule.isLongMethod()) 
 					rulesLongMethodList.add(rule);
-				}
 
 				if(rule.isFeatureEnvy())
 					rulesFeatureEnvyList.add(rule);
@@ -150,18 +145,14 @@ public class ChooseRule {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				//frame.resetRulesInGUI();
-
-				if( !(rulesLongMethod.getSelectedItem().toString().equals("")) ) {
+				if( !(rulesLongMethod.getSelectedItem().toString().equals("")) ) 
 					selectedRuleLongMethod = (Rule)rulesLongMethod.getSelectedItem();
-					System.out.println("selecionada long method: " + selectedRuleLongMethod);
-				} else 
+				else
 					selectedRuleLongMethod = new Rule();
 
-				if( !(rulesFeatureEnvy.getSelectedItem().toString().equals("")) ) {
+				if( !(rulesFeatureEnvy.getSelectedItem().toString().equals("")) )
 					selectedRuleFeatureEnvy = (Rule)rulesFeatureEnvy.getSelectedItem();
-					System.out.println("selecionada feature envy: " + selectedRuleFeatureEnvy);
-				} else
+				else
 					selectedRuleFeatureEnvy = new Rule();
 
 				frame.getChangeRules().updateMethods(selectedRuleLongMethod, selectedRuleFeatureEnvy);

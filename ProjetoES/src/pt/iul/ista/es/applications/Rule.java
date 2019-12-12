@@ -342,9 +342,5 @@ public class Rule {
 	 */
 	public void addRuleToList(List<Rule> savedRules) {
 		savedRules.add(this);
-		
-		for (Rule rule : savedRules) 
-			System.out.println(rule.toString());
-			
 	}
 }

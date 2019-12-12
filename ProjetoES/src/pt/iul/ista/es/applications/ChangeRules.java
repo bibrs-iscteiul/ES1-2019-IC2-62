@@ -17,9 +17,9 @@ import pt.iul.ista.es.applications.Rule;
 
 
 /**
- * The Class ChangeRules.
+ * The Class ChangeRules opens a new frame which is necessary to write the rules and save them.
  * 
- * @author Joana Cavalheiro
+ * @author Gonçalo Almeida e Joana Cavalheiro
  * @since 2019-11-10
  */
 public class ChangeRules {
@@ -121,7 +121,7 @@ public class ChangeRules {
 	}
 
 	/**
-	 * Adds the frame content.
+	 * Adds the frame content to the frame.
 	 */
 	private void addFrameContent() {
 
@@ -217,7 +217,7 @@ public class ChangeRules {
 	}
 
 	/**
-	 * Save rules.
+	 * Read rules of gui and save them in a list of rules.
 	 */
 	public void saveRules() {
 
@@ -241,10 +241,9 @@ public class ChangeRules {
 		if (!(feOperator.getSelectedItem().toString() == "null") || !(feOperator.getSelectedItem().toString() == "-"))
 			auxRule.setFeatureEnvyOperator(feOperator.getSelectedItem().toString());
 
-		if (!(locBox.getSelectedItem().toString() == "-")) {
-			System.out.println("mudei o loc operator");
+		if (!(locBox.getSelectedItem().toString() == "-")) 
 			auxRule.setLocOperator(locBox.getSelectedItem().toString());
-		}
+		
 		if (!(cycloBox.getSelectedItem().toString() == "-"))
 			auxRule.setCycloOperator(cycloBox.getSelectedItem().toString());
 
@@ -308,7 +307,6 @@ public class ChangeRules {
 				if(auxRule.getLocThreeshold() != -1 && auxRule.getCycloThreeshold() != -1)
 					rule.setLongMethodOperator(auxRule.getLongMethodOperator());		
 				
-				System.out.println("adicionar: " + rule.toString());
 				rule.addRuleToList(frame.getSavedRules());
 				
 				frame.setLastRuleDefined(rule);
@@ -332,12 +330,9 @@ public class ChangeRules {
 					rule.setLaaOperator(auxRule.getLaaOperator());
 				}
 				
-				if(auxRule.getAtfdThreeshold() != -1 && !(Double.compare(auxRule.getLaaThreeshold(), -1) == 0)) {
-					System.out.println("entrei no if, o valor é " + auxRule.getFeatureEnvyOperator());
+				if(auxRule.getAtfdThreeshold() != -1 && !(Double.compare(auxRule.getLaaThreeshold(), -1) == 0))
 					rule.setFeatureEnvyOperator(auxRule.getFeatureEnvyOperator());		
-				}
-				
-				System.out.println("adicionar: " + rule.toString());
+		
 				rule.addRuleToList(frame.getSavedRules());
 				
 				frame.setLastRuleDefined(rule);
@@ -350,10 +345,10 @@ public class ChangeRules {
 	}
 
 	/**
-	 * Update methods.
+	 * When a excel file is imported, is necessary to update methods with the right values of user's long method and user's feature envy.
 	 *
-	 * @param ruleLongMethod the rule long method
-	 * @param ruleFeatureEnvy the rule feature envy
+	 * @param ruleLongMethod the user's long method rule
+	 * @param ruleFeatureEnvy the user's feature envy rule
 	 */
 	public void updateMethods(Rule ruleLongMethod, Rule ruleFeatureEnvy) {
 
@@ -366,7 +361,6 @@ public class ChangeRules {
 					method.setLongMethodUserBoolean(longMethodUser);
 				}
 				
-				System.out.println(ruleFeatureEnvy.toString() + " VER ISTO");
 				if(!(ruleFeatureEnvy.toString().equals(""))) {
 					boolean featureEnvyUser = method.isFeatureEnvyUser(ruleFeatureEnvy.getAtfdThreeshold(), ruleFeatureEnvy.getAtfdOperator(), ruleFeatureEnvy.getLaaThreeshold(), ruleFeatureEnvy.getLaaOperator(), ruleFeatureEnvy.getFeatureEnvyOperator());
 					method.setFeatureEnvyUserBoolean(featureEnvyUser);
@@ -396,7 +390,7 @@ public class ChangeRules {
 	}
 
 	/**
-	 * Reset rules.
+	 * Reset rules in gui.
 	 */
 	public void resetRules() {
 

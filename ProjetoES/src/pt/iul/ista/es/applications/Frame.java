@@ -26,8 +26,6 @@ import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.Rule;
 
-
-
 /**
  * The Class Frame.
  * @author Beatriz Ragageles e Bernardo Gameiro
@@ -408,7 +406,7 @@ public class Frame {
 	}
 
 	/**
-	 * Adds the frame content.
+	 * Adds the frame content to the gui.
 	 */
 	private void addFrameContent() {
 
@@ -440,7 +438,7 @@ public class Frame {
 		JButton definirRegras = new JButton("Definir Regras"); 
 		JButton escolherRegra = new JButton("Escolher Regra");
 
-		escolherFicheiro.addActionListener(new ActionListener() { // adiciona acao ao botao
+		escolherFicheiro.addActionListener(new ActionListener() { 
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -682,7 +680,7 @@ public class Frame {
 	}
 
 	/**
-	 * Compare.
+	 * Compare two booleans to know what type of error.
 	 *
 	 * @param a the a
 	 * @param b the b
@@ -704,7 +702,7 @@ public class Frame {
 	}
 
 	/**
-	 * The main method.
+	 * The main method to open the gui.
 	 *
 	 * @param args the arguments
 	 */
