@@ -9,8 +9,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.gui.Method;
-import pt.iul.ista.es.gui.ReadFromFile;
+import pt.iul.ista.es.applications.Method;
+import pt.iul.ista.es.applications.ReadFromFile;
 
 class ReadFromFileTest {
 

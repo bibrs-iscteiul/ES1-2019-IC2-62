@@ -1,4 +1,4 @@
-package pt.iul.ista.es.gui;
+package pt.iul.ista.es.applications;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.Rule;
 
@@ -83,6 +84,15 @@ public class ChangeRules {
 	 */
 	public Frame getFrame() {
 		return frame;
+	}
+
+	/**
+	 * Sets the frame.
+	 *
+	 * @param frame the new frame
+	 */
+	public void setFrame(Frame frame) {
+		this.frame = frame;
 	}
 
 	/**

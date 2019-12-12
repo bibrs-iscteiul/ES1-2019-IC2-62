@@ -10,9 +10,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.gui.Frame;
-import pt.iul.ista.es.gui.ReadFromFile;
-import pt.iul.ista.es.gui.Rule;
+import pt.iul.ista.es.applications.Frame;
+import pt.iul.ista.es.applications.ReadFromFile;
+import pt.iul.ista.es.applications.Rule;
 
 class FrameTest {
 
@@ -43,13 +43,13 @@ class FrameTest {
 	void testCompare() {
 		frame.compare(true, true);
 		assertEquals(frame.getDci(), 1);
-		
+
 		frame.compare(true, false);
 		assertEquals(frame.getDii(), 1);
-		
+
 		frame.compare(false, false);
 		assertEquals(frame.getAdci(), 1);
-		
+
 		frame.compare(false, true);
 		assertEquals(frame.getAdii(), 1);
 	}
@@ -74,8 +74,8 @@ class FrameTest {
 		assertEquals(frame.getRules(),comboBox);
 
 		//testSetExcelImportado
-		frame.setExcelImportado(true);
-		assertEquals(frame.isExcelImportado(),true);
+		frame.setExcelImported(true);
+		assertEquals(frame.isExcelImported(),true);
 
 		//testSetReadFile
 		frame.setReadFile(readfile);
@@ -89,10 +89,6 @@ class FrameTest {
 		frame.setDci(1);
 		assertEquals(frame.getDci(), 1);
 
-		//testSetDii
-		frame.setDii(1);
-		assertEquals(frame.getDii(), 1);
-
 		//testSetAdci
 		frame.setAdci(1);
 		assertEquals(frame.getAdci(), 1);
@@ -100,7 +96,10 @@ class FrameTest {
 		//testSetAdii
 		frame.setAdii(1);
 		assertEquals(frame.getAdii(), 1);
-
+		
+		//testSetDii
+		frame.setDii(1);
+		assertEquals(frame.getDii(), 1);
 	}
 
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.gui.Rule;
+import pt.iul.ista.es.applications.Rule;
 
 class RuleTest {
 

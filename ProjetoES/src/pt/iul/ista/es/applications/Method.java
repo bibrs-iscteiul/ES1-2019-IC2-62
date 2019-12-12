@@ -10,7 +10,7 @@ package pt.iul.ista.es.applications;
 public class Method {
 
 	/** The Method ID. */
-	int MethodID;
+	int methodID;
 	
 	/** The package name. */
 	String packageName;
@@ -50,7 +50,196 @@ public class Method {
 	
 	/** The user's feature envy. */
 	boolean isFeatureEnvyUserBoolean;
+
+	/**
+	 * Instantiates a new method.
+	 *
+	 * @param methodID the method ID
+	 * @param packageName the package name
+	 * @param className the class name
+	 * @param methodName the method name
+	 * @param loc the loc
+	 * @param cyclo the cyclo
+	 * @param atfd the atfd
+	 * @param laa the laa
+	 * @param is_long_method the is long method
+	 * @param iplasma the iplasma
+	 * @param pmd the pmd
+	 * @param is_feature_envy the is feature envy
+	 * @param is_long_method_user the is long method user
+	 * @param is_feature_envy_user the is feature envy user
+	 */
+	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
+			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy, boolean is_long_method_user, 
+			boolean is_feature_envy_user) {
 	
+		this.methodID = methodID;
+		this.packageName = packageName;
+		this.className = className;
+		this.methodName = methodName;
+		this.loc = loc;
+		this.cyclo = cyclo;
+		this.atfd = atfd;
+		this.laa = laa;
+		this.is_long_method = is_long_method;
+		this.iplasma = iplasma;
+		this.pmd = pmd;
+		this.is_feature_envy = is_feature_envy;
+
+		this.isLongMethodUserBoolean= is_long_method_user;
+		this.isFeatureEnvyUserBoolean = is_feature_envy_user;
+	}
+	
+	/**
+	 * Instantiates a new method.
+	 */
+	public Method() {
+		
+	}
+	
+	/**
+	 * Gets the method ID.
+	 *
+	 * @return the method ID
+	 */
+	public int getMethodID() {
+		return methodID;
+	}
+
+	/**
+	 * Sets the method ID.
+	 *
+	 * @param methodID the new method ID
+	 */
+	public void setMethodID(int methodID) {
+		this.methodID = methodID;
+	}
+	
+	/**
+	 * Gets the package name.
+	 *
+	 * @return the package name
+	 */
+	public String getPackageName() {
+		return packageName;
+	}
+	
+	/**
+	 * Sets the package name.
+	 *
+	 * @param packageName the new package name
+	 */
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	/**
+	 * Gets the class name.
+	 *
+	 * @return the class name
+	 */
+	public String getClassName() {
+		return className;
+	}
+
+	/**
+	 * Sets the class name.
+	 *
+	 * @param className the new class name
+	 */
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	/**
+	 * Gets the method name.
+	 *
+	 * @return the method name
+	 */
+	public String getMethodName() {
+		return methodName;
+	}
+
+	/**
+	 * Sets the method name.
+	 *
+	 * @param methodName the new method name
+	 */
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
+	/**
+	 * Gets the loc.
+	 *
+	 * @return the loc
+	 */
+	public int getLoc() {
+		return loc;
+	}
+
+	/**
+	 * Sets the loc.
+	 *
+	 * @param loc the new loc
+	 */
+	public void setLoc(int loc) {
+		this.loc = loc;
+	}
+
+	/**
+	 * Gets the cyclo.
+	 *
+	 * @return the cyclo
+	 */
+	public int getCyclo() {
+		return cyclo;
+	}
+
+	/**
+	 * Sets the cyclo.
+	 *
+	 * @param cyclo the new cyclo
+	 */
+	public void setCyclo(int cyclo) {
+		this.cyclo = cyclo;
+	}
+
+	/**
+	 * Gets the atfd.
+	 *
+	 * @return the atfd
+	 */
+	public int getAtfd() {
+		return atfd;
+	}
+
+	/**
+	 * Sets the atfd.
+	 *
+	 * @param atfd the new atfd
+	 */
+	public void setAtfd(int atfd) {
+		this.atfd = atfd;
+	}
+
+	/**
+	 * Gets the laa.
+	 *
+	 * @return the laa
+	 */
+	public double getLaa() {
+		return laa;
+	}
+
+	/**
+	 * Sets the laa.
+	 *
+	 * @param laa the new laa
+	 */
+	public void setLaa(double laa) {
+		this.laa = laa;
+	}
 	
 	/**
 	 * Checks if is checks if is long method.
@@ -122,61 +311,6 @@ public class Method {
 	 */
 	public void setIs_feature_envy(boolean is_feature_envy) {
 		this.is_feature_envy = is_feature_envy;
-	}
-
-	/**
-	 * Instantiates a new method.
-	 *
-	 * @param methodID the method ID
-	 * @param packageName the package name
-	 * @param className the class name
-	 * @param methodName the method name
-	 * @param loc the loc
-	 * @param cyclo the cyclo
-	 * @param atfd the atfd
-	 * @param laa the laa
-	 * @param is_long_method the is long method
-	 * @param iplasma the iplasma
-	 * @param pmd the pmd
-	 * @param is_feature_envy the is feature envy
-	 * @param is_long_method_user the is long method user
-	 * @param is_feature_envy_user the is feature envy user
-	 */
-	public Method(int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd,
-			double laa, boolean is_long_method, boolean iplasma, boolean pmd, boolean is_feature_envy, boolean is_long_method_user, 
-			boolean is_feature_envy_user) {
-	
-		this.MethodID = methodID;
-		this.packageName = packageName;
-		this.className = className;
-		this.methodName = methodName;
-		this.loc = loc;
-		this.cyclo = cyclo;
-		this.atfd = atfd;
-		this.laa = laa;
-		this.is_long_method = is_long_method;
-		this.iplasma = iplasma;
-		this.pmd = pmd;
-		this.is_feature_envy = is_feature_envy;
-
-		this.isLongMethodUserBoolean= is_long_method_user;
-		this.isFeatureEnvyUserBoolean = is_feature_envy_user;
-	}
-	
-	/**
-	 * Instantiates a new method.
-	 */
-	public Method() {
-		
-	}
-	
-	/**
-	 * Gets the method ID.
-	 *
-	 * @return the method ID
-	 */
-	public int getMethodID() {
-		return MethodID;
 	}
 
 	/**
@@ -613,7 +747,7 @@ public class Method {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("ID: " + this.MethodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
+		sb.append("ID: " + this.methodID + "; Package: " + this.packageName + "; Classe: " + this.className + 
 				"; Método: " + this.methodName + "; LOC: " + this.loc + "; CYCLO: " + this.cyclo + "; ATFD: " + this.atfd + "; LAA: " 
 				+ this.laa + "; isLongMethod: " + this.is_long_method + "; iPlasma: " + this.iplasma + "; PMD: " 
 				+ this.pmd + "; isFeatureEnvy: " + this.is_feature_envy);

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import pt.iul.ista.es.gui.ChangeRules;
-import pt.iul.ista.es.gui.Frame;
+import pt.iul.ista.es.applications.ChangeRules;
+import pt.iul.ista.es.applications.Frame;
 
 class ChangeRulesTest {
 

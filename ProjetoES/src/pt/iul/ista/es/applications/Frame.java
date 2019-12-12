@@ -1,4 +1,4 @@
-package pt.iul.ista.es.gui;
+package pt.iul.ista.es.applications;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
+
 import pt.iul.ista.es.applications.Method;
 import pt.iul.ista.es.applications.ReadFromFile;
 import pt.iul.ista.es.applications.Rule;
@@ -99,27 +100,79 @@ public class Frame {
 	
 	/** The dii. */
 	private int dii=0;
-
-
+	
 	/**
-	 * Gets the choose rule.
+	 * Gets the frame.
 	 *
-	 * @return the choose rule
+	 * @return the frame
 	 */
-	public ChooseRule getChooseRule() {
-		return chooseRule;
+	public JFrame getFrame() {
+		return frame;
 	}
 
 	/**
-	 * Sets the choose rule.
+	 * Sets the frame.
 	 *
-	 * @param chooseRule the new choose rule
+	 * @param frame the new frame
 	 */
-	public void setChooseRule(ChooseRule chooseRule) {
-		this.chooseRule = chooseRule;
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 
+	/**
+	 * Gets the lm log.
+	 *
+	 * @return the lm log
+	 */
+	public JLabel getLmLog() {
+		return lmLog;
+	}
 
+	/**
+	 * Sets the lm log.
+	 *
+	 * @param lm log the new lm log
+	 */
+	public void setLmLog(JLabel lmLog) {
+		this.lmLog = lmLog;
+	}
+
+	/**
+	 * Gets the fe log.
+	 *
+	 * @return the fe log
+	 */
+	public JLabel getFeLog() {
+		return feLog;
+	}
+
+	/**
+	 * Sets the fe log.
+	 *
+	 * @param fe log the new fe log
+	 */
+	public void setFeLog(JLabel feLog) {
+		this.feLog = feLog;
+	}
+
+	/**
+	 * Gets the rules.
+	 *
+	 * @return the rules
+	 */
+	public JComboBox<Rule> getRules() {
+		return rules;
+	}
+
+	/**
+	 * Sets the rules.
+	 *
+	 * @param rules the new rules
+	 */
+	public void setRules(JComboBox<Rule> rules) {
+		this.rules = rules;
+	}
+	
 	/**
 	 * Checks if is excel imported.
 	 *
@@ -129,7 +182,6 @@ public class Frame {
 		return excelImportado;
 	}
 
-
 	/**
 	 * Sets the excel imported.
 	 *
@@ -137,6 +189,24 @@ public class Frame {
 	 */
 	public void setExcelImported(boolean excelImportado) {
 		this.excelImportado = excelImportado;
+	}
+	
+	/**
+	 * Gets the read file.
+	 *
+	 * @return the read file
+	 */
+	public ReadFromFile getReadFile() {
+		return readFile;
+	}
+
+	/**
+	 * Sets the read file.
+	 *
+	 * @param read file the new read file
+	 */
+	public void setReadFile(ReadFromFile readFile) {
+		this.readFile = readFile;
 	}
 
 	/**
@@ -176,6 +246,24 @@ public class Frame {
 	}
 
 	/**
+	 * Gets the choose rule.
+	 *
+	 * @return the choose rule
+	 */
+	public ChooseRule getChooseRule() {
+		return chooseRule;
+	}
+
+	/**
+	 * Sets the choose rule.
+	 *
+	 * @param chooseRule the new choose rule
+	 */
+	public void setChooseRule(ChooseRule chooseRule) {
+		this.chooseRule = chooseRule;
+	}
+	
+	/**
 	 * Gets the saved rules.
 	 *
 	 * @return the saved rules
@@ -211,7 +299,77 @@ public class Frame {
 		this.lastRuleDefined = lastRuleDefined;
 	}
 
+	/**
+	 * Gets the dci.
+	 *
+	 * @return the dci
+	 */
+	public int getDci() {
+		return dci;
+	}
 
+	/**
+	 * Sets the dci.
+	 *
+	 * @param dci the new dci
+	 */
+	public void setDci(int dci) {
+		this.dci = dci;
+	}
+
+	/**
+	 * Gets the adci.
+	 *
+	 * @return the adci
+	 */
+	public int getAdci() {
+		return adci;
+	}
+
+	/**
+	 * Sets the adci.
+	 *
+	 * @param adci the new adci
+	 */
+	public void setAdci(int adci) {
+		this.adci = adci;
+	}
+
+	/**
+	 * Gets the adii.
+	 *
+	 * @return the adii
+	 */
+	public int getAdii() {
+		return adii;
+	}
+
+	/**
+	 * Sets the adii.
+	 *
+	 * @param adii the new adii
+	 */
+	public void setAdii(int adii) {
+		this.adii = adii;
+	}
+
+	/**
+	 * Gets the dii.
+	 *
+	 * @return the dii
+	 */
+	public int getDii() {
+		return dii;
+	}
+
+	/**
+	 * Sets the dii.
+	 *
+	 * @param dii the new dii
+	 */
+	public void setDii(int dii) {
+		this.dii = dii;
+	}
 
 	/**
 	 * Instantiates a new frame.

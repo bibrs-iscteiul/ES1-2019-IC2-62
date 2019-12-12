@@ -31,6 +31,42 @@ public class ReadFromFile {
 	List<Method> allMethods;
 
 	/**
+	 * Gets the row number.
+	 *
+	 * @return the row number
+	 */
+	public int getRowNumber() {
+		return rowNumber;
+	}
+
+	/**
+	 * Sets the row number.
+	 *
+	 * @param rowNumber the new row number
+	 */
+	public void setRowNumber(int rowNumber) {
+		this.rowNumber = rowNumber;
+	}
+
+	/**
+	 * Gets the col number.
+	 *
+	 * @return the col number
+	 */
+	public int getColNumber() {
+		return colNumber;
+	}
+
+	/**
+	 * Sets the col number.
+	 *
+	 * @param colNumber the new col number
+	 */
+	public void setColNumber(int colNumber) {
+		this.colNumber = colNumber;
+	}
+
+	/**
 	 * Instantiates a new read from file.
 	 */
 	public ReadFromFile() {
@@ -70,7 +106,7 @@ public class ReadFromFile {
 
 				switch (cell.getColumnIndex()) {
 				case 0:
-					method.MethodID = (int) cell.getNumericCellValue();
+					method.methodID = (int) cell.getNumericCellValue();
 					break;
 
 				case 1:
