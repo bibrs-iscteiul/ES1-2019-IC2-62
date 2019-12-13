@@ -10,3 +10,5 @@ Membros:
 
 Má implementação/erros:
 - Nada a apontar.
+
+Tive um problema e não coloquei start collecting, no Process Mining, por isso os ficheiros csv e json, não estão como pertendidos. Ana Catarina Santos, nº83866.
