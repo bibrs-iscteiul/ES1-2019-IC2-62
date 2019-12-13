@@ -11,4 +11,4 @@ Membros:
 Má implementação/erros:
 - Nada a apontar.
 
-Tive um problema e não coloquei start collecting, no Process Mining, por isso os ficheiros csv e json, não estão como pretendidos. Ana Catarina Santos, nº83866.
+Houve dois membros do grupo que tiveram um problema com o plugin process mining e não conseguiram obter os ficheiros csv e json como era pretendido. 
