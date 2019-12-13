@@ -492,6 +492,7 @@ public class Frame {
 			}
 		});
 
+		
 		compararLongMethod.addActionListener(new ActionListener() {
 
 			@Override
@@ -564,6 +565,7 @@ public class Frame {
 			}
 		});
 
+		
 		compararFeatureEnvy.addActionListener(new ActionListener() {
 
 			@Override
@@ -595,6 +597,7 @@ public class Frame {
 			}
 		});
 
+		
 		escolherRegra.addActionListener(new ActionListener() {
 
 			@Override
@@ -724,6 +727,7 @@ public class Frame {
 		}
 	}
 
+	
 	/**
 	 * The main method to open the gui.
 	 *
