@@ -40,10 +40,10 @@ public class ChooseRule {
 	JButton chooseButton;
 
 	/** The selected rule long method. */
-	private Rule selectedRuleLongMethod;
+	private Rule selectedRuleLongMethod = null;
 
 	/** The selected rule feature envy. */
-	private Rule selectedRuleFeatureEnvy;
+	private Rule selectedRuleFeatureEnvy = null;
 
 
 	/**
@@ -157,6 +157,7 @@ public class ChooseRule {
 
 				frame.getChangeRules().updateMethods(selectedRuleLongMethod, selectedRuleFeatureEnvy);
 				frame.updateRulesInGUI((Rule)rulesLongMethod.getSelectedItem(), (Rule)rulesFeatureEnvy.getSelectedItem());
+				
 
 				chooseRule.setVisible(false);
 			}
