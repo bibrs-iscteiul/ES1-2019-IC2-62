@@ -11,4 +11,11 @@ Membros:
 Má implementação/erros:
 - Nada a apontar.
 
+Coverage:
+A cobertura dos testes é feito pelas métricas Method Counters e Type Counters com coberturas de  81,2% e 92,9%, respetivamente.
+
+
 Houve dois membros do grupo que tiveram um problema com o plugin process mining e não conseguiram obter os ficheiros csv e json como era pretendido. 
+
+
+
